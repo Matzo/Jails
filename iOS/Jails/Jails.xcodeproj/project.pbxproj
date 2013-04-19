@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B40917F17211F210008C4C2 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* test.json */; };
+		1B40918017211F2F0008C4C2 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* test.json */; };
+		1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
+		1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
+		1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
+		1B409188172133760008C4C2 /* JailsViewAdjusterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B409187172133760008C4C2 /* JailsViewAdjusterTest.m */; };
+		1B4353AF1721133C0093CA5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
+		1B4353B11721133C0093CA5F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353B01721133C0093CA5F /* CoreGraphics.framework */; };
+		1B4353B71721133C0093CA5F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353B51721133C0093CA5F /* InfoPlist.strings */; };
+		1B4353B91721133C0093CA5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353B81721133C0093CA5F /* main.m */; };
+		1B4353BD1721133C0093CA5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353BC1721133C0093CA5F /* AppDelegate.m */; };
+		1B4353C01721133D0093CA5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353BF1721133D0093CA5F /* ViewController.m */; };
+		1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */; };
+		1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C41721133D0093CA5F /* ViewController_iPad.xib */; };
+		1B4353CD172114130093CA5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
+		1B4353CF1721141A0093CA5F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
+		1B4353D2172116200093CA5F /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
+		1B4353D3172118050093CA5F /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
+		1B4353D61721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
+		1B4353D71721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
+		1B4353D817211A0F0093CA5F /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
+		1B4353D917211A4F0093CA5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
+		1BE796F91720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
+		1BE796FE1720F62400613242 /* Jails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BE796FD1720F62400613242 /* Jails.h */; };
+		1BE797001720F62400613242 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
+		1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE797071720F62400613242 /* SenTestingKit.framework */; };
+		1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
+		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
+		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
+		1BE797171720F62400613242 /* JailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE797161720F62400613242 /* JailsTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1B4353CA172113840093CA5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE796ED1720F62400613242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE796F41720F62400613242;
+			remoteInfo = Jails;
+		};
+		1BE7970C1720F62400613242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE796ED1720F62400613242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE796F41720F62400613242;
+			remoteInfo = Jails;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1BE796F31720F62400613242 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				1BE796FE1720F62400613242 /* Jails.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1B40917E17211F210008C4C2 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		1B40918117212E320008C4C2 /* JailsViewAdjuster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjuster.h; sourceTree = "<group>"; };
+		1B40918217212E320008C4C2 /* JailsViewAdjuster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsViewAdjuster.m; sourceTree = "<group>"; };
+		1B409186172133760008C4C2 /* JailsViewAdjusterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjusterTest.h; sourceTree = "<group>"; };
+		1B409187172133760008C4C2 /* JailsViewAdjusterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsViewAdjusterTest.m; sourceTree = "<group>"; };
+		1B4353AD1721133C0093CA5F /* JailsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JailsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B4353B01721133C0093CA5F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1B4353B41721133C0093CA5F /* JailsDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JailsDemo-Info.plist"; sourceTree = "<group>"; };
+		1B4353B61721133C0093CA5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1B4353B81721133C0093CA5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1B4353BA1721133C0093CA5F /* JailsDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JailsDemo-Prefix.pch"; sourceTree = "<group>"; };
+		1B4353BB1721133C0093CA5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1B4353BC1721133C0093CA5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1B4353BE1721133C0093CA5F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1B4353BF1721133D0093CA5F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1B4353C21721133D0093CA5F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		1B4353C51721133D0093CA5F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		1B4353CC172114130093CA5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1B4353CE1721141A0093CA5F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		1B4353D0172116200093CA5F /* NSObject+Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzle.h"; sourceTree = "<group>"; };
+		1B4353D1172116200093CA5F /* NSObject+Swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzle.m"; sourceTree = "<group>"; };
+		1B4353D41721197B0093CA5F /* UIViewController+JailsAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JailsAspect.h"; sourceTree = "<group>"; };
+		1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JailsAspect.m"; sourceTree = "<group>"; };
+		1BE796F51720F62400613242 /* libJails.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJails.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE796F81720F62400613242 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1BE796FC1720F62400613242 /* Jails-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jails-Prefix.pch"; sourceTree = "<group>"; };
+		1BE796FD1720F62400613242 /* Jails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Jails.h; sourceTree = "<group>"; };
+		1BE796FF1720F62400613242 /* Jails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jails.m; sourceTree = "<group>"; };
+		1BE797061720F62400613242 /* JailsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JailsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE797071720F62400613242 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1BE797111720F62400613242 /* JailsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JailsTests-Info.plist"; sourceTree = "<group>"; };
+		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
+		1BE797161720F62400613242 /* JailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailsTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B4353AA1721133C0093CA5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4353AF1721133C0093CA5F /* Foundation.framework in Frameworks */,
+				1B4353B11721133C0093CA5F /* CoreGraphics.framework in Frameworks */,
+				1B4353D917211A4F0093CA5F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE796F21720F62400613242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4353CF1721141A0093CA5F /* CoreFoundation.framework in Frameworks */,
+				1B4353CD172114130093CA5F /* UIKit.framework in Frameworks */,
+				1BE796F91720F62400613242 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE797021720F62400613242 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */,
+				1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */,
+				1BE7970E1720F62400613242 /* libJails.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B40917D17211F210008C4C2 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				1B40917E17211F210008C4C2 /* test.json */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
+		1B4353B21721133C0093CA5F /* JailsDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
+				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
+				1B4353BE1721133C0093CA5F /* ViewController.h */,
+				1B4353BF1721133D0093CA5F /* ViewController.m */,
+				1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */,
+				1B4353C41721133D0093CA5F /* ViewController_iPad.xib */,
+				1B4353B31721133C0093CA5F /* Supporting Files */,
+			);
+			path = JailsDemo;
+			sourceTree = "<group>";
+		};
+		1B4353B31721133C0093CA5F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B4353B41721133C0093CA5F /* JailsDemo-Info.plist */,
+				1B4353B51721133C0093CA5F /* InfoPlist.strings */,
+				1B4353B81721133C0093CA5F /* main.m */,
+				1B4353BA1721133C0093CA5F /* JailsDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BE796EC1720F62400613242 = {
+			isa = PBXGroup;
+			children = (
+				1BE796FA1720F62400613242 /* Jails */,
+				1BE7970F1720F62400613242 /* JailsTests */,
+				1B4353B21721133C0093CA5F /* JailsDemo */,
+				1BE796F71720F62400613242 /* Frameworks */,
+				1BE796F61720F62400613242 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1BE796F61720F62400613242 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BE796F51720F62400613242 /* libJails.a */,
+				1BE797061720F62400613242 /* JailsTests.octest */,
+				1B4353AD1721133C0093CA5F /* JailsDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1BE796F71720F62400613242 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B4353CE1721141A0093CA5F /* CoreFoundation.framework */,
+				1B4353CC172114130093CA5F /* UIKit.framework */,
+				1BE796F81720F62400613242 /* Foundation.framework */,
+				1BE797071720F62400613242 /* SenTestingKit.framework */,
+				1B4353B01721133C0093CA5F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BE796FA1720F62400613242 /* Jails */ = {
+			isa = PBXGroup;
+			children = (
+				1BE796FD1720F62400613242 /* Jails.h */,
+				1BE796FF1720F62400613242 /* Jails.m */,
+				1B4353D0172116200093CA5F /* NSObject+Swizzle.h */,
+				1B4353D1172116200093CA5F /* NSObject+Swizzle.m */,
+				1B4353D41721197B0093CA5F /* UIViewController+JailsAspect.h */,
+				1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */,
+				1B40918117212E320008C4C2 /* JailsViewAdjuster.h */,
+				1B40918217212E320008C4C2 /* JailsViewAdjuster.m */,
+				1BE796FB1720F62400613242 /* Supporting Files */,
+			);
+			path = Jails;
+			sourceTree = "<group>";
+		};
+		1BE796FB1720F62400613242 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BE796FC1720F62400613242 /* Jails-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BE7970F1720F62400613242 /* JailsTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B40917D17211F210008C4C2 /* TestData */,
+				1BE797151720F62400613242 /* JailsTests.h */,
+				1BE797161720F62400613242 /* JailsTests.m */,
+				1BE797101720F62400613242 /* Supporting Files */,
+				1B409186172133760008C4C2 /* JailsViewAdjusterTest.h */,
+				1B409187172133760008C4C2 /* JailsViewAdjusterTest.m */,
+			);
+			path = JailsTests;
+			sourceTree = "<group>";
+		};
+		1BE797101720F62400613242 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BE797111720F62400613242 /* JailsTests-Info.plist */,
+				1BE797121720F62400613242 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1B4353AC1721133C0093CA5F /* JailsDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B4353C91721133D0093CA5F /* Build configuration list for PBXNativeTarget "JailsDemo" */;
+			buildPhases = (
+				1B4353A91721133C0093CA5F /* Sources */,
+				1B4353AA1721133C0093CA5F /* Frameworks */,
+				1B4353AB1721133C0093CA5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B4353CB172113840093CA5F /* PBXTargetDependency */,
+			);
+			name = JailsDemo;
+			productName = JailsDemo;
+			productReference = 1B4353AD1721133C0093CA5F /* JailsDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1BE796F41720F62400613242 /* Jails */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE7971A1720F62400613242 /* Build configuration list for PBXNativeTarget "Jails" */;
+			buildPhases = (
+				1BE796F11720F62400613242 /* Sources */,
+				1BE796F21720F62400613242 /* Frameworks */,
+				1BE796F31720F62400613242 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jails;
+			productName = Jails;
+			productReference = 1BE796F51720F62400613242 /* libJails.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		1BE797051720F62400613242 /* JailsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE7971D1720F62400613242 /* Build configuration list for PBXNativeTarget "JailsTests" */;
+			buildPhases = (
+				1BE797011720F62400613242 /* Sources */,
+				1BE797021720F62400613242 /* Frameworks */,
+				1BE797031720F62400613242 /* Resources */,
+				1BE797041720F62400613242 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BE7970D1720F62400613242 /* PBXTargetDependency */,
+			);
+			name = JailsTests;
+			productName = JailsTests;
+			productReference = 1BE797061720F62400613242 /* JailsTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1BE796ED1720F62400613242 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Matzo;
+			};
+			buildConfigurationList = 1BE796F01720F62400613242 /* Build configuration list for PBXProject "Jails" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1BE796EC1720F62400613242;
+			productRefGroup = 1BE796F61720F62400613242 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1BE796F41720F62400613242 /* Jails */,
+				1BE797051720F62400613242 /* JailsTests */,
+				1B4353AC1721133C0093CA5F /* JailsDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1B4353AB1721133C0093CA5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4353B71721133C0093CA5F /* InfoPlist.strings in Resources */,
+				1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */,
+				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
+				1B40918017211F2F0008C4C2 /* test.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE797031720F62400613242 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE797141720F62400613242 /* InfoPlist.strings in Resources */,
+				1B40917F17211F210008C4C2 /* test.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1BE797041720F62400613242 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B4353A91721133C0093CA5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4353B91721133C0093CA5F /* main.m in Sources */,
+				1B4353BD1721133C0093CA5F /* AppDelegate.m in Sources */,
+				1B4353C01721133D0093CA5F /* ViewController.m in Sources */,
+				1B4353D3172118050093CA5F /* NSObject+Swizzle.m in Sources */,
+				1B4353D71721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
+				1B4353D817211A0F0093CA5F /* Jails.m in Sources */,
+				1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE796F11720F62400613242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE797001720F62400613242 /* Jails.m in Sources */,
+				1B4353D2172116200093CA5F /* NSObject+Swizzle.m in Sources */,
+				1B4353D61721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
+				1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE797011720F62400613242 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE797171720F62400613242 /* JailsTests.m in Sources */,
+				1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
+				1B409188172133760008C4C2 /* JailsViewAdjusterTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1B4353CB172113840093CA5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BE796F41720F62400613242 /* Jails */;
+			targetProxy = 1B4353CA172113840093CA5F /* PBXContainerItemProxy */;
+		};
+		1BE7970D1720F62400613242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BE796F41720F62400613242 /* Jails */;
+			targetProxy = 1BE7970C1720F62400613242 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1B4353B51721133C0093CA5F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4353B61721133C0093CA5F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4353C21721133D0093CA5F /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		1B4353C41721133D0093CA5F /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4353C51721133D0093CA5F /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		1BE797121720F62400613242 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BE797131720F62400613242 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1B4353C71721133D0093CA5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JailsDemo/JailsDemo-Prefix.pch";
+				INFOPLIST_FILE = "JailsDemo/JailsDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1B4353C81721133D0093CA5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JailsDemo/JailsDemo-Prefix.pch";
+				INFOPLIST_FILE = "JailsDemo/JailsDemo-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1BE797181720F62400613242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1BE797191720F62400613242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BE7971B1720F62400613242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Jails.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1BE7971C1720F62400613242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Jails.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		1BE7971E1720F62400613242 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1BE7971F1720F62400613242 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B4353C91721133D0093CA5F /* Build configuration list for PBXNativeTarget "JailsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B4353C71721133D0093CA5F /* Debug */,
+				1B4353C81721133D0093CA5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE796F01720F62400613242 /* Build configuration list for PBXProject "Jails" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE797181720F62400613242 /* Debug */,
+				1BE797191720F62400613242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE7971A1720F62400613242 /* Build configuration list for PBXNativeTarget "Jails" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE7971B1720F62400613242 /* Debug */,
+				1BE7971C1720F62400613242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE7971D1720F62400613242 /* Build configuration list for PBXNativeTarget "JailsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE7971E1720F62400613242 /* Debug */,
+				1BE7971F1720F62400613242 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1BE796ED1720F62400613242 /* Project object */;
+}

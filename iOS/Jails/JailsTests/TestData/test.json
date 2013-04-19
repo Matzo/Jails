@@ -1,0 +1,61 @@
+{"ab":{
+    "MZViewController":{
+        "assign":[30,70],
+        "view": [
+            {},
+            {
+                "name":"b",
+                "properties":[
+                    {
+                        "name":"nameLabel",
+                        "backgroundColor":[255.0,0.0,0.0,1.0],
+                        "frame":["0","0","+10","+10"],
+                        "selector":"viewClicked:"
+                    },
+                    {
+                        "name":"view",
+                        "backgroundColor":[0.0,0.0,0.0,1.0],
+                        "createSubviews":[
+                            {
+                                "class":"UIButton",
+                                "frame":["10","100","100","40"],
+                                "title":"btn",
+                                "selector":"openClicked:"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "ViewController":{
+        "assign":[0,100],
+        "view": [
+                 {},
+                 {
+                 "name":"b",
+                 "properties":[
+                               {
+                               "name":"nameLabel",
+                               "backgroundColor":[255.0,0.0,0.0,1.0],
+                               "frame":["0","0","+10","+10"],
+                               "selector":"viewClicked:"
+                               },
+                               {
+                               "name":"view",
+                               "backgroundColor":[0.0,0.0,0.0,1.0],
+                               "createSubviews":[
+                                                 {
+                                                 "class":"UIButton",
+                                                 "frame":["10","100","100","40"],
+                                                 "title":"btn",
+                                                 "selector":"openClicked:"
+                                                 }
+                                                 ]
+                               }
+                               ]
+                 }
+                 ]
+    }
+
+}}
