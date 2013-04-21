@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "JailsAdjusterTestViewController.h"
 
 @interface ViewController ()
 
@@ -27,4 +28,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)openJail:(id)sender {
+    JailsAdjusterTestViewController *vc = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController" bundle:nil];
+    
+    [self presentViewController:vc animated:YES completion:^{
+    }];
+}
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (JailsAspect)
-- (void)aspect_viewDidLoad;
-- (void)aspect_viewWillLayoutSubviews;
-- (void)aspect_viewDidLayoutSubviews;
+- (void)_aspect_viewDidLoad;
+- (void)_aspect_viewWillLayoutSubviews;
+- (void)_aspect_viewDidLayoutSubviews;
 @end

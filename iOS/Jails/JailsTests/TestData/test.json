@@ -1,7 +1,7 @@
 {"ab":{
     "JailsAdjusterTestViewController":{
         "assign":[0,100],
-        "view": [
+        "branches": [
                  {},
                  {
                  "name":"b",
@@ -18,7 +18,7 @@
                                "createSubviews":[
                                                  {
                                                  "class":"UIButton",
-                                                 "frame":["10","100","100","40"],
+                                                 "frame":["10","200","100","40"],
                                                  "text":"btn",
                                                  "selector":"openClicked:"
                                                  }
@@ -40,26 +40,27 @@
     },
     "ViewController":{
         "assign":[0,100],
-        "view": [
+        "branches": [
                  {},
                  {
                  "name":"b",
                  "properties":[
                                {
-                               "name":"nameLabel",
-                               "backgroundColor":[255.0,0.0,0.0,1.0],
-                               "frame":["0","0","+10","+10"],
-                               "selector":"viewClicked:"
-                               },
-                               {
                                "name":"view",
-                               "backgroundColor":[0.0,0.0,0.0,1.0],
+                               "backgroundColor":[100.0,100.0,100.0,1.0],
                                "createSubviews":[
                                                  {
                                                  "class":"UIButton",
                                                  "frame":["10","100","100","40"],
                                                  "text":"btn",
-                                                 "selector":"openClicked:"
+                                                 "selector":"openJail:"
+                                                 },
+                                                 {
+                                                 "class":"UILabel",
+                                                 "backgroundColor":[255.0,0.0,0.0,1.0],
+                                                 "frame":["0","0","200","30"],
+                                                 "text":"Hello World Outside",
+                                                 "selector":"viewClicked:"
                                                  }
                                                  ]
                                }
@@ -67,5 +68,4 @@
                  }
                  ]
     }
-    
 }}

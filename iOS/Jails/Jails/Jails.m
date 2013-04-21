@@ -15,9 +15,18 @@
 - (id)init {
     self = [super init];
     if (self) {
-        srand((unsigned) time(NULL));
-        self.abSeed = rand() % 100;
-
+        
+        NSUserDefaults *userDefoulds = [NSUserDefaults standardUserDefaults];
+        int seed = 0;
+        if ([[[userDefoulds dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
+            seed = [userDefoulds integerForKey:kNSUserDefaultsJailsSeedKey];
+        } else {
+            srand((unsigned) time(NULL));
+            seed = rand() % 100;
+            [userDefoulds setInteger:seed forKey:kNSUserDefaultsJailsSeedKey];
+        }
+        
+        self.branchSeed = seed;
         self.aspectedClassSet = [NSMutableSet set];
     }
     return self;
@@ -33,83 +42,120 @@
 }
 
 #pragma mark - Prepare AB test
-+(void)startABTest {
-    NSURL *abConfURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test"
-                                                                                          ofType:@"json"]];
-    [Jails loadJSONFromURL:abConfURL];
-    
-    // after load
-    [Jails aspectAB];
-}
-
-+(void)loadJSON:(NSString*)url {
-    [Jails loadJSONFromURL:[NSURL URLWithString:url]];
-}
-
-+(void)loadJSONFromURL:(NSURL*)url {
++(void)breakWithConfURL:(NSURL*)url {
     Jails *jails = [Jails sharedInstance];
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:5.0];
+    jails.jsonURL = url;
     
-    //    [NSURLConnection sendAsynchronousRequest:req
-    //                                       queue:[NSOperationQueue mainQueue]
-    //                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *error) {
-    //                               NSLog(@"data:%@",data);
-    //                               NSLog(@"error:%@",error);
-    //                               jails.json = [[NSString alloc] initWithData:data
-    //                                                                  encoding:NSUTF8StringEncoding];
-    //                               NSLog(@"jails.json:%@", jails.json);
-    //                           }];
     
-    NSURLResponse *res = nil;
+    NSData *data = [jails loadCache];
     NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:req
-                                         returningResponse:&res
-                                                     error:&error];
-    jails.json = [[NSString alloc] initWithData:data
-                                       encoding:NSUTF8StringEncoding];
+    
+    // use cache first
     if (data) {
-        jails.abConf = [NSJSONSerialization JSONObjectWithData:data
-                                                       options:NSJSONReadingMutableContainers
-                                                         error:&error];
+        jails.conf = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        if (error) {
+            NSLog(@"parse config error:%@", error);
+        } else {
+            [jails injectAspect];
+        }
+    }
+    
+    
+    // always load JSON even if it is cached
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [jails loadJSON];
+    });
+}
+
++(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval {
+    Jails *jails = [Jails sharedInstance];
+    jails.interval = interval;
+    [Jails breakWithConfURL:url];
+    
+    if (0 < interval) {
+        jails.repeatTimer = [NSTimer timerWithTimeInterval:interval
+                                                    target:jails
+                                                  selector:@selector(loadJSON)
+                                                  userInfo:nil
+                                                   repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:jails.repeatTimer forMode:NSRunLoopCommonModes];
     }
 }
 
-+(void)aspectAB {
-    Jails *j = [Jails sharedInstance];
-    NSDictionary *abTargetDic = [j.abConf objectForKey:@"ab"];
-    for (NSString *className in [abTargetDic keyEnumerator]) {
+-(void)loadJSON {
+    NSData *data = nil;
+    NSError *error = nil;
+
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.jsonURL
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                          timeoutInterval:5.0];
+    NSURLResponse *res = nil;
+    data = [NSURLConnection sendSynchronousRequest:req
+                                 returningResponse:&res
+                                             error:&error];
+    if (error) {
+        NSLog(@"get config error:%@", error);
+        return;
+    }
+    
+    if (data) {
+        self.conf = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:NSJSONReadingMutableContainers
+                                                      error:&error];
+        if (error) {
+            NSLog(@"parse config error:%@", error);
+            return;
+        } else {
+            [self saveCache:data];
+            [self injectAspect];
+        }
+    }
+}
+
+-(void)saveCache:(NSData*)data {
+    NSString *path = [self cachePath];
+    [data writeToFile:path atomically:YES];
+}
+-(NSData*)loadCache {
+    NSString *path = [self cachePath];
+    return [NSData dataWithContentsOfFile:path];
+}
+-(NSString*)cachePath {
+    return [NSString stringWithFormat:@"%@_jails_config.cache", NSTemporaryDirectory()];
+}
+
+-(void)injectAspect {
+    NSDictionary *targetsDic = [self.conf objectForKey:@"ab"];
+    for (NSString *className in [targetsDic keyEnumerator]) {
         
-        if ([j.aspectedClassSet containsObject:className]) {
+        if ([self.aspectedClassSet containsObject:className]) {
             continue;
         }
-        //NSLog(@"aspect to class:%@", className);
-        //        NSDictionary *target = [abTargetDic objectForKey:key];
         
         [NSClassFromString(className) swizzleMethod:@selector(viewDidLoad)
-                                         withMethod:@selector(aspect_viewDidLoad)];
+                                         withMethod:@selector(_aspect_viewDidLoad)];
         
         [NSClassFromString(className) swizzleMethod:@selector(viewWillLayoutSubviews)
-                                         withMethod:@selector(aspect_viewWillLayoutSubviews)];
+                                         withMethod:@selector(_aspect_viewWillLayoutSubviews)];
         
         [NSClassFromString(className) swizzleMethod:@selector(viewDidLayoutSubviews)
-                                         withMethod:@selector(aspect_viewDidLayoutSubviews)];
+                                         withMethod:@selector(_aspect_viewDidLayoutSubviews)];
         
-        [j.aspectedClassSet addObject:className];
+        [self.aspectedClassSet addObject:className];
     }
 }
 
 
 
 #pragma mark - Execute AB
-+(void)abTestWithViewController:(UIViewController*)viewController {
++(void)branchViewController:(UIViewController*)viewController {
     Jails *jails = [Jails sharedInstance];
     NSDictionary *conf = [jails getConfigWithViewController:viewController];
     if (conf) {
-//        NSLog(@"conf:%@", conf);
         
-        viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+//        viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         for (NSDictionary *property in conf[@"properties"]) {
             SEL propName = NSSelectorFromString(property[@"name"]);
@@ -124,7 +170,7 @@
     }
 }
 
-+(NSString*)abNameWithViewController:(UIViewController*)viewController {
++(NSString*)branchNameOfViewController:(UIViewController*)viewController {
     Jails *jails = [Jails sharedInstance];
     NSDictionary *conf = [jails getConfigWithViewController:viewController];
     if (conf) {
@@ -134,23 +180,28 @@
     }
 }
 
++(void)stopRepeatTimer {
+    Jails *jails = [Jails sharedInstance];
+    [jails.repeatTimer invalidate];
+}
+
 #pragma mark - Private Methods
 - (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController {
     NSString *className = NSStringFromClass([viewController class]);
     NSDictionary *conf = nil;
-    if (self.abConf && (conf = self.abConf[@"ab"][className])) {
+    if (self.conf && (conf = self.conf[@"ab"][className])) {
         NSArray *abList = conf[@"assign"];
         int range = 0;
         int target = 0;
         for (int i = 0; i < abList.count; i++) {
             NSNumber *percent = abList[i];
             range += [percent intValue];
-            if (self.abSeed < range) {
+            if (self.branchSeed < range) {
                 target = i;
                 break;
             }
         }
-        return conf[@"view"][target];
+        return conf[@"branches"][target];
     } else {
         return nil;
     }

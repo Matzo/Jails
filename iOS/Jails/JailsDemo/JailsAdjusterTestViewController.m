@@ -41,10 +41,12 @@
 
 - (IBAction)buttonClicked:(id)sender {
     self.buttonSelectorChanged = NO;
+    [self dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"buttonClicked");
 }
 - (IBAction)adjustedButtonClicked:(id)sender {
     self.buttonSelectorChanged = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"adjustedButtonClicked");
 }
 - (IBAction)createdButtonClicked:(id)sender {

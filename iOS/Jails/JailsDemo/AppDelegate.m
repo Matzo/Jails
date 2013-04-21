@@ -21,13 +21,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [Jails startABTest];
+    [Jails breakWithConfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"]]];
     
     UIViewController *viewController;
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        viewController = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController" bundle:nil];
-//        self.viewController = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController" bundle:nil];
+//        viewController = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController" bundle:nil];
+        viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
     } else {
         viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }

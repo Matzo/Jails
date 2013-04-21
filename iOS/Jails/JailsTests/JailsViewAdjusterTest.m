@@ -101,7 +101,6 @@
     STAssertTrue(self.testVC.testView.hidden, @"view was hidden");
 }
 
-
 - (void)testCreateNewView {
 
     UIView *created = (UIView*)[JailsViewAdjuster createViewInController:self.testVC conf:@{

@@ -44,8 +44,8 @@
 		F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C41721133D0093CA5F /* ViewController_iPad.xib */; };
 		F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
 		F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353B01721133C0093CA5F /* CoreGraphics.framework */; };
+		F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
 		F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */; };
-		F7F1582517226CE400997085 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
 		F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582B172274AD00997085 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -174,15 +174,15 @@
 		1B4353B21721133C0093CA5F /* JailsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */,
-				F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */,
-				F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */,
 				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
 				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
 				1B4353BE1721133C0093CA5F /* ViewController.h */,
 				1B4353BF1721133D0093CA5F /* ViewController.m */,
 				1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */,
 				1B4353C41721133D0093CA5F /* ViewController_iPad.xib */,
+				F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */,
+				F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */,
+				F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */,
 				1B4353B31721133C0093CA5F /* Supporting Files */,
 			);
 			path = JailsDemo;
@@ -375,6 +375,7 @@
 				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
 				1B40918017211F2F0008C4C2 /* test.json in Resources */,
 				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
+				F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +387,6 @@
 				1B40917F17211F210008C4C2 /* test.json in Resources */,
 				F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */,
 				F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */,
-				F7F1582517226CE400997085 /* JailsAdjusterTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
