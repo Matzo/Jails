@@ -37,6 +37,16 @@
 		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
 		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
 		1BE797171720F62400613242 /* JailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE797161720F62400613242 /* JailsTests.m */; };
+		F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
+		F77C74A41722666300350CD1 /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
+		F77C74A51722666600350CD1 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
+		F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */; };
+		F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C41721133D0093CA5F /* ViewController_iPad.xib */; };
+		F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
+		F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353B01721133C0093CA5F /* CoreGraphics.framework */; };
+		F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */; };
+		F7F1582517226CE400997085 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
+		F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582B172274AD00997085 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +63,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1BE796F41720F62400613242;
 			remoteInfo = Jails;
+		};
+		F77C74A1172265A600350CD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE796ED1720F62400613242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B4353AC1721133C0093CA5F;
+			remoteInfo = JailsDemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -104,6 +121,10 @@
 		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
 		1BE797161720F62400613242 /* JailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailsTests.m; sourceTree = "<group>"; };
+		F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsAdjusterTestViewController.h; sourceTree = "<group>"; };
+		F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsAdjusterTestViewController.m; sourceTree = "<group>"; };
+		F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailsAdjusterTestViewController.xib; sourceTree = "<group>"; };
+		F7F1582B172274AD00997085 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */,
+				F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */,
 				1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */,
 				1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */,
 				1BE7970E1720F62400613242 /* libJails.a in Frameworks */,
@@ -151,6 +174,9 @@
 		1B4353B21721133C0093CA5F /* JailsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */,
+				F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */,
+				F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */,
 				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
 				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
 				1B4353BE1721133C0093CA5F /* ViewController.h */,
@@ -169,6 +195,7 @@
 				1B4353B51721133C0093CA5F /* InfoPlist.strings */,
 				1B4353B81721133C0093CA5F /* main.m */,
 				1B4353BA1721133C0093CA5F /* JailsDemo-Prefix.pch */,
+				F7F1582B172274AD00997085 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -302,6 +329,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F77C74A2172265A600350CD1 /* PBXTargetDependency */,
 				1BE7970D1720F62400613242 /* PBXTargetDependency */,
 			);
 			name = JailsTests;
@@ -346,6 +374,7 @@
 				1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */,
 				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
 				1B40918017211F2F0008C4C2 /* test.json in Resources */,
+				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +384,9 @@
 			files = (
 				1BE797141720F62400613242 /* InfoPlist.strings in Resources */,
 				1B40917F17211F210008C4C2 /* test.json in Resources */,
+				F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */,
+				F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */,
+				F7F1582517226CE400997085 /* JailsAdjusterTestViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +420,7 @@
 				1B4353D71721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
 				1B4353D817211A0F0093CA5F /* Jails.m in Sources */,
 				1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
+				F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +442,9 @@
 				1BE797171720F62400613242 /* JailsTests.m in Sources */,
 				1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
 				1B409188172133760008C4C2 /* JailsViewAdjusterTest.m in Sources */,
+				F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */,
+				F77C74A41722666300350CD1 /* NSObject+Swizzle.m in Sources */,
+				F77C74A51722666600350CD1 /* Jails.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +460,11 @@
 			isa = PBXTargetDependency;
 			target = 1BE796F41720F62400613242 /* Jails */;
 			targetProxy = 1BE7970C1720F62400613242 /* PBXContainerItemProxy */;
+		};
+		F77C74A2172265A600350CD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B4353AC1721133C0093CA5F /* JailsDemo */;
+			targetProxy = F77C74A1172265A600350CD1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -578,6 +619,7 @@
 		1BE7971E1720F62400613242 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JailsDemo.app/JailsDemo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -586,6 +628,7 @@
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -593,6 +636,7 @@
 		1BE7971F1720F62400613242 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JailsDemo.app/JailsDemo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -601,6 +645,7 @@
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

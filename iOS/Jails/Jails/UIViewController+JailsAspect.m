@@ -11,22 +11,20 @@
 
 @implementation UIViewController (JailsAspect)
 - (void)aspect_viewDidLoad {
-    NSLog(@"before viewDidLoad in %@", NSStringFromClass(self.class));
     [self aspect_viewDidLoad];
-    NSLog(@"after viewDidLoad in %@", NSStringFromClass(self.class));
     
-    [Jails abTestWithViewController:self];
+    @try {
+        [Jails abTestWithViewController:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
 }
 - (void)aspect_viewWillLayoutSubviews {
-    NSLog(@"before aspect_viewWillLayoutSubviews in %@", NSStringFromClass(self.class));
     [self aspect_viewWillLayoutSubviews];
-    NSLog(@"after aspect_viewWillLayoutSubviews in %@", NSStringFromClass(self.class));
 }
 - (void)aspect_viewDidLayoutSubviews {
-    NSLog(@"before aspect_viewDidLayoutSubviews in %@", NSStringFromClass(self.class));
     [self aspect_viewDidLayoutSubviews];
-    NSLog(@"after aspect_viewDidLayoutSubviews in %@", NSStringFromClass(self.class));
 }
-
 
 @end

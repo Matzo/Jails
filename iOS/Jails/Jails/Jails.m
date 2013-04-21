@@ -84,7 +84,7 @@
         if ([j.aspectedClassSet containsObject:className]) {
             continue;
         }
-        NSLog(@"aspect to class:%@", className);
+        //NSLog(@"aspect to class:%@", className);
         //        NSDictionary *target = [abTargetDic objectForKey:key];
         
         [NSClassFromString(className) swizzleMethod:@selector(viewDidLoad)
@@ -107,16 +107,18 @@
     Jails *jails = [Jails sharedInstance];
     NSDictionary *conf = [jails getConfigWithViewController:viewController];
     if (conf) {
-        NSLog(@"conf:%@", conf);
+//        NSLog(@"conf:%@", conf);
         
         viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         for (NSDictionary *property in conf[@"properties"]) {
             SEL propName = NSSelectorFromString(property[@"name"]);
             if ([viewController respondsToSelector:propName]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 UIView *view = [viewController performSelector:propName];
-                NSLog(@"view:%@", view);
-                [jails updateView:view conf:property];
+#pragma clang diagnostic pop
+                [JailsViewAdjuster updateViewController:viewController view:view conf:property];
             }
         }
     }
@@ -154,38 +156,6 @@
     }
 }
 
-- (void)updateView:(UIView*)view conf:(NSDictionary*)conf {
-    // adjust frame
-    [JailsViewAdjuster adjustFrameTo:view conf:conf];
-    
-    // adjust color
-    [JailsViewAdjuster adjustBackgroundColorTo:view conf:conf];
-
-    // adjust selector
-    [JailsViewAdjuster adjustSelectorTo:view conf:conf];
-
-    // adjust title
-    [JailsViewAdjuster adjustTitleTo:view conf:conf];
-
-    // adjust visivility
-    [JailsViewAdjuster adjustHiddenTo:view conf:conf];
-
-    
-    NSArray *createSubviews = nil;
-    if ((createSubviews = conf[@"createSubviews"])) {
-        for (NSDictionary *subviewConf in createSubviews) {
-            UIView *newView = [self createView:view conf:subviewConf];
-            [view addSubview:newView];
-        }
-    }
-}
-
-- (UIView*)createView:(UIView*)view conf:(NSDictionary*)conf {
-    UIView *newView = [(UIView*)[NSClassFromString(conf[@"class"]) alloc] initWithFrame:CGRectZero];
-    [self updateView:newView conf:conf];
-    
-    return newView;
-}
 
 
 @end
