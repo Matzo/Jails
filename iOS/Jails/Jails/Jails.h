@@ -8,19 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+#define kNSUserDefaultsJailsSeedKey @"kNSUserDefaultsJailsSeedKey"
+
 @interface Jails : NSObject
-@property (nonatomic, assign) int abSeed;
-@property (strong) NSString *json;
-@property (strong) NSDictionary *abConf;
+@property (nonatomic, assign) int branchSeed;
+@property (strong) NSURL *jsonURL;
+@property (strong) NSTimer *repeatTimer;
+@property (strong) NSDictionary *conf;
 @property (strong) NSMutableSet *aspectedClassSet;
+@property NSTimeInterval interval;
 
 +(id)sharedInstance;
++(void)breakWithConfURL:(NSURL*)url;
++(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval;
++(void)stopRepeatLoading;
 
-+(void)startABTest;
-
-+(void)loadJSON:(NSString*)url;
-+(void)abTestWithViewController:(UIViewController*)viewController;
-+(NSString*)abNameWithViewController:(UIViewController*)viewController;
++(void)branchViewController:(UIViewController*)viewController;
++(NSString*)branchNameOfViewController:(UIViewController*)viewController;
 
 
 

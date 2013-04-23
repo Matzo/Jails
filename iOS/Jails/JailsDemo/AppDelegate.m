@@ -12,6 +12,8 @@
 //#import "NSObject+Swizzle.h"
 //#import "UIViewController+JailsAspect.h"
 #import "Jails.h"
+#import "JailsAdjusterTestViewController.h"
+
 
 @implementation AppDelegate
 
@@ -19,18 +21,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    [[ViewController class] swizzleMethod:@selector(viewDidLoad) withMethod:@selector(aspectedViewDidLoad)];
+    [Jails breakWithConfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"]]];
     
-//    [Jails aspectIntoViewController:[ViewController class]];
-    [Jails startABTest];
-    
+    UIViewController *viewController;
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+//        viewController = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController" bundle:nil];
+        viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+        viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
