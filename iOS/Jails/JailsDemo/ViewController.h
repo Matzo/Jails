@@ -10,5 +10,6 @@
 
 @interface ViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+- (IBAction)openJail:(id)sender;
 
 @end

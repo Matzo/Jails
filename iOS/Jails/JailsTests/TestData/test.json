@@ -1,55 +1,66 @@
 {"ab":{
-    "MZViewController":{
-        "assign":[30,70],
-        "view": [
-            {},
-            {
-                "name":"b",
-                "properties":[
-                    {
-                        "name":"nameLabel",
-                        "backgroundColor":[255.0,0.0,0.0,1.0],
-                        "frame":["0","0","+10","+10"],
-                        "selector":"viewClicked:"
-                    },
-                    {
-                        "name":"view",
-                        "backgroundColor":[0.0,0.0,0.0,1.0],
-                        "createSubviews":[
-                            {
-                                "class":"UIButton",
-                                "frame":["10","100","100","40"],
-                                "title":"btn",
-                                "selector":"openClicked:"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "ViewController":{
+    "JailsAdjusterTestViewController":{
         "assign":[0,100],
-        "view": [
+        "branches": [
                  {},
                  {
                  "name":"b",
                  "properties":[
                                {
-                               "name":"nameLabel",
+                               "name":"label",
                                "backgroundColor":[255.0,0.0,0.0,1.0],
-                               "frame":["0","0","+10","+10"],
-                               "selector":"viewClicked:"
+                               "frame":["+20","+0","+10","+10"],
+                               "text":"This is B"
                                },
                                {
+                               "name":"testView",
+                               "backgroundColor":[100.0,100.0,100.0,1.0],
+                               "createSubviews":[
+                                                 {
+                                                 "class":"UIButton",
+                                                 "frame":["10","200","100","40"],
+                                                 "text":"btn",
+                                                 "selector":"openClicked:"
+                                                 }
+                                                 ]
+                               },
+                               {
+                               "name":"button",
+                               "frame":["+50","+0","+10","+10"],
+                               "text":"Change Label Text",
+                               "selector":"adjustedButtonClicked:"
+                               },
+                               {
+                               "name":"web",
+                               "text":"text B <a href='http://www.google.com'>link</a>"
+                               }
+                               ]
+                 }
+                 ]
+    },
+    "ViewController":{
+        "assign":[0,100],
+        "branches": [
+                 {},
+                 {
+                 "name":"b",
+                 "properties":[
+                               {
                                "name":"view",
-                               "backgroundColor":[0.0,0.0,0.0,1.0],
+                               "backgroundColor":[100.0,100.0,100.0,1.0],
                                "createSubviews":[
                                                  {
                                                  "class":"UIButton",
                                                  "frame":["10","100","100","40"],
-                                                 "title":"btn",
-                                                 "selector":"openClicked:"
+                                                 "text":"btn",
+                                                 "selector":"openJail:"
+                                                 },
+                                                 {
+                                                 "class":"UILabel",
+                                                 "backgroundColor":[255.0,0.0,0.0,1.0],
+                                                 "frame":["0","0","200","30"],
+                                                 "text":"Hello World Outside",
+                                                 "selector":"viewClicked:"
                                                  }
                                                  ]
                                }
@@ -57,5 +68,4 @@
                  }
                  ]
     }
-
 }}

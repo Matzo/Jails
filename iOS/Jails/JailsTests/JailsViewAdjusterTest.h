@@ -7,7 +7,10 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "JailsAdjusterTestViewController.h"
 
-@interface JailsViewAdjusterTest : SenTestCase
-
+@interface JailsViewAdjusterTest : SenTestCase<UIWebViewDelegate>
+@property (strong, nonatomic) JailsAdjusterTestViewController *testVC;
 @end
+
+
