@@ -64,9 +64,12 @@
     
     
     // always load JSON even if it is cached
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [jails loadJSON];
     });
+    
+    // set reload events
+    [jails observeNotification];
 }
 
 +(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval {
@@ -82,6 +85,12 @@
                                                    repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:jails.repeatTimer forMode:NSRunLoopCommonModes];
     }
+}
+
+-(void)observeNotification {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self];
+    [center addObserver:self selector:@selector(loadJSON) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(void)loadJSON {
@@ -180,9 +189,12 @@
     }
 }
 
-+(void)stopRepeatTimer {
++(void)stopRepeatLoading {
     Jails *jails = [Jails sharedInstance];
     [jails.repeatTimer invalidate];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:jails];
 }
 
 #pragma mark - Private Methods

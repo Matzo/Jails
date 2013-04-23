@@ -21,7 +21,7 @@
 +(id)sharedInstance;
 +(void)breakWithConfURL:(NSURL*)url;
 +(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval;
-+(void)stopRepeatTimer;
++(void)stopRepeatLoading;
 
 +(void)branchViewController:(UIViewController*)viewController;
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController;
