@@ -1,6 +1,6 @@
-{"ab":{
+{
     "JailsAdjusterTestViewController":{
-        "assign":[0,100],
+        "ratio":[0,100],
         "branches": [
                  {},
                  {
@@ -39,7 +39,7 @@
                  ]
     },
     "ViewController":{
-        "assign":[0,100],
+        "ratio":[0,100],
         "branches": [
                  {},
                  {
@@ -68,4 +68,4 @@
                  }
                  ]
     }
-}}
+}
