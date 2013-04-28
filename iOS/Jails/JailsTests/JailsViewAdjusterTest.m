@@ -8,6 +8,7 @@
 
 #import "JailsViewAdjusterTest.h"
 #import "JailsViewAdjuster.h"
+#import "NSObject+Swizzle.h"
 
 #import "ViewController.h"
 
@@ -60,13 +61,25 @@
 }
 - (void)testAdjustSelector {
     [JailsViewAdjuster adjustSelectorInViewController:self.testVC view:self.testVC.button conf:@{
-     @"selector":@"adjustedButtonClicked:",
+     @"action":@"adjustedButtonClicked:",
      }];
     
     [self.testVC.button sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     STAssertTrue(self.testVC.buttonSelectorChanged, @"button selector was changed");
 }
+
+- (void)testAdjustURL {
+    NSURL *url = [JailsViewAdjuster urlFromString:@"http://www.google.com/"];
+    STAssertEqualObjects(url, [NSURL URLWithString:@"http://www.google.com/"], @"made URL");
+
+    url = [JailsViewAdjuster urlFromString:@"someSelector;"];
+    STAssertEqualObjects(url, nil, @"made URL");
+    
+    url = [JailsViewAdjuster urlFromString:nil];
+    STAssertEqualObjects(url, nil, @"made URL");
+}
+
 
 - (void)testAdjustText {
     [JailsViewAdjuster adjustTextInViewController:self.testVC view:self.testVC.label conf:@{
@@ -151,7 +164,7 @@
                                     @"frame":@[@"200", @"200", @"80", @"40"],
                                     @"class":@"UIButton",
                                     @"text":@"new button",
-                                    @"selector":@"createdButtonClicked:"
+                                    @"action":@"createdButtonClicked:"
                                     }];
     [self.testVC.view addSubview:created];
     
@@ -168,6 +181,11 @@
 //- (void)webViewDidFinishLoad:(UIWebView *)webView {
 //}
 
+
 @end
 
-
+//
+//@implementation JailsAdjusterTestViewController(Mock)
+//- (void)_jails_openLink:(id)sender {
+//}
+//@end

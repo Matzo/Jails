@@ -7,6 +7,7 @@
 //
 
 #import "JailsViewAdjuster.h"
+#import "Jails.h"
 
 @implementation JailsViewAdjuster
 
@@ -70,18 +71,30 @@
 
 // adjust selector
 + (void)adjustSelectorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-    NSString *selectorString = conf[@"selector"];
+    NSString *selectorString = conf[@"action"];
     if (!selectorString) {
         return;
     }
     
-    SEL selector = NSSelectorFromString(selectorString);
-    if (!selector) {
-        return;
-    }
+    Jails *jails = [Jails sharedInstance];
+    NSURL *url = [self urlFromString:selectorString];
+    SEL selector;
     
     if ([view isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton*)view;
+
+        if (url) {
+            NSString *key = [button description];
+            jails.linkDic[key] = url;
+            selector = @selector(_jails_openLink:);
+        } else {
+            selector = NSSelectorFromString(selectorString);
+        }
+
+        if (!selector) {
+            return;
+        }
+
         NSSet *targets = [button allTargets];
 
         // remove all action
@@ -147,6 +160,29 @@
         return [confValue floatValue];
     }
 }
+
+// hundle URL
++(NSURL*)urlFromString:(NSString*)urlString {
+    NSString *pattern = @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)";
+    NSRange match = [urlString rangeOfString:pattern
+                                     options:NSRegularExpressionSearch];
+
+    if (match.location != NSNotFound) {
+//        NSLog(@"%@", [urlString substringWithRange:match]);
+        return [NSURL URLWithString:urlString];
+    } else {
+        return nil;
+    }
+}
+
+//+(void)hundleURL:(NSURL*)url {
+//    UIApplication *app = [UIApplication sharedApplication];
+//    if ([app canOpenURL:url]) {
+//        [app openURL:url];
+//    }
+//}
+
+
 
 
 @end

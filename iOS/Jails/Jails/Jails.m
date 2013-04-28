@@ -28,6 +28,7 @@
         
         self.branchSeed = seed;
         self.aspectedClassSet = [NSMutableSet set];
+        self.linkDic = [NSMutableDictionary dictionary];
     }
     return self;
 }
