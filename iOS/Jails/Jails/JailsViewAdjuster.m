@@ -9,6 +9,8 @@
 #import "JailsViewAdjuster.h"
 #import "Jails.h"
 
+#define URL_PATTERN @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)"
+
 @implementation JailsViewAdjuster
 
 
@@ -21,10 +23,13 @@
     
     // adjust selector
     [JailsViewAdjuster adjustSelectorInViewController:viewController view:view conf:conf];
+
+    // adjust image
+    [JailsViewAdjuster adjustImageInViewController:viewController view:view conf:conf];
     
     // adjust title
     [JailsViewAdjuster adjustTextInViewController:viewController view:view conf:conf];
-    
+
     // adjust visivility
     [JailsViewAdjuster adjustHiddenInViewController:viewController view:view conf:conf];
     
@@ -141,6 +146,51 @@
     
     view.hidden = [conf[@"hidden"] boolValue];
 }
++ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
+    NSString *imageString = conf[@"image"];
+
+    if (imageString && [view isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton*)view;
+        
+        NSRange match = [imageString rangeOfString:URL_PATTERN
+                                     options:NSRegularExpressionSearch];
+        
+        if (match.location != NSNotFound) {
+            // get image from external
+            NSURL *imageURL = [NSURL URLWithString:imageString];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSURLRequest *req = [[NSURLRequest alloc] initWithURL:imageURL
+                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:30.0];
+                NSURLResponse *res = nil;
+                NSData *data = nil;
+                NSError *error = nil;
+                data = [NSURLConnection sendSynchronousRequest:req
+                                             returningResponse:&res
+                                                         error:&error];
+                if (error) {
+                    NSLog(@"get image error:%@", error);
+                    return;
+                }
+                
+                if (data) {
+                    UIImage *loadedImage = [[UIImage alloc] initWithData:data];
+                    if (loadedImage) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
+                        });
+                    }
+                }
+            });
+            
+        } else {
+            UIImage *image = [UIImage imageNamed:imageString];
+            if (image) {
+                [button setBackgroundImage:image forState:UIControlStateNormal];
+            }
+        }
+    }
+}
 
 + (CGRect)newFrameBase:(CGRect)baseFrame conf:(NSArray*)frameObj {
     if (frameObj && frameObj.count == 4) {
@@ -163,8 +213,7 @@
 
 // hundle URL
 +(NSURL*)urlFromString:(NSString*)urlString {
-    NSString *pattern = @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)";
-    NSRange match = [urlString rangeOfString:pattern
+    NSRange match = [urlString rangeOfString:URL_PATTERN
                                      options:NSRegularExpressionSearch];
 
     if (match.location != NSNotFound) {

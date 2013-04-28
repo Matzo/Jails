@@ -114,6 +114,18 @@
     STAssertTrue(self.testVC.testView.hidden, @"view was hidden");
 }
 
+- (void)testAdjustImage {
+    [JailsViewAdjuster adjustImageInViewController:self.testVC view:self.testVC.button conf:@{
+     @"image":@"button1"
+     }];
+    
+    UIImage *result = [self.testVC.button backgroundImageForState:UIControlStateNormal];
+    UIImage *expect = [UIImage imageNamed:@"button1"];
+    
+    STAssertEqualObjects(result, expect, @"button1.png");
+}
+
+
 - (void)testCreateNewView {
 
     UIView *created = (UIView*)[JailsViewAdjuster createViewInController:self.testVC conf:@{
