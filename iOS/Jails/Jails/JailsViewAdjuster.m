@@ -159,6 +159,28 @@
             // get image from external
             NSURL *imageURL = [NSURL URLWithString:imageString];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // TODO: refactoring for cache and loading indicator
+                NSString *tmpFileName = [imageString stringByReplacingOccurrencesOfString:@"/" withString:@"__"];
+                NSString *tmpPath = [NSString stringWithFormat:@"%@_jails_%@", NSTemporaryDirectory(), tmpFileName];
+                NSData *cache = [[NSData alloc] initWithContentsOfFile:tmpPath];
+                UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+                if (cache) {
+                    UIImage *loadedImage = [[UIImage alloc] initWithData:cache];
+                    if (loadedImage) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
+                        });
+                    }
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [button addSubview:loading];
+                        [loading startAnimating];
+                        loading.center = CGPointMake(button.bounds.size.width * 0.5,
+                                                     button.bounds.size.height * 0.5);
+                    });
+                }
+                
                 NSURLRequest *req = [[NSURLRequest alloc] initWithURL:imageURL
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:30.0];
@@ -179,8 +201,14 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
                         });
+
+                        [data writeToFile:tmpPath atomically:YES];
                     }
                 }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [loading stopAnimating];
+                    [loading removeFromSuperview];
+                });
             });
             
         } else {
