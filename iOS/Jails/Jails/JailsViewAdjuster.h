@@ -21,7 +21,9 @@
 + (void)adjustSelectorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
 + (void)adjustTextInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
 + (void)adjustHiddenInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
 
++(NSURL*)urlFromString:(NSString*)urlString;
 
 //+ (void)adjustFrameTo:(UIView*)view conf:(NSDictionary*)conf;
 //+ (void)adjustBackgroundColorTo:(UIView*)view conf:(NSDictionary*)conf;

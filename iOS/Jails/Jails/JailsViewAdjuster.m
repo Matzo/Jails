@@ -7,6 +7,9 @@
 //
 
 #import "JailsViewAdjuster.h"
+#import "Jails.h"
+
+#define URL_PATTERN @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)"
 
 @implementation JailsViewAdjuster
 
@@ -20,10 +23,13 @@
     
     // adjust selector
     [JailsViewAdjuster adjustSelectorInViewController:viewController view:view conf:conf];
+
+    // adjust image
+    [JailsViewAdjuster adjustImageInViewController:viewController view:view conf:conf];
     
     // adjust title
     [JailsViewAdjuster adjustTextInViewController:viewController view:view conf:conf];
-    
+
     // adjust visivility
     [JailsViewAdjuster adjustHiddenInViewController:viewController view:view conf:conf];
     
@@ -33,6 +39,10 @@
     if ((createSubviews = conf[@"createSubviews"])) {
         for (NSDictionary *subviewConf in createSubviews) {
             UIView *newView = [JailsViewAdjuster createViewInController:viewController conf:subviewConf];
+            if ([newView isMemberOfClass:[UIWebView class]]) {
+                UIWebView *web = (UIWebView*)newView;
+                web.scrollView.bounces = NO;
+            }
             [view addSubview:newView];
         }
     }
@@ -70,18 +80,30 @@
 
 // adjust selector
 + (void)adjustSelectorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-    NSString *selectorString = conf[@"selector"];
+    NSString *selectorString = conf[@"action"];
     if (!selectorString) {
         return;
     }
     
-    SEL selector = NSSelectorFromString(selectorString);
-    if (!selector) {
-        return;
-    }
+    Jails *jails = [Jails sharedInstance];
+    NSURL *url = [self urlFromString:selectorString];
+    SEL selector;
     
     if ([view isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton*)view;
+
+        if (url) {
+            NSString *key = [button description];
+            jails.linkDic[key] = url;
+            selector = @selector(_jails_openLink:);
+        } else {
+            selector = NSSelectorFromString(selectorString);
+        }
+
+        if (!selector) {
+            return;
+        }
+
         NSSet *targets = [button allTargets];
 
         // remove all action
@@ -128,6 +150,79 @@
     
     view.hidden = [conf[@"hidden"] boolValue];
 }
++ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
+    NSString *imageString = conf[@"image"];
+
+    if (imageString && [view isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton*)view;
+        
+        NSRange match = [imageString rangeOfString:URL_PATTERN
+                                     options:NSRegularExpressionSearch];
+        
+        if (match.location != NSNotFound) {
+            // get image from external
+            NSURL *imageURL = [NSURL URLWithString:imageString];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                // TODO: refactoring for cache and loading indicator
+                NSString *tmpFileName = [imageString stringByReplacingOccurrencesOfString:@"/" withString:@"__"];
+                NSString *tmpPath = [NSString stringWithFormat:@"%@_jails_%@", NSTemporaryDirectory(), tmpFileName];
+                NSData *cache = [[NSData alloc] initWithContentsOfFile:tmpPath];
+                UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
+                if (cache) {
+                    UIImage *loadedImage = [[UIImage alloc] initWithData:cache];
+                    if (loadedImage) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
+                        });
+                    }
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [button addSubview:loading];
+                        [loading startAnimating];
+                        loading.center = CGPointMake(button.bounds.size.width * 0.5,
+                                                     button.bounds.size.height * 0.5);
+                    });
+                }
+                
+                NSURLRequest *req = [[NSURLRequest alloc] initWithURL:imageURL
+                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:30.0];
+                NSURLResponse *res = nil;
+                NSData *data = nil;
+                NSError *error = nil;
+                data = [NSURLConnection sendSynchronousRequest:req
+                                             returningResponse:&res
+                                                         error:&error];
+                if (error) {
+                    NSLog(@"get image error:%@", error);
+                    return;
+                }
+                
+                if (data) {
+                    UIImage *loadedImage = [[UIImage alloc] initWithData:data];
+                    if (loadedImage) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
+                        });
+
+                        [data writeToFile:tmpPath atomically:YES];
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [loading stopAnimating];
+                    [loading removeFromSuperview];
+                });
+            });
+            
+        } else {
+            UIImage *image = [UIImage imageNamed:imageString];
+            if (image) {
+                [button setBackgroundImage:image forState:UIControlStateNormal];
+            }
+        }
+    }
+}
 
 + (CGRect)newFrameBase:(CGRect)baseFrame conf:(NSArray*)frameObj {
     if (frameObj && frameObj.count == 4) {
@@ -147,6 +242,28 @@
         return [confValue floatValue];
     }
 }
+
+// hundle URL
++(NSURL*)urlFromString:(NSString*)urlString {
+    NSRange match = [urlString rangeOfString:URL_PATTERN
+                                     options:NSRegularExpressionSearch];
+
+    if (match.location != NSNotFound) {
+//        NSLog(@"%@", [urlString substringWithRange:match]);
+        return [NSURL URLWithString:urlString];
+    } else {
+        return nil;
+    }
+}
+
+//+(void)hundleURL:(NSURL*)url {
+//    UIApplication *app = [UIApplication sharedApplication];
+//    if ([app canOpenURL:url]) {
+//        [app openURL:url];
+//    }
+//}
+
+
 
 
 @end

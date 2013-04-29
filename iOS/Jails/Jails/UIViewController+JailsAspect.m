@@ -27,4 +27,16 @@
     [self _aspect_viewDidLayoutSubviews];
 }
 
+- (void)_jails_openLink:(id)sender {
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    Jails *jails = [Jails sharedInstance];
+    NSString *key = [sender description];
+    NSURL *url = jails.linkDic[key];
+    
+    if ([app canOpenURL:url]) {
+        [app openURL:url];
+    }
+}
+
 @end
