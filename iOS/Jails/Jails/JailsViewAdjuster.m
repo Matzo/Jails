@@ -39,6 +39,10 @@
     if ((createSubviews = conf[@"createSubviews"])) {
         for (NSDictionary *subviewConf in createSubviews) {
             UIView *newView = [JailsViewAdjuster createViewInController:viewController conf:subviewConf];
+            if ([newView isMemberOfClass:[UIWebView class]]) {
+                UIWebView *web = (UIWebView*)newView;
+                web.scrollView.bounces = NO;
+            }
             [view addSubview:newView];
         }
     }
