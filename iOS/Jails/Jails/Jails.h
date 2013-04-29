@@ -17,6 +17,7 @@
 @property (strong) NSDictionary *conf;
 @property (strong) NSMutableSet *aspectedClassSet;
 @property NSTimeInterval interval;
+@property (strong) NSMutableDictionary *linkDic;
 
 +(id)sharedInstance;
 +(void)breakWithConfURL:(NSURL*)url;
@@ -25,7 +26,6 @@
 
 +(void)branchViewController:(UIViewController*)viewController;
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController;
-
 
 
 //- (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController;

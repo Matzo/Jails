@@ -28,6 +28,7 @@
         
         self.branchSeed = seed;
         self.aspectedClassSet = [NSMutableSet set];
+        self.linkDic = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -136,8 +137,7 @@
 }
 
 -(void)injectAspect {
-    NSDictionary *targetsDic = [self.conf objectForKey:@"ab"];
-    for (NSString *className in [targetsDic keyEnumerator]) {
+    for (NSString *className in [self.conf keyEnumerator]) {
         
         if ([self.aspectedClassSet containsObject:className]) {
             continue;
@@ -201,8 +201,8 @@
 - (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController {
     NSString *className = NSStringFromClass([viewController class]);
     NSDictionary *conf = nil;
-    if (self.conf && (conf = self.conf[@"ab"][className])) {
-        NSArray *abList = conf[@"assign"];
+    if (self.conf && (conf = self.conf[className])) {
+        NSArray *abList = conf[@"ratio"];
         int range = 0;
         int target = 0;
         for (int i = 0; i < abList.count; i++) {

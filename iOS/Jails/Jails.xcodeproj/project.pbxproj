@@ -37,6 +37,8 @@
 		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
 		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
 		1BE797171720F62400613242 /* JailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE797161720F62400613242 /* JailsTests.m */; };
+		F7760C3C172D5E2F007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
+		F7760C3D172D6567007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
 		F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
 		F77C74A41722666300350CD1 /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
 		F77C74A51722666600350CD1 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
@@ -121,6 +123,7 @@
 		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
 		1BE797161720F62400613242 /* JailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailsTests.m; sourceTree = "<group>"; };
+		F7760C3B172D5E2F007D645A /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsAdjusterTestViewController.h; sourceTree = "<group>"; };
 		F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsAdjusterTestViewController.m; sourceTree = "<group>"; };
 		F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailsAdjusterTestViewController.xib; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		1B4353B21721133C0093CA5F /* JailsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F7760C3B172D5E2F007D645A /* button1.png */,
 				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
 				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
 				1B4353BE1721133C0093CA5F /* ViewController.h */,
@@ -376,6 +380,7 @@
 				1B40918017211F2F0008C4C2 /* test.json in Resources */,
 				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
 				F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */,
+				F7760C3C172D5E2F007D645A /* button1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +392,7 @@
 				1B40917F17211F210008C4C2 /* test.json in Resources */,
 				F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */,
 				F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */,
+				F7760C3D172D6567007D645A /* button1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
