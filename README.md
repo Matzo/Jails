@@ -15,8 +15,16 @@ iOS
 ### Sample Code
 `[Jails breakWithConfURL:[NSURL URLWithString:@"http://your.domain.com/path/to/conf/jails.json"]];`
 
+Android (Draft)
+----
+### Require
+- AspectJ
+
+### Install
+1. install AJDT from Eclipse Marketplace
 
 Tools
 ----
 - jails.json editor  
 http://matzo.github.io/jpon_demo/#jails.json
+
