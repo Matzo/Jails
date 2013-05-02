@@ -13,7 +13,16 @@ iOS
 4. add `-ObjC -all_load` to `Other Linker Flags` of Build Setting.
 
 ### Sample Code
-`[Jails breakWithConfURL:[NSURL URLWithString:@"http://your.domain.com/path/to/conf/jails.json"]];`
+    // AppDelegate.m
+    
+    #import "Jails.h"
+    
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+         :
+        [Jails breakWithConfURL:[NSURL URLWithString:@"http://your.domain.com/path/to/conf/jails.json"]];
+         :
+    }
+    
 
 Android (Draft)
 ----
