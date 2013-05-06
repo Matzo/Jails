@@ -41,7 +41,7 @@ Android
     @Override
     protected void onCreate(Bundle savedInstanceState) {
           :
-        Jails jails = Jails.getSharedInstance().loadConfig("http://your.domain.com/path/to/conf/jails.json");
+        Jails jails = Jails.breakWithConfURL("http://your.domain.com/path/to/conf/jails.json");
           :
     }
 
