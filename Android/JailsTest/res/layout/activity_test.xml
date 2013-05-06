@@ -36,5 +36,15 @@
         android:layout_alignLeft="@+id/webView1"
         android:layout_below="@+id/webView1"
          />
+    
+    <View
+        android:id="@+id/invisible_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_below="@+id/view1"
+        android:visibility="gone"
+         />
+    
 
 </RelativeLayout>

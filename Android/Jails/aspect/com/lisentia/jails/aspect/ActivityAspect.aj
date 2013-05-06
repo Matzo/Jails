@@ -1,13 +1,12 @@
 package com.lisentia.jails.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Before;
-
-import com.lisentia.jails.Jails;
+import org.aspectj.lang.annotation.After;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+
+import com.lisentia.jails.Jails;
 
 public aspect ActivityAspect {
 	
@@ -17,7 +16,7 @@ public aspect ActivityAspect {
 	 * @see Activity
 	 * @see Bundle
 	 */
-	@Before("execution(void Activity+.onCreate(Bundle))")
+	@After("execution(void Activity+.onCreate(Bundle))")
 	public void beforeOnCreate(JoinPoint thisJoinPoint) {
 		Activity target = (Activity) thisJoinPoint.getTarget();
 		Jails jails = new Jails();
