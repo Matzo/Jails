@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +18,11 @@ public class Jails {
 	}
 	
 	public void loadConfig(String path) {
+	}
+	
+	public void breakWithConfURL(String url) {
+		Jails jails = Jails.getSharedInstance();
+		jails.loadConfig(url);
 	}
 	
 	public void adjustViews(Activity activity) {
