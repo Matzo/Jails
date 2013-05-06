@@ -18,19 +18,32 @@ iOS
     #import "Jails.h"
     
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-         :
+          :
         [Jails breakWithConfURL:[NSURL URLWithString:@"http://your.domain.com/path/to/conf/jails.json"]];
-         :
+          :
     }
     
 
-Android (Draft)
+Android
 ----
 ### Require
 - AspectJ
 
 ### Install
-1. install AJDT from Eclipse Marketplace
+1. install AJDT from Eclipse Marketplace.
+2. update your project to AspectJ Project by `Select Project > Configure > Convert to AspectJ Project`.
+3. add `jails.jar` and `aspectjrt.jar` (check `AspectJ Runtime Library` at Order and Export in Java Build Path) to your project.
+4. add `ActivityAspect.aj` to your project.
+
+### Sample Code
+    // MainActivity.java
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+          :
+        Jails jails = Jails.getSharedInstance().loadConfig("http://your.domain.com/path/to/conf/jails.json");
+          :
+    }
 
 Tools
 ----
