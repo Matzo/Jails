@@ -1,7 +1,7 @@
 Jails
 =====
 
-AB testing framework for iOS and Android native apps
+AB testing framework for native apps of iOS and Android.
 
 iOS
 ----
