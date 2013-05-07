@@ -5,6 +5,9 @@ AB testing framework for native apps of iOS and Android.
 
 iOS
 ----
+### Require
+- iOS 5.0 and later
+
 ### Install
 
 1. open project on Xcode.
