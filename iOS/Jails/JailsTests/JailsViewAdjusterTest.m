@@ -11,6 +11,7 @@
 #import "NSObject+Swizzle.h"
 
 #import "ViewController.h"
+#import "JailsWebViewAdapter.h"
 
 @implementation JailsViewAdjusterTest
 
@@ -21,11 +22,22 @@
                                                                     bundle:nil];
     [self.testVC loadView];
     [self.testVC viewDidLoad];
+    
+//    self._isFinished = YES;
 }
+//- (void)tearDown
+//{
+//    // Tear-down code here.
+//    
+//    [super tearDown];
+//}
+
 - (void)tearDown
 {
-    // Tear-down code here.
-    
+    // テストが終了するまで待機
+//    do {
+//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+//    } while (!self._isFinished);
     [super tearDown];
 }
 
@@ -33,6 +45,7 @@
     [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
      @"frame":@[@"10",@"20",@"+10",@"+20"],
      }];
+    
     
     CGRect expected = CGRectMake(10.0, 20.0, 110.0, 60.0);
     CGRect result = self.testVC.testView.frame;
@@ -164,10 +177,33 @@
                                   @"text":@"aaaaawaaaa",
                                   @"class":@"UIWebView",
                                   }];
+    
+    JailsWebViewAdapter *webAdapter = [[JailsWebViewAdapter alloc] init];
+    created.delegate = webAdapter;
     [self.testVC.view addSubview:created];
+//    dispatch_sync(dispatch_get_main_queue(), ^{
+//        [self.testVC.view addSubview:created];
+//    });
     
     STAssertTrue([created isMemberOfClass:[UIWebView class]], @"created class is UIWebView");
     STAssertEquals(created.frame, CGRectMake(120.0, 120.0, 60.0, 60.0), @"frame created");
+    
+    
+//    __block BOOL loaded = NO;
+//    while (loaded == NO) {
+//        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//        [center addObserverForName:@"UIWebViewNotificationDidFinishLoad"
+//                            object:created
+//                             queue:[NSOperationQueue mainQueue]
+//                        usingBlock:^(NSNotification *note) {
+//                            NSLog(@"view did finish load");
+//                            loaded = YES;
+//                            self._isFinished = YES;
+//                            
+//                        }];
+//        NSLog(@"webview:%@", [created stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"]);
+//        sleep(1);
+//    }
 }
 
 - (void)testCreateNewButton {
@@ -185,6 +221,10 @@
     STAssertEqualObjects([created titleForState:UIControlStateNormal], @"new button", @"button text");
     STAssertTrue([created isMemberOfClass:[UIButton class]], @"created class is UIButton");
     STAssertTrue(self.testVC.buttonCreated, @"button was created");
+
+//    dispatch_sync(dispatch_get_main_queue(), ^{
+//        <#code#>
+//    });
 }
 
 

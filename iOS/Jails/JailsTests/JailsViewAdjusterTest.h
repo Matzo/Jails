@@ -10,6 +10,7 @@
 #import "JailsAdjusterTestViewController.h"
 
 @interface JailsViewAdjusterTest : SenTestCase<UIWebViewDelegate>
+//@property (assign) BOOL _isFinished;
 @property (strong, nonatomic) JailsAdjusterTestViewController *testVC;
 @end
 
