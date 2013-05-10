@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">2083</string>
@@ -129,10 +129,6 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIDataDetectorTypes">1</int>
 						<bool key="IBUIDetectsPhoneNumbers">YES</bool>
@@ -297,6 +293,9 @@
 						<string key="adjustedButtonClicked:">id</string>
 						<string key="buttonClicked:">id</string>
 						<string key="createdButtonClicked:">id</string>
+						<string key="webAdapterSelector">id</string>
+						<string key="webAdapterSelectorWithParam1:">NSString</string>
+						<string key="webAdapterSelectorWithParam1:param2:">NSString</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="adjustedButtonClicked:">
@@ -310,6 +309,18 @@
 						<object class="IBActionInfo" key="createdButtonClicked:">
 							<string key="name">createdButtonClicked:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="webAdapterSelector">
+							<string key="name">webAdapterSelector</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="webAdapterSelectorWithParam1:">
+							<string key="name">webAdapterSelectorWithParam1:</string>
+							<string key="candidateClassName">NSString</string>
+						</object>
+						<object class="IBActionInfo" key="webAdapterSelectorWithParam1:param2:">
+							<string key="name">webAdapterSelectorWithParam1:param2:</string>
+							<string key="candidateClassName">NSString</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">

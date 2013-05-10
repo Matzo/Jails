@@ -8,6 +8,8 @@
 
 #import "JailsViewAdjuster.h"
 #import "Jails.h"
+#import "JailsWebViewAdapter.h"
+#import "UIViewController+JailsAspect.h"
 
 #define URL_PATTERN @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)"
 
@@ -26,15 +28,21 @@
 
     // adjust image
     [JailsViewAdjuster adjustImageInViewController:viewController view:view conf:conf];
+
+    // adjust webViewControl
+    [JailsViewAdjuster adjustWebInViewController:viewController view:view conf:conf];
     
-    // adjust title
+    // adjust text
     [JailsViewAdjuster adjustTextInViewController:viewController view:view conf:conf];
 
     // adjust visivility
     [JailsViewAdjuster adjustHiddenInViewController:viewController view:view conf:conf];
     
-    [view setNeedsDisplay];
     
+    [view setNeedsDisplay];
+
+//    Jails *jails = [Jails sharedInstance];
+
     NSArray *createSubviews = nil;
     if ((createSubviews = conf[@"createSubviews"])) {
         for (NSDictionary *subviewConf in createSubviews) {
@@ -221,6 +229,20 @@
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
         }
+    }
+}
+
++ (void)adjustWebInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
+    if ([view isKindOfClass:[UIWebView class]]) {
+        UIWebView *web = (UIWebView*)view;
+        JailsWebViewAdapter *adapter = [[JailsWebViewAdapter alloc] init];
+        [viewController._aspect_webAdapterList addObject:adapter];
+        
+        if (web.delegate) {
+            adapter.originalDelegate = web.delegate;
+        }
+        adapter.delegate = viewController;
+        web.delegate = adapter;
     }
 }
 

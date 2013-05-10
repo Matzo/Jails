@@ -16,18 +16,19 @@
     self = [super init];
     if (self) {
         
-        NSUserDefaults *userDefoulds = [NSUserDefaults standardUserDefaults];
+        NSUserDefaults *userDefoults = [NSUserDefaults standardUserDefaults];
         int seed = 0;
-        if ([[[userDefoulds dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
-            seed = [userDefoulds integerForKey:kNSUserDefaultsJailsSeedKey];
+        if ([[[userDefoults dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
+            seed = [userDefoults integerForKey:kNSUserDefaultsJailsSeedKey];
         } else {
             srand((unsigned) time(NULL));
             seed = rand() % 100;
-            [userDefoulds setInteger:seed forKey:kNSUserDefaultsJailsSeedKey];
+            [userDefoults setInteger:seed forKey:kNSUserDefaultsJailsSeedKey];
         }
         
         self.branchSeed = seed;
         self.aspectedClassSet = [NSMutableSet set];
+        self.webAdapterListDic = [NSMutableDictionary dictionary];
         self.linkDic = [NSMutableDictionary dictionary];
     }
     return self;
@@ -151,6 +152,10 @@
         
         [NSClassFromString(className) swizzleMethod:@selector(viewDidLayoutSubviews)
                                          withMethod:@selector(_aspect_viewDidLayoutSubviews)];
+        
+//        [NSClassFromString(className) swizzleMethod:@selector(dealloc)
+//                                         withMethod:@selector(_aspect_dealloc)];
+
         
         [self.aspectedClassSet addObject:className];
     }

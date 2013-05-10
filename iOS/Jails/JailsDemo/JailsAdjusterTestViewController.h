@@ -19,4 +19,7 @@
 - (IBAction)buttonClicked:(id)sender;
 - (IBAction)adjustedButtonClicked:(id)sender;
 - (IBAction)createdButtonClicked:(id)sender;
+- (IBAction)webAdapterSelector;
+- (IBAction)webAdapterSelectorWithParam1:(NSString*)p1;
+- (IBAction)webAdapterSelectorWithParam1:(NSString*)p1 param2:(NSString*)p2;
 @end

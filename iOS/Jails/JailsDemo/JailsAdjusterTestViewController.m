@@ -53,6 +53,15 @@
     self.buttonCreated = YES;
     NSLog(@"createdButtonClicked");
 }
+- (IBAction)webAdapterSelector {
+    NSLog(@"webAdapterSelector");
+}
+- (IBAction)webAdapterSelectorWithParam1:(NSString*)p1 {
+    NSLog(@"webAdapterSelectorWithParam1:%@", p1);
+}
+- (IBAction)webAdapterSelectorWithParam1:(NSString*)p1 param2:(NSString*)p2 {
+    NSLog(@"webAdapterSelectorWithParam1:%@ param2:%@", p1, p2);
+}
 
 
 @end

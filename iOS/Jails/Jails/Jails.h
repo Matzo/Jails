@@ -16,6 +16,7 @@
 @property (strong) NSTimer *repeatTimer;
 @property (strong) NSDictionary *conf;
 @property (strong) NSMutableSet *aspectedClassSet;
+@property (strong) NSMutableDictionary *webAdapterListDic;
 @property NSTimeInterval interval;
 @property (strong) NSMutableDictionary *linkDic;
 

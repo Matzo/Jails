@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface JailsWebViewAdapter : NSObject<UIWebViewDelegate>
+@property (weak, nonatomic) id<NSObject> delegate;
 @property (weak, nonatomic) id<UIWebViewDelegate> originalDelegate;
 @property (assign) BOOL didFinishLoad;
 
@@ -17,5 +18,5 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView;
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
-
+- (SEL)selectorFromURL:(NSURL*)url params:(NSDictionary**)paramList;
 @end
