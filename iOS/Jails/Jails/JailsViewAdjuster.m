@@ -127,6 +127,11 @@
         }
         // add new action to viewController
         [button addTarget:viewController action:selector forControlEvents:UIControlEventTouchUpInside];
+    } else if ([view isKindOfClass:[UIWebView class]]) {
+        if (url) {
+            UIWebView *web = (UIWebView*)view;
+            [web loadRequest:[NSURLRequest requestWithURL:url]];
+        }
     }
 }
 

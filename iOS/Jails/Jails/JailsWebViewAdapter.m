@@ -20,10 +20,12 @@
         if ([url.scheme isEqualToString:@"jails"]) {
             NSDictionary *params = nil;
             SEL selector = [self selectorFromURL:url params:&params];
+            
             if ([self.delegate respondsToSelector:selector]) {
+                int countOfArguments = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count] - 1;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                switch (params.count) {
+                switch (countOfArguments) {
                     case 0: {
                         [self.delegate performSelector:selector];
                     } break;
@@ -76,7 +78,7 @@
             selector = NSSelectorFromString(value);
         }
         if ([key isEqualToString:@"param1"] || [key isEqualToString:@"param2"]) {
-            [_params setObject:value forKey:key];
+            [_params setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:key];
         }
     }
     

@@ -22,4 +22,6 @@
 - (IBAction)webAdapterSelector;
 - (IBAction)webAdapterSelectorWithParam1:(NSString*)p1;
 - (IBAction)webAdapterSelectorWithParam1:(NSString*)p1 param2:(NSString*)p2;
+
+- (void)openURL:(NSString*)url;
 @end

@@ -11,5 +11,8 @@
 
 @interface JailsWebViewAdapterTest : SenTestCase
 @property (nonatomic, strong) JailsWebViewAdapter *adapter;
+@property (assign) BOOL delegateAction1Called;
+@property (assign) BOOL delegateAction2Called;
+@property (assign) BOOL delegateAction3Called;
 
 @end

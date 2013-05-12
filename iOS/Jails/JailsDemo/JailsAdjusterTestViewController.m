@@ -64,4 +64,12 @@
 }
 
 
+- (void)openURL:(NSString*)url {
+    UIApplication *app = [UIApplication sharedApplication];
+    NSURL *_url = [NSURL URLWithString:url];
+    if ([app canOpenURL:_url]) {
+        [app openURL:_url];
+    }
+}
+
 @end
