@@ -66,9 +66,7 @@
     
     
     // always load JSON even if it is cached
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [jails loadJSON];
-    });
+    [jails loadJSON];
     
     // set reload events
     [jails observeNotification];
@@ -96,33 +94,35 @@
 }
 
 -(void)loadJSON {
-    NSData *data = nil;
-    NSError *error = nil;
-
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.jsonURL
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:5.0];
-    NSURLResponse *res = nil;
-    data = [NSURLConnection sendSynchronousRequest:req
-                                 returningResponse:&res
-                                             error:&error];
-    if (error) {
-        NSLog(@"get config error:%@", error);
-        return;
-    }
-    
-    if (data) {
-        self.conf = [NSJSONSerialization JSONObjectWithData:data
-                                                    options:NSJSONReadingMutableContainers
-                                                      error:&error];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = nil;
+        NSError *error = nil;
+        
+        NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.jsonURL
+                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                              timeoutInterval:5.0];
+        NSURLResponse *res = nil;
+        data = [NSURLConnection sendSynchronousRequest:req
+                                     returningResponse:&res
+                                                 error:&error];
         if (error) {
-            NSLog(@"parse config error:%@", error);
+            NSLog(@"get config error:%@", error);
             return;
-        } else {
-            [self saveCache:data];
-            [self injectAspect];
         }
-    }
+        
+        if (data) {
+            self.conf = [NSJSONSerialization JSONObjectWithData:data
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&error];
+            if (error) {
+                NSLog(@"parse config error:%@", error);
+                return;
+            } else {
+                [self saveCache:data];
+                [self injectAspect];
+            }
+        }
+    });
 }
 
 -(void)saveCache:(NSData*)data {
