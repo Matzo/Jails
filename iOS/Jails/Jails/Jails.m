@@ -77,7 +77,7 @@
     jails.interval = interval;
     [Jails breakWithConfURL:url];
     
-    if (0 < interval) {
+    if (0 < interval && !jails.repeatTimer) {
         jails.repeatTimer = [NSTimer timerWithTimeInterval:interval
                                                     target:jails
                                                   selector:@selector(loadJSON)
@@ -197,6 +197,7 @@
 +(void)stopRepeatLoading {
     Jails *jails = [Jails sharedInstance];
     [jails.repeatTimer invalidate];
+    jails.repeatTimer = nil;
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:jails];
