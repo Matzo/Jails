@@ -7,6 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "Jails.h"
 
 @interface JailsTests : SenTestCase
 

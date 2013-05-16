@@ -15,6 +15,10 @@
     [super setUp];
     
     // Set-up code here.
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"];
+    [Jails breakWithConfURL:[NSURL fileURLWithPath:filePath]];
+
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
 }
 
 - (void)tearDown
@@ -23,5 +27,13 @@
     
     [super tearDown];
 }
+
+- (void)testBranchNameOfViewController {
+    UIViewController *viewController = [[UIViewController alloc] init];
+    NSString *result = [Jails branchNameOfViewController:viewController];
+    
+    STAssertEqualObjects(result, @"b", @"branch name is 100% b");
+}
+
 
 @end

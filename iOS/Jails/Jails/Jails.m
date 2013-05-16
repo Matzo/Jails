@@ -153,9 +153,6 @@
         [NSClassFromString(className) swizzleMethod:@selector(viewDidLayoutSubviews)
                                          withMethod:@selector(_aspect_viewDidLayoutSubviews)];
         
-//        [NSClassFromString(className) swizzleMethod:@selector(dealloc)
-//                                         withMethod:@selector(_aspect_dealloc)];
-
         
         [self.aspectedClassSet addObject:className];
     }
@@ -188,7 +185,7 @@
     Jails *jails = [Jails sharedInstance];
     NSDictionary *conf = [jails getConfigWithViewController:viewController];
     if (conf) {
-        return conf[@"name"];
+        return conf[@"branchName"];
     } else {
         return nil;
     }
