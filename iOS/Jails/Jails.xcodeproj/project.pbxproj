@@ -39,6 +39,12 @@
 		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
 		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
 		1BE797171720F62400613242 /* JailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE797161720F62400613242 /* JailsTests.m */; };
+		F709FBF31744F5B900379229 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
+		F709FBF41744F5BA00379229 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
+		F709FBFA1744FD6D00379229 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F709FBF81744FD6600379229 /* CoreImage.framework */; };
+		F709FBFD17450F9B00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
+		F709FBFE17450FAA00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
+		F709FBFF17450FAB00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
 		F7760C3C172D5E2F007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
 		F7760C3D172D6567007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
 		F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
@@ -129,6 +135,9 @@
 		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
 		1BE797161720F62400613242 /* JailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailsTests.m; sourceTree = "<group>"; };
+		F709FBF81744FD6600379229 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		F709FBFB17450F9B00379229 /* JailsHttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsHttpUtils.h; sourceTree = "<group>"; };
+		F709FBFC17450F9B00379229 /* JailsHttpUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsHttpUtils.m; sourceTree = "<group>"; };
 		F7760C3B172D5E2F007D645A /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsWebViewAdapter.h; sourceTree = "<group>"; };
 		F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsWebViewAdapter.m; sourceTree = "<group>"; };
@@ -146,6 +155,7 @@
 				1B4353AF1721133C0093CA5F /* Foundation.framework in Frameworks */,
 				1B4353B11721133C0093CA5F /* CoreGraphics.framework in Frameworks */,
 				1B4353D917211A4F0093CA5F /* UIKit.framework in Frameworks */,
+				F709FBF41744F5BA00379229 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +178,8 @@
 				1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */,
 				1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */,
 				1BE7970E1720F62400613242 /* libJails.a in Frameworks */,
+				F709FBF31744F5B900379229 /* CoreFoundation.framework in Frameworks */,
+				F709FBFA1744FD6D00379229 /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +248,7 @@
 		1BE796F71720F62400613242 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F709FBF81744FD6600379229 /* CoreImage.framework */,
 				1B4353CE1721141A0093CA5F /* CoreFoundation.framework */,
 				1B4353CC172114130093CA5F /* UIKit.framework */,
 				1BE796F81720F62400613242 /* Foundation.framework */,
@@ -258,6 +271,8 @@
 				1B40918217212E320008C4C2 /* JailsViewAdjuster.m */,
 				F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */,
 				F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */,
+				F709FBFB17450F9B00379229 /* JailsHttpUtils.h */,
+				F709FBFC17450F9B00379229 /* JailsHttpUtils.m */,
 				1BE796FB1720F62400613242 /* Supporting Files */,
 			);
 			path = Jails;
@@ -454,6 +469,7 @@
 				1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
 				F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */,
 				1BC06EE4173D29E000DF959A /* JailsWebViewAdapter.m in Sources */,
+				F709FBFE17450FAA00379229 /* JailsHttpUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +482,7 @@
 				1B4353D61721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
 				1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
 				F7CCC3AE1737B268008F4009 /* JailsWebViewAdapter.m in Sources */,
+				F709FBFD17450F9B00379229 /* JailsHttpUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +498,7 @@
 				F77C74A51722666600350CD1 /* Jails.m in Sources */,
 				1BC06EE5173D29E500DF959A /* JailsWebViewAdapter.m in Sources */,
 				1BC06EE8173D365E00DF959A /* JailsWebViewAdapterTest.m in Sources */,
+				F709FBFF17450FAB00379229 /* JailsHttpUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

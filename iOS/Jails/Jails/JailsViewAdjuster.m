@@ -10,8 +10,10 @@
 #import "Jails.h"
 #import "JailsWebViewAdapter.h"
 #import "UIViewController+JailsAspect.h"
+#import "JailsHttpUtils.h"
 
 #define URL_PATTERN @"(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)"
+#define HEX_COLOR_PATTERN @"^#[a-fA-F0-9]{6}$"
 
 @implementation JailsViewAdjuster
 
@@ -21,13 +23,10 @@
     [JailsViewAdjuster adjustFrameInViewController:viewController view:view conf:conf];
     
     // adjust color
-    [JailsViewAdjuster adjustBackgroundColorInViewController:viewController view:view conf:conf];
+    [JailsViewAdjuster adjustBackgroundInViewController:viewController view:view conf:conf];
     
     // adjust selector
     [JailsViewAdjuster adjustSelectorInViewController:viewController view:view conf:conf];
-
-    // adjust image
-    [JailsViewAdjuster adjustImageInViewController:viewController view:view conf:conf];
 
     // adjust webViewControl
     [JailsViewAdjuster adjustWebInViewController:viewController view:view conf:conf];
@@ -40,8 +39,6 @@
     
     
     [view setNeedsDisplay];
-
-//    Jails *jails = [Jails sharedInstance];
 
     NSArray *createSubviews = nil;
     if ((createSubviews = conf[@"createSubviews"])) {
@@ -73,17 +70,63 @@
 }
 
 // adjust color
-+ (void)adjustBackgroundColorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustBackgroundInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     NSArray *rgba = conf[@"backgroundColor"];
+
     if (!rgba || rgba.count != 4) {
-        return;
+        
+        NSString *background = conf[@"background"];
+        if (!background) {
+            return;
+        } else {
+
+            if ([background rangeOfString:HEX_COLOR_PATTERN
+                                  options:NSRegularExpressionSearch].location != NSNotFound) {
+                NSString *hexString = [background substringFromIndex:1];
+                view.backgroundColor = [self colorFromHex:hexString alpha:1.0];
+            } else {
+            
+                NSURL *url = [self urlFromString:background];
+                if (url) {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        NSData *data = [JailsHttpUtils syncDownloadFromURL:url cache:YES validation:^BOOL(NSData *d) {
+                            return [UIImage imageWithData:d] ? YES : NO;
+                        }];
+
+                        if (data) {
+                            UIImage *image = [UIImage imageWithData:data];
+                            if (image) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    if ([view isKindOfClass:[UIButton class]]) {
+                                        UIButton *button = (UIButton*)view;
+                                        [button setBackgroundImage:image forState:UIControlStateNormal];
+                                    } else {
+                                        view.backgroundColor = [UIColor colorWithPatternImage:image];
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    return;
+                } else {
+                    UIImage *image = [UIImage imageNamed:background];
+                    if (image) {
+                        if ([view isKindOfClass:[UIButton class]]) {
+                            UIButton *button = (UIButton*)view;
+                            [button setBackgroundImage:image forState:UIControlStateNormal];
+                        } else {
+                            view.backgroundColor = [UIColor colorWithPatternImage:image];
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        view.backgroundColor = [UIColor colorWithRed:[rgba[0] floatValue]/255.0
+                                               green:[rgba[1] floatValue]/255.0
+                                                blue:[rgba[2] floatValue]/255.0
+                                               alpha:[rgba[3] floatValue]];
     }
-    
-    UIColor *newColor = [UIColor colorWithRed:[rgba[0] floatValue]/255.0
-                                        green:[rgba[1] floatValue]/255.0
-                                         blue:[rgba[2] floatValue]/255.0
-                                        alpha:[rgba[3] floatValue]];
-    view.backgroundColor = newColor;
 }
 
 // adjust selector
@@ -163,79 +206,60 @@
     
     view.hidden = [conf[@"hidden"] boolValue];
 }
-+ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-    NSString *imageString = conf[@"image"];
+//+ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
+//    NSString *imageString = conf[@"image"];
+//
+//    if (imageString && [view isKindOfClass:[UIButton class]]) {
+//        UIButton *button = (UIButton*)view;
+//        [self adjustImageInViewController:viewController button:button conf:imageString];
+//    }
+//}
+//
+//+ (void)adjustImageInViewController:(UIViewController*)viewController button:(UIButton*)button conf:(NSString*)imageString {
+//
+//    NSRange match = [imageString rangeOfString:URL_PATTERN
+//                                       options:NSRegularExpressionSearch];
+//    
+//    if (match.location != NSNotFound) {
+//        // get image from external
+//        NSURL *imageURL = [NSURL URLWithString:imageString];
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//            
+//            dispatch_sync(dispatch_get_main_queue(), ^{
+//                [button addSubview:loading];
+//                [loading startAnimating];
+//                loading.center = CGPointMake(button.bounds.size.width * 0.5,
+//                                             button.bounds.size.height * 0.5);
+//            });
+//            
+//            NSData *data = [JailsHttpUtils syncDownloadFromURL:imageURL cache:YES validation:^BOOL(NSData *data) {
+//                return [UIImage imageWithData:data] ? YES : NO;
+//            }];
+//            
+//            if (data) {
+//                UIImage *loadedImage = [[UIImage alloc] initWithData:data];
+//                if (loadedImage) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
+//                    });
+//                }
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [loading stopAnimating];
+//                [loading removeFromSuperview];
+//            });
+//        });
+//        
+//    } else {
+//        UIImage *image = [UIImage imageNamed:imageString];
+//        if (image) {
+//            [button setBackgroundImage:image forState:UIControlStateNormal];
+//        }
+//    }
+//}
 
-    if (imageString && [view isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton*)view;
-        
-        NSRange match = [imageString rangeOfString:URL_PATTERN
-                                     options:NSRegularExpressionSearch];
-        
-        if (match.location != NSNotFound) {
-            // get image from external
-            NSURL *imageURL = [NSURL URLWithString:imageString];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                // TODO: refactoring for cache and loading indicator
-                NSString *tmpFileName = [imageString stringByReplacingOccurrencesOfString:@"/" withString:@"__"];
-                NSString *tmpPath = [NSString stringWithFormat:@"%@_jails_%@", NSTemporaryDirectory(), tmpFileName];
-                NSData *cache = [[NSData alloc] initWithContentsOfFile:tmpPath];
-                UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
-                if (cache) {
-                    UIImage *loadedImage = [[UIImage alloc] initWithData:cache];
-                    if (loadedImage) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
-                        });
-                    }
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [button addSubview:loading];
-                        [loading startAnimating];
-                        loading.center = CGPointMake(button.bounds.size.width * 0.5,
-                                                     button.bounds.size.height * 0.5);
-                    });
-                }
-                
-                NSURLRequest *req = [[NSURLRequest alloc] initWithURL:imageURL
-                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                      timeoutInterval:30.0];
-                NSURLResponse *res = nil;
-                NSData *data = nil;
-                NSError *error = nil;
-                data = [NSURLConnection sendSynchronousRequest:req
-                                             returningResponse:&res
-                                                         error:&error];
-                if (error) {
-                    NSLog(@"get image error:%@", error);
-                    return;
-                }
-                
-                if (data) {
-                    UIImage *loadedImage = [[UIImage alloc] initWithData:data];
-                    if (loadedImage) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
-                        });
-
-                        [data writeToFile:tmpPath atomically:YES];
-                    }
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [loading stopAnimating];
-                    [loading removeFromSuperview];
-                });
-            });
-            
-        } else {
-            UIImage *image = [UIImage imageNamed:imageString];
-            if (image) {
-                [button setBackgroundImage:image forState:UIControlStateNormal];
-            }
-        }
-    }
-}
 
 + (void)adjustWebInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     if ([view isKindOfClass:[UIWebView class]]) {
@@ -282,6 +306,19 @@
         return nil;
     }
 }
+
++(UIColor*)colorFromHex:(NSString *)hex alpha:(CGFloat)a {
+	NSScanner *colorScanner = [NSScanner scannerWithString:hex];
+	unsigned int color;
+	[colorScanner scanHexInt:&color];
+	CGFloat r = ((color & 0xFF0000) >> 16)/255.0f;
+	CGFloat g = ((color & 0x00FF00) >> 8) /255.0f;
+	CGFloat b =  (color & 0x0000FF) /255.0f;
+	//NSLog(@"HEX to RGB >> r:%f g:%f b:%f a:%f\n",r,g,b,a);
+	return [UIColor colorWithRed:r green:g blue:b alpha:a];
+}
+
+
 
 //+(void)hundleURL:(NSURL*)url {
 //    UIApplication *app = [UIApplication sharedApplication];

@@ -31,13 +31,13 @@
                     } break;
                     case 1: {
                         [self.delegate performSelector:selector
-                                            withObject:params[@"param1"]];
+                                            withObject:params[@"p1"]];
                     } break;
                     case 2:
                     default: {
                         [self.delegate performSelector:selector
-                                            withObject:params[@"param1"]
-                                            withObject:params[@"param2"]];
+                                            withObject:params[@"p1"]
+                                            withObject:params[@"p2"]];
                     } break;
                 }
 #pragma clang diagnostic pop
@@ -77,7 +77,7 @@
         if ([key isEqualToString:@"action"]) {
             selector = NSSelectorFromString(value);
         }
-        if ([key isEqualToString:@"param1"] || [key isEqualToString:@"param2"]) {
+        if ([key isEqualToString:@"p1"] || [key isEqualToString:@"p2"]) {
             [_params setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:key];
         }
     }

@@ -10,7 +10,7 @@
 #import "JailsAdjusterTestViewController.h"
 
 @interface JailsViewAdjusterTest : SenTestCase
-//@property (assign) BOOL _isFinished;
+@property (assign) BOOL isFinished;
 @property (strong, nonatomic) JailsAdjusterTestViewController *testVC;
 @end
 

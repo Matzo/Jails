@@ -12,6 +12,7 @@
 
 #import "ViewController.h"
 #import "JailsWebViewAdapter.h"
+#import <CoreImage/CoreImage.h>
 
 @implementation JailsViewAdjusterTest
 
@@ -23,7 +24,7 @@
     [self.testVC loadView];
     [self.testVC viewDidLoad];
     
-//    self._isFinished = YES;
+    self.isFinished = YES;
 }
 //- (void)tearDown
 //{
@@ -35,9 +36,9 @@
 - (void)tearDown
 {
     // テストが終了するまで待機
-//    do {
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
-//    } while (!self._isFinished);
+    while (!self.isFinished) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
     [super tearDown];
 }
 
@@ -61,7 +62,7 @@
 
 }
 - (void)testAdjustBackgroundColor {
-    [JailsViewAdjuster adjustBackgroundColorInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
      @"backgroundColor":@[@255.0,@0.0,@0.0,@1.0],
      }];
 
@@ -72,6 +73,47 @@
     UIColor *result = self.testVC.testView.backgroundColor;
     STAssertEqualObjects(result, expected, @"adjust background color");
 }
+- (void)testAdjustBackgroundHexColor {
+    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
+     @"background":@"#FF0010"
+     }];
+    
+    UIColor *expected = [UIColor colorWithRed:255.0/255.0
+                                        green:0.0/255.0
+                                         blue:16.0/255.0
+                                        alpha:1.0];
+    UIColor *result = self.testVC.testView.backgroundColor;
+    STAssertEqualObjects(result, expected, @"adjust background color");
+}
+
+- (void)testAdjustBackgroundImagePatternColor {
+    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
+     @"background":@"button1"
+     }];
+    
+    UIColor *result = self.testVC.testView.backgroundColor;
+    UIColor *expect = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button1"]];
+    STAssertTrue(CGColorEqualToColor(result.CGColor, expect.CGColor), @"local image color");
+
+}
+
+
+- (void)testAdjustBackgroundImagePatternColorURL {
+    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.label conf:@{
+     @"background":@"https://raw.github.com/Matzo/Jails/develop/iOS/Jails/JailsDemo/button1.png"
+     }];
+    
+    UIColor *result = nil;
+    while (!result) {
+        result = self.testVC.label.backgroundColor;
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+
+    CGColorSpaceRef colorSpace = [CIColor colorWithCGColor:result.CGColor].colorSpace;
+    STAssertTrue(CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelPattern, @"remote image pattern color");
+}
+
+
 - (void)testAdjustSelector {
     [JailsViewAdjuster adjustSelectorInViewController:self.testVC view:self.testVC.button conf:@{
      @"action":@"adjustedButtonClicked:",
@@ -127,16 +169,16 @@
     STAssertTrue(self.testVC.testView.hidden, @"view was hidden");
 }
 
-- (void)testAdjustImage {
-    [JailsViewAdjuster adjustImageInViewController:self.testVC view:self.testVC.button conf:@{
-     @"image":@"button1"
-     }];
-    
-    UIImage *result = [self.testVC.button backgroundImageForState:UIControlStateNormal];
-    UIImage *expect = [UIImage imageNamed:@"button1"];
-    
-    STAssertEqualObjects(result, expect, @"button1.png");
-}
+//- (void)testAdjustImage {
+//    [JailsViewAdjuster adjustImageInViewController:self.testVC view:self.testVC.button conf:@{
+//     @"image":@"button1"
+//     }];
+//    
+//    UIImage *result = [self.testVC.button backgroundImageForState:UIControlStateNormal];
+//    UIImage *expect = [UIImage imageNamed:@"button1"];
+//    
+//    STAssertEqualObjects(result, expect, @"button1.png");
+//}
 
 
 - (void)testCreateNewView {
