@@ -67,35 +67,6 @@
     STAssertEqualObjects(params, expect, @"params from URL");
 }
 
-//- (void)testWebViewDelegateLinkClicked {
-//    
-//    NSURLRequest *req;
-//    req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction1"]];
-//    [self.adapter webView:nil shouldStartLoadWithRequest:req navigationType:UIWebViewNavigationTypeLinkClicked];
-//    STAssertTrue(self.delegateAction1Called, @"delegateAction1Called");
-//    
-//    
-//    req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction2WithParam1:&param1=1&param2=2"]];
-//    [self.adapter webView:nil shouldStartLoadWithRequest:req navigationType:UIWebViewNavigationTypeLinkClicked];
-//    STAssertTrue(self.delegateAction2Called, @"delegateAction2Called");
-//
-//    
-//    req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction3WithParam1:param2:&param1=1&param2=2"]];
-//    [self.adapter webView:nil shouldStartLoadWithRequest:req navigationType:UIWebViewNavigationTypeLinkClicked];
-//    STAssertTrue(self.delegateAction3Called, @"delegateAction3Called");
-//
-//    
-//    req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction3WithParam1:param2:"]];
-//    [self.adapter webView:nil shouldStartLoadWithRequest:req navigationType:UIWebViewNavigationTypeLinkClicked];
-//    STAssertTrue(self.delegateAction3Called, @"delegateAction3Called");
-//    
-//    
-//    req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction3WithParam1:param2:"]];
-//    [self.adapter webView:nil shouldStartLoadWithRequest:req navigationType:UIWebViewNavigationTypeLinkClicked];
-//    STAssertTrue(self.delegateAction3Called, @"delegateAction3Called");
-//
-//}
-//
 - (void)testWebViewDelegateLinkClicked1 {
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"jails://?action=delegateAction1"]];

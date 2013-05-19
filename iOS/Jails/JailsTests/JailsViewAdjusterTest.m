@@ -22,16 +22,9 @@
     self.testVC = [[JailsAdjusterTestViewController alloc] initWithNibName:@"JailsAdjusterTestViewController"
                                                                     bundle:nil];
     [self.testVC loadView];
-    [self.testVC viewDidLoad];
     
     self.isFinished = YES;
 }
-//- (void)tearDown
-//{
-//    // Tear-down code here.
-//    
-//    [super tearDown];
-//}
 
 - (void)tearDown
 {
@@ -169,17 +162,6 @@
      }];
     STAssertEqualObjects([self.testVC.button titleForState:UIControlStateNormal], @"bar!", @"button title was chanded");
     
-    
-//    [JailsViewAdjuster adjustTextTo:self.testVC.web conf:@{
-//     @"text":@"<html>aaaa <b>bbbb</b> cccc</html>",
-//     }];
-//    [self.testVC.web loadHTMLString:@"<html>aaaa <b>bbbb</b> cccc</html>" baseURL:nil];
-//    
-//    self.testVC.web.delegate = self;
-//    
-//    NSString *result = [self.testVC.web stringByEvaluatingJavaScriptFromString:@"(function() { return document.documentElement.innerHTML})();"];
-//    STAssertEqualObjects(result, @"aaaa <b>bbbb</b> cccc", @"button title was chanded");
-//
 }
 - (void)testAdjustHidden {
     [JailsViewAdjuster adjustHiddenInViewController:self.testVC view:self.testVC.testView conf:@{
@@ -189,17 +171,6 @@
     
     STAssertTrue(self.testVC.testView.hidden, @"view was hidden");
 }
-
-//- (void)testAdjustImage {
-//    [JailsViewAdjuster adjustImageInViewController:self.testVC view:self.testVC.button conf:@{
-//     @"image":@"button1"
-//     }];
-//    
-//    UIImage *result = [self.testVC.button backgroundImageForState:UIControlStateNormal];
-//    UIImage *expect = [UIImage imageNamed:@"button1"];
-//    
-//    STAssertEqualObjects(result, expect, @"button1.png");
-//}
 
 
 - (void)testCreateNewView {
@@ -244,29 +215,11 @@
     JailsWebViewAdapter *webAdapter = [[JailsWebViewAdapter alloc] init];
     created.delegate = webAdapter;
     [self.testVC.view addSubview:created];
-//    dispatch_sync(dispatch_get_main_queue(), ^{
-//        [self.testVC.view addSubview:created];
-//    });
-    
+
     STAssertTrue([created isMemberOfClass:[UIWebView class]], @"created class is UIWebView");
     STAssertEquals(created.frame, CGRectMake(120.0, 120.0, 60.0, 60.0), @"frame created");
     
-    
-//    __block BOOL loaded = NO;
-//    while (loaded == NO) {
-//        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-//        [center addObserverForName:@"UIWebViewNotificationDidFinishLoad"
-//                            object:created
-//                             queue:[NSOperationQueue mainQueue]
-//                        usingBlock:^(NSNotification *note) {
-//                            NSLog(@"view did finish load");
-//                            loaded = YES;
-//                            self._isFinished = YES;
-//                            
-//                        }];
-//        NSLog(@"webview:%@", [created stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"]);
-//        sleep(1);
-//    }
+
 }
 
 - (void)testCreateNewButton {
@@ -285,22 +238,9 @@
     STAssertTrue([created isMemberOfClass:[UIButton class]], @"created class is UIButton");
     STAssertTrue(self.testVC.buttonCreated, @"button was created");
 
-//    dispatch_sync(dispatch_get_main_queue(), ^{
-//        <#code#>
-//    });
+
 }
-
-
-
-//#pragma mark - UIWebViewDelegate
-//- (void)webViewDidFinishLoad:(UIWebView *)webView {
-//}
 
 
 @end
 
-//
-//@implementation JailsAdjusterTestViewController(Mock)
-//- (void)_jails_openLink:(id)sender {
-//}
-//@end
