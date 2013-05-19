@@ -8,7 +8,8 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "Jails.h"
+#import "JailsAdjusterTestViewController.h"
 
 @interface JailsTests : SenTestCase
-
+//@property (strong) JailsAdjusterTestViewController *viewController;
 @end

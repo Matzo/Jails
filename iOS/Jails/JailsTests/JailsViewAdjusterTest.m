@@ -61,6 +61,27 @@
     STAssertEquals(result, expected, @"adjust frame");
 
 }
+
+- (void)testAdjustFrameRelative {
+    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+     @"frame":@[@"label+10",@"label+11",@"label+12",@"label+13"],
+     }];
+    
+    CGRect expected = CGRectMake(110.0, 91.0, 112.0, 53.0);
+    CGRect result = self.testVC.testView.frame;
+    STAssertEquals(result, expected, @"adjust frame relative");
+}
+- (void)testAdjustFrameRelative2 {
+    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+     @"frame":@[@"label-10",@"label-11",@"label-12",@"label-13"],
+     }];
+    
+    
+    CGRect expected = CGRectMake(-10.0, 29.0, 88.0, 27.0);
+    CGRect result = self.testVC.testView.frame;
+    STAssertEquals(result, expected, @"adjust frame relative");
+}
+
 - (void)testAdjustBackgroundColor {
     [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
      @"backgroundColor":@[@255.0,@0.0,@0.0,@1.0],

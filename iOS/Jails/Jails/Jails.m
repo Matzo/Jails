@@ -34,7 +34,7 @@
     return self;
 }
 
-+(id)sharedInstance {
++(Jails*)sharedInstance {
     static Jails* instance = nil;
     if (instance == nil) {
         instance = [[Jails alloc] init];

@@ -20,7 +20,7 @@
 @property NSTimeInterval interval;
 @property (strong) NSMutableDictionary *linkDic;
 
-+(id)sharedInstance;
++(Jails*)sharedInstance;
 +(void)breakWithConfURL:(NSURL*)url;
 +(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval;
 +(void)stopRepeatLoading;

@@ -15,10 +15,13 @@
     [super setUp];
     
     // Set-up code here.
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"jails-0_2" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"];
     [Jails breakWithConfURL:[NSURL fileURLWithPath:filePath]];
 
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    
+//    self.viewController = [[JailsAdjusterTestViewController alloc] init];
+//    self.viewController.testView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 10.0, 20.0, 20.0)];
 }
 
 - (void)tearDown
@@ -32,8 +35,8 @@
     UIViewController *viewController = [[UIViewController alloc] init];
     NSString *result = [Jails branchNameOfViewController:viewController];
     
+    NSLog(@"Jails conf:%@", [Jails sharedInstance].conf);
     STAssertEqualObjects(result, @"b", @"branch name is 100% b");
 }
-
 
 @end

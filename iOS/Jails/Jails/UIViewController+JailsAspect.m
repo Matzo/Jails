@@ -15,7 +15,6 @@
     [self _aspect_viewDidLoad];
     
     @try {
-//        self._aspect_webAdapterList = [NSMutableArray array];
         [Jails branchViewController:self];
     }
     @catch (NSException *exception) {

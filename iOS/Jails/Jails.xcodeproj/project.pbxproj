@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B40917F17211F210008C4C2 /* jails-0_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* jails-0_1.json */; };
-		1B40918017211F2F0008C4C2 /* jails-0_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* jails-0_1.json */; };
 		1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
 		1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
 		1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
@@ -57,8 +55,9 @@
 		F79DF69C173BF1C80025CFE5 /* Jails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BE796FD1720F62400613242 /* Jails.h */; };
 		F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
 		F7CCC3AE1737B268008F4009 /* JailsWebViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */; };
-		F7DA1AFC1748420400413274 /* jails-0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFB1748420400413274 /* jails-0_2.json */; };
-		F7DA1AFD1748427900413274 /* jails-0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFB1748420400413274 /* jails-0_2.json */; };
+		F7DA1B0017486B4A00413274 /* jails-0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFF17486B4A00413274 /* jails-0_2.json */; };
+		F7DA1B021748729400413274 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFB1748420400413274 /* test.json */; };
+		F7DA1B061748739700413274 /* jails-0_1.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1B051748739700413274 /* jails-0_1.json */; };
 		F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */; };
 		F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582B172274AD00997085 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
@@ -78,7 +77,7 @@
 			remoteGlobalIDString = 1BE796F41720F62400613242;
 			remoteInfo = Jails;
 		};
-		F77C74A1172265A600350CD1 /* PBXContainerItemProxy */ = {
+		F7DA1B031748737A00413274 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BE796ED1720F62400613242 /* Project object */;
 			proxyType = 1;
@@ -101,7 +100,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B40917E17211F210008C4C2 /* jails-0_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_1.json"; sourceTree = "<group>"; };
 		1B40918117212E320008C4C2 /* JailsViewAdjuster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjuster.h; sourceTree = "<group>"; };
 		1B40918217212E320008C4C2 /* JailsViewAdjuster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsViewAdjuster.m; sourceTree = "<group>"; };
 		1B409186172133760008C4C2 /* JailsViewAdjusterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjusterTest.h; sourceTree = "<group>"; };
@@ -143,7 +141,9 @@
 		F7760C3B172D5E2F007D645A /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsWebViewAdapter.h; sourceTree = "<group>"; };
 		F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsWebViewAdapter.m; sourceTree = "<group>"; };
-		F7DA1AFB1748420400413274 /* jails-0_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_2.json"; sourceTree = "<group>"; };
+		F7DA1AFB1748420400413274 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		F7DA1AFF17486B4A00413274 /* jails-0_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_2.json"; sourceTree = "<group>"; };
+		F7DA1B051748739700413274 /* jails-0_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_1.json"; sourceTree = "<group>"; };
 		F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsAdjusterTestViewController.h; sourceTree = "<group>"; };
 		F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsAdjusterTestViewController.m; sourceTree = "<group>"; };
 		F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailsAdjusterTestViewController.xib; sourceTree = "<group>"; };
@@ -192,8 +192,7 @@
 		1B40917D17211F210008C4C2 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
-				F7DA1AFB1748420400413274 /* jails-0_2.json */,
-				1B40917E17211F210008C4C2 /* jails-0_1.json */,
+				F7DA1AFB1748420400413274 /* test.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -201,6 +200,7 @@
 		1B4353B21721133C0093CA5F /* JailsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F7DA1AFE17486B4A00413274 /* TestData */,
 				F7760C3B172D5E2F007D645A /* button1.png */,
 				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
 				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
@@ -314,6 +314,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F7DA1AFE17486B4A00413274 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				F7DA1AFF17486B4A00413274 /* jails-0_2.json */,
+				F7DA1B051748739700413274 /* jails-0_1.json */,
+			);
+			path = TestData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,7 +374,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				F77C74A2172265A600350CD1 /* PBXTargetDependency */,
+				F7DA1B041748737A00413274 /* PBXTargetDependency */,
 				1BE7970D1720F62400613242 /* PBXTargetDependency */,
 			);
 			name = JailsTests;
@@ -409,11 +418,12 @@
 				1B4353B71721133C0093CA5F /* InfoPlist.strings in Resources */,
 				1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */,
 				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
-				1B40918017211F2F0008C4C2 /* jails-0_1.json in Resources */,
 				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
 				F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */,
 				F7760C3C172D5E2F007D645A /* button1.png in Resources */,
-				F7DA1AFD1748427900413274 /* jails-0_2.json in Resources */,
+				F7DA1B0017486B4A00413274 /* jails-0_2.json in Resources */,
+				F7DA1B021748729400413274 /* test.json in Resources */,
+				F7DA1B061748739700413274 /* jails-0_1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,11 +432,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE797141720F62400613242 /* InfoPlist.strings in Resources */,
-				1B40917F17211F210008C4C2 /* jails-0_1.json in Resources */,
 				F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */,
 				F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */,
 				F7760C3D172D6567007D645A /* button1.png in Resources */,
-				F7DA1AFC1748420400413274 /* jails-0_2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,10 +529,10 @@
 			target = 1BE796F41720F62400613242 /* Jails */;
 			targetProxy = 1BE7970C1720F62400613242 /* PBXContainerItemProxy */;
 		};
-		F77C74A2172265A600350CD1 /* PBXTargetDependency */ = {
+		F7DA1B041748737A00413274 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B4353AC1721133C0093CA5F /* JailsDemo */;
-			targetProxy = F77C74A1172265A600350CD1 /* PBXContainerItemProxy */;
+			targetProxy = F7DA1B031748737A00413274 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

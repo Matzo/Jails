@@ -66,7 +66,7 @@
         return;
     }
 
-    view.frame = [JailsViewAdjuster newFrameBase:view.frame conf:frameObj];
+    view.frame = [JailsViewAdjuster newFrameInViewController:viewController baseFrame:view.frame conf:frameObj];
 }
 
 // adjust color
@@ -275,24 +275,96 @@
     }
 }
 
-+ (CGRect)newFrameBase:(CGRect)baseFrame conf:(NSArray*)frameObj {
++ (CGRect)newFrameInViewController:(UIViewController*)viewController baseFrame:(CGRect)baseFrame conf:(NSArray*)frameObj {
     if (frameObj && frameObj.count == 4) {
-        baseFrame.origin.x = [JailsViewAdjuster newValueBase:baseFrame.origin.x conf:frameObj[0]];
-        baseFrame.origin.y = [JailsViewAdjuster newValueBase:baseFrame.origin.y conf:frameObj[1]];
-        baseFrame.size.width = [JailsViewAdjuster newValueBase:baseFrame.size.width conf:frameObj[2]];
-        baseFrame.size.height = [JailsViewAdjuster newValueBase:baseFrame.size.height conf:frameObj[3]];
+
+        for (int i = 0; i < 4; i++) {
+            UIView *relativeView = nil;
+            NSString *confValue = frameObj[i];
+            
+            NSString *operator = nil;
+            NSRange operatorRange = [confValue rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
+            if (operatorRange.location != NSNotFound) {
+                NSString *property = [confValue substringToIndex:operatorRange.location];
+                operator = [confValue substringWithRange:operatorRange];
+                confValue = [confValue substringFromIndex:operatorRange.location];
+                
+                SEL propName = NSSelectorFromString(property);
+                if ([viewController respondsToSelector:propName]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                    relativeView = [viewController performSelector:propName];
+#pragma clang diagnostic pop
+                }
+            }
+
+            CGFloat baseValue = 0.0;
+            CGFloat *target;
+
+            switch (i) {
+                case 0:
+                    baseValue = relativeView ?
+                        [operator isEqualToString:@"+"] ? CGRectGetMaxX(relativeView.frame)
+                                                        : CGRectGetMinX(relativeView.frame)
+                        : baseFrame.origin.x;
+                    target = &baseFrame.origin.x;
+                    break;
+
+                case 1:
+                    baseValue = relativeView ?
+                        [operator isEqualToString:@"+"] ? CGRectGetMaxY(relativeView.frame)
+                                                        : CGRectGetMinY(relativeView.frame)
+                        : baseFrame.origin.y;
+                    target = &baseFrame.origin.y;
+                    break;
+
+                case 2:
+                    baseValue = relativeView? CGRectGetWidth(relativeView.frame) : baseFrame.size.width;
+                    target = &baseFrame.size.width;
+                    break;
+                    
+                case 3:
+                    baseValue = relativeView? CGRectGetHeight(relativeView.frame) : baseFrame.size.height;
+                    target = &baseFrame.size.height;
+                    break;
+            }
+            
+            *target = [JailsViewAdjuster newValueBase:baseValue conf:confValue];
+
+        }
     }
     return baseFrame;
 }
 
 + (CGFloat)newValueBase:(CGFloat)baseValue conf:(NSString*)confValue {
-    if ([confValue rangeOfString:@"+"].location == 0
-        || [confValue rangeOfString:@"-"].location == 0) {
+    NSRange operatorRange = [confValue rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
+    if (operatorRange.location != NSNotFound) {
         return baseValue + [confValue floatValue];
     } else {
         return [confValue floatValue];
     }
 }
+
+//+ (CGFloat)newValueInViewController:(UIViewController*)viewController base:(CGFloat)baseValue conf:(NSString*)confValue {
+//    
+//    CGFloat result = 0.0;
+//    CGFloat adjustValue = 0.0;
+//    NSString *operator = nil;
+//    NSRange operatorRange = [confValue rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
+//    if (operatorRange.location != NSNotFound) {
+//        operator = [confValue substringWithRange:operatorRange];
+//        adjustValue = [[confValue substringFromIndex:operatorRange.location] floatValue];
+//        result = baseValue;
+//    } else {
+//        adjustValue = [confValue floatValue];
+//    }
+//    
+//    if (0 < operatorRange.location) {
+//        NSString *propertyName = [confValue substringToIndex:operatorRange.location];
+//    }
+//    
+//    return result + adjustValue;
+//}
 
 // hundle URL
 +(NSURL*)urlFromString:(NSString*)urlString {
