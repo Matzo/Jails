@@ -13,12 +13,13 @@
 + (void)updateView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
 + (UIView*)createViewInParent:(id)parent conf:(NSDictionary*)conf;
 
-+ (void)adjustFrameInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustBackgroundInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustSelectorInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustTextInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustHiddenInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustWebInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustFrameOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (void)adjustBackgroundOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (void)adjustSelectorOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (void)adjustTextOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (void)adjustHiddenOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (void)adjustWebOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
+
 
 +(NSURL*)urlFromString:(NSString*)urlString;
 +(UIColor*)colorFromHex:(NSString *)hex alpha:(CGFloat)a;

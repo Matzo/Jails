@@ -21,22 +21,22 @@
 
     if ([parent isKindOfClass:[UIViewController class]] || [parent isKindOfClass:[UIView class]]) {
         // adjust frame
-        [JailsViewAdjuster adjustFrameInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustFrameOfView:view parent:parent conf:conf];
         
         // adjust color
-        [JailsViewAdjuster adjustBackgroundInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustBackgroundOfView:view parent:parent conf:conf];
         
         // adjust selector
-        [JailsViewAdjuster adjustSelectorInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustSelectorOfView:view parent:parent conf:conf];
         
         // adjust webViewControl
-        [JailsViewAdjuster adjustWebInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustWebOfView:view parent:parent conf:conf];
         
         // adjust text
-        [JailsViewAdjuster adjustTextInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustTextOfView:view parent:parent conf:conf];
         
         // adjust visivility
-        [JailsViewAdjuster adjustHiddenInParent:parent view:view conf:conf];
+        [JailsViewAdjuster adjustHiddenOfView:view parent:parent conf:conf];
         
         
         [view setNeedsDisplay];
@@ -64,17 +64,17 @@
 }
 
 
-+ (void)adjustFrameInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustFrameOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
     NSArray *frameObj = conf[@"frame"];
     if (!frameObj) {
         return;
     }
 
-    view.frame = [JailsViewAdjuster newFrameInViewController:viewController baseFrame:view.frame conf:frameObj];
+    view.frame = [JailsViewAdjuster newFrameFromBaseFrame:view.frame parent:parent conf:frameObj];
 }
 
 // adjust color
-+ (void)adjustBackgroundInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustBackgroundOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
     NSArray *rgba = conf[@"backgroundColor"];
 
     if (!rgba || rgba.count != 4) {
@@ -134,7 +134,7 @@
 }
 
 // adjust selector
-+ (void)adjustSelectorInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustSelectorOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
     NSString *selectorString = conf[@"action"];
     if (!selectorString) {
         return;
@@ -172,8 +172,8 @@
                 
             }
         }
-        // add new action to viewController
-        [button addTarget:viewController action:selector forControlEvents:UIControlEventTouchUpInside];
+        // add new action to parent(UIViewController or UIView)
+        [button addTarget:parent action:selector forControlEvents:UIControlEventTouchUpInside];
     } else if ([view isKindOfClass:[UIWebView class]]) {
         if (url) {
             UIWebView *web = (UIWebView*)view;
@@ -183,7 +183,7 @@
 }
 
 // adjust text
-+ (void)adjustTextInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustTextOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
     NSString *text = conf[@"text"];
     if (!text) {
         return;
@@ -203,7 +203,7 @@
 }
 
 // adjust visivility
-+ (void)adjustHiddenInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustHiddenOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
     if (![[conf allKeys] containsObject:@"hidden"]) {
         return;
     }
@@ -211,12 +211,12 @@
     view.hidden = [conf[@"hidden"] boolValue];
 }
 
-+ (void)adjustWebInParent:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-    if ([view isKindOfClass:[UIWebView class]]) {
++ (void)adjustWebOfView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
+    if ([view isKindOfClass:[UIWebView class]] && [parent isKindOfClass:[UIViewController class]]) {
         UIWebView *web = (UIWebView*)view;
+        UIViewController *viewController = (UIViewController*)parent;
         JailsWebViewAdapter *adapter = [[JailsWebViewAdapter alloc] init];
         [viewController._jails_webAdapterList addObject:adapter];
-        
         if (web.delegate) {
             adapter.originalDelegate = web.delegate;
         }
@@ -225,7 +225,7 @@
     }
 }
 
-+ (CGRect)newFrameInViewController:(id)viewController baseFrame:(CGRect)baseFrame conf:(NSArray*)frameObj {
++ (CGRect)newFrameFromBaseFrame:(CGRect)baseFrame parent:(id)parent conf:(NSArray*)frameObj {
     if (frameObj && frameObj.count == 4) {
 
         for (int i = 0; i < 4; i++) {
@@ -240,10 +240,10 @@
                 confValue = [confValue substringFromIndex:operatorRange.location];
                 
                 SEL propName = NSSelectorFromString(property);
-                if ([viewController respondsToSelector:propName]) {
+                if ([parent respondsToSelector:propName]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                    relativeView = [viewController performSelector:propName];
+                    relativeView = [parent performSelector:propName];
 #pragma clang diagnostic pop
                 }
             }

@@ -38,7 +38,7 @@
 }
 
 - (void)testAdjustFrame {
-    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
      @"frame":@[@"10",@"20",@"+10",@"+20"],
      }];
     
@@ -48,7 +48,7 @@
     STAssertEquals(result, expected, @"adjust frame");
     
     
-    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
      @"frame":@[@"-10",@"-20",@"-10",@"-20"],
      }];
     expected = CGRectMake(0.0, 0.0, 100.0, 40.0);
@@ -58,7 +58,7 @@
 }
 
 - (void)testAdjustFrameRelative {
-    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
      @"frame":@[@"label+10",@"label+11",@"label+12",@"label+13"],
      }];
     
@@ -67,7 +67,7 @@
     STAssertEquals(result, expected, @"adjust frame relative");
 }
 - (void)testAdjustFrameRelative2 {
-    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
      @"frame":@[@"label-10",@"label-11",@"label-12",@"label-13"],
      }];
     
@@ -78,7 +78,7 @@
 }
 
 - (void)testAdjustBackgroundColor {
-    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundOfView:self.testVC.testView parent:self.testVC conf:@{
      @"backgroundColor":@[@255.0,@0.0,@0.0,@1.0],
      }];
 
@@ -90,7 +90,7 @@
     STAssertEqualObjects(result, expected, @"adjust background color");
 }
 - (void)testAdjustBackgroundHexColor {
-    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundOfView:self.testVC.testView parent:self.testVC conf:@{
      @"background":@"#FF0010"
      }];
     
@@ -103,7 +103,7 @@
 }
 
 - (void)testAdjustBackgroundImagePatternColor {
-    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundOfView:self.testVC.testView parent:self.testVC conf:@{
      @"background":@"button1"
      }];
     
@@ -115,7 +115,7 @@
 
 
 - (void)testAdjustBackgroundImagePatternColorURL {
-    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.label conf:@{
+    [JailsViewAdjuster adjustBackgroundOfView:self.testVC.label parent:self.testVC conf:@{
      @"background":@"https://raw.github.com/Matzo/Jails/develop/iOS/Jails/JailsDemo/button1.png"
      }];
     
@@ -131,7 +131,7 @@
 
 
 - (void)testAdjustSelector {
-    [JailsViewAdjuster adjustSelectorInParent:self.testVC view:self.testVC.button conf:@{
+    [JailsViewAdjuster adjustSelectorOfView:self.testVC.button parent:self.testVC conf:@{
      @"action":@"adjustedButtonClicked:",
      }];
     
@@ -153,20 +153,20 @@
 
 
 - (void)testAdjustText {
-    [JailsViewAdjuster adjustTextInParent:self.testVC view:self.testVC.label conf:@{
+    [JailsViewAdjuster adjustTextOfView:self.testVC.label parent:self.testVC conf:@{
      @"text":@"foo!",
      }];
     STAssertEqualObjects(self.testVC.label.text, @"foo!", @"label is chanded");
     
     
-    [JailsViewAdjuster adjustTextInParent:self.testVC view:self.testVC.button conf:@{
+    [JailsViewAdjuster adjustTextOfView:self.testVC.button parent:self.testVC conf:@{
      @"text":@"bar!",
      }];
     STAssertEqualObjects([self.testVC.button titleForState:UIControlStateNormal], @"bar!", @"button title was chanded");
     
 }
 - (void)testAdjustHidden {
-    [JailsViewAdjuster adjustHiddenInParent:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustHiddenOfView:self.testVC.testView parent:self.testVC conf:@{
      @"hidden":@YES,
      }];
     
@@ -255,7 +255,7 @@
     UILabel *titleLabel = cell.textLabel;
     UILabel *subtitleLabel = cell.detailTextLabel;
     
-    [JailsViewAdjuster adjustFrameInParent:cell view:titleLabel conf:@{
+    [JailsViewAdjuster adjustFrameOfView:titleLabel parent:cell conf:@{
      @"frame":@[@"10",@"20",@"100",@"20"]
      }];
     
@@ -265,7 +265,7 @@
     STAssertEquals(result, expected, @"adjust frame");
     
     
-    [JailsViewAdjuster adjustFrameInParent:cell view:subtitleLabel conf:@{
+    [JailsViewAdjuster adjustFrameOfView:subtitleLabel parent:cell conf:@{
      @"frame":@[@"textLabel+10",@"textLabel+10",@"textLabel+10",@"textLabel+10"],
      }];
 
