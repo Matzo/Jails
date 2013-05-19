@@ -15,7 +15,7 @@
     [super setUp];
     
     // Set-up code here.
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"jails-0_2" ofType:@"json"];
     [Jails breakWithConfURL:[NSURL fileURLWithPath:filePath]];
 
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];

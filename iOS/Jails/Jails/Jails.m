@@ -203,20 +203,19 @@
 #pragma mark - Private Methods
 - (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController {
     NSString *className = NSStringFromClass([viewController class]);
-    NSDictionary *conf = nil;
-    if (self.conf && (conf = self.conf[className])) {
-        NSArray *abList = conf[@"ratio"];
+    NSArray *abList = nil;
+    if (self.conf && (abList = self.conf[className])) {
         int range = 0;
         int target = 0;
         for (int i = 0; i < abList.count; i++) {
-            NSNumber *percent = abList[i];
+            NSNumber *percent = abList[i][@"ratio"];
             range += [percent intValue];
             if (self.branchSeed < range) {
                 target = i;
                 break;
             }
         }
-        return conf[@"branches"][target];
+        return abList[target];
     } else {
         return nil;
     }
