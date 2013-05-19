@@ -3,7 +3,7 @@
 //  Jails
 //
 //  Created by Matsuo Keisuke on 2013/05/16.
-//  Copyright (c) 2013年 Matzo. All rights reserved.
+//  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
 #import "JailsHttpUtils.h"

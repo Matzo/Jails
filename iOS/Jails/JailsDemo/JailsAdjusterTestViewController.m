@@ -3,10 +3,12 @@
 //  Jails
 //
 //  Created by Matsuo Keisuke on 2013/04/20.
-//  Copyright (c) 2013年 Matzo. All rights reserved.
+//  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
 #import "JailsAdjusterTestViewController.h"
+#import "JailsAdjusterTestCellData.h"
+#import "JailsAdjusterTestCell.h"
 
 @interface JailsAdjusterTestViewController ()
 
@@ -19,6 +21,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        NSMutableArray *cellDataList = [NSMutableArray array];
+        for (int i = 0; i < 100; i++) {
+            JailsAdjusterTestCellData *cellData = [[JailsAdjusterTestCellData alloc] init];
+            cellData.title = [NSString stringWithFormat:@"%d:title", i];
+            cellData.subtitle = [NSString stringWithFormat:@"%d:subtitle", i];
+            [cellDataList addObject:cellData];
+        }
+        self.cellDataList = cellDataList;
     }
     return self;
 }
@@ -71,5 +81,23 @@
         [app openURL:_url];
     }
 }
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.cellDataList count];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"JailsAdjusterTestCell";
+    
+    JailsAdjusterTestCellData *data = [self.cellDataList objectAtIndex:indexPath.row];
+    JailsAdjusterTestCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[JailsAdjusterTestCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
+    }
+    cell.data = data;
+    
+    return cell;
+}
+
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "Jails.h"
-#import "NSObject+Swizzle.h"
+#import "NSObject+JailsAspect.h"
 #import "JailsViewAdjuster.h"
 
 @implementation Jails
@@ -143,16 +143,17 @@
         if ([self.aspectedClassSet containsObject:className]) {
             continue;
         }
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewDidLoad)
-                                         withMethod:@selector(_aspect_viewDidLoad)];
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewWillLayoutSubviews)
-                                         withMethod:@selector(_aspect_viewWillLayoutSubviews)];
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewDidLayoutSubviews)
-                                         withMethod:@selector(_aspect_viewDidLayoutSubviews)];
-        
+        Class class = NSClassFromString(className);
+        if ([class isSubclassOfClass:[UIViewController class]]) {
+            [class _jails_swizzleMethod:@selector(viewDidLoad)
+                             withMethod:@selector(_jails_viewDidLoad)];
+            
+//            [class _jails_swizzleMethod:@selector(viewDidLayoutSubviews)
+//                             withMethod:@selector(_aspect_viewDidLayoutSubviews)];
+        } else if ([class isSubclassOfClass:[UIView class]]) {
+            [class _jails_swizzleMethod:@selector(layoutSubviews)
+                             withMethod:@selector(_jails_layoutSubviews)];
+        }
         
         [self.aspectedClassSet addObject:className];
     }
@@ -161,21 +162,20 @@
 
 
 #pragma mark - Execute AB
-+(void)branchViewController:(UIViewController*)viewController {
++(void)branch:(id)parent {
     Jails *jails = [Jails sharedInstance];
-    NSDictionary *conf = [jails getConfigWithViewController:viewController];
+    NSDictionary *conf = [jails getConfigWithClass:[parent class]];
     if (conf) {
-        
-//        viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         for (NSDictionary *property in conf[@"properties"]) {
             SEL propName = NSSelectorFromString(property[@"name"]);
-            if ([viewController respondsToSelector:propName]) {
+            if ([parent respondsToSelector:propName]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                UIView *view = [viewController performSelector:propName];
+                UIView *childView = [parent performSelector:propName];
 #pragma clang diagnostic pop
-                [JailsViewAdjuster updateViewController:viewController view:view conf:property];
+                
+                [JailsViewAdjuster updateView:childView parent:parent conf:property];
             }
         }
     }
@@ -183,7 +183,7 @@
 
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController {
     Jails *jails = [Jails sharedInstance];
-    NSDictionary *conf = [jails getConfigWithViewController:viewController];
+    NSDictionary *conf = [jails getConfigWithClass:[viewController class]];
     if (conf) {
         return conf[@"branchName"];
     } else {
@@ -201,8 +201,8 @@
 }
 
 #pragma mark - Private Methods
-- (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController {
-    NSString *className = NSStringFromClass([viewController class]);
+- (NSDictionary*)getConfigWithClass:(Class)class {
+    NSString *className = NSStringFromClass([class class]);
     NSArray *abList = nil;
     if (self.conf && (abList = self.conf[className])) {
         int range = 0;
@@ -220,8 +220,6 @@
         return nil;
     }
 }
-
-
 
 @end
 

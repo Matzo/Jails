@@ -17,50 +17,54 @@
 
 @implementation JailsViewAdjuster
 
++ (void)updateView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf {
 
-+ (void)updateViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-    // adjust frame
-    [JailsViewAdjuster adjustFrameInViewController:viewController view:view conf:conf];
-    
-    // adjust color
-    [JailsViewAdjuster adjustBackgroundInViewController:viewController view:view conf:conf];
-    
-    // adjust selector
-    [JailsViewAdjuster adjustSelectorInViewController:viewController view:view conf:conf];
-
-    // adjust webViewControl
-    [JailsViewAdjuster adjustWebInViewController:viewController view:view conf:conf];
-    
-    // adjust text
-    [JailsViewAdjuster adjustTextInViewController:viewController view:view conf:conf];
-
-    // adjust visivility
-    [JailsViewAdjuster adjustHiddenInViewController:viewController view:view conf:conf];
-    
-    
-    [view setNeedsDisplay];
-
-    NSArray *createSubviews = nil;
-    if ((createSubviews = conf[@"createSubviews"])) {
-        for (NSDictionary *subviewConf in createSubviews) {
-            UIView *newView = [JailsViewAdjuster createViewInController:viewController conf:subviewConf];
-            if ([newView isMemberOfClass:[UIWebView class]]) {
-                UIWebView *web = (UIWebView*)newView;
-                web.scrollView.bounces = NO;
+    if ([parent isKindOfClass:[UIViewController class]] || [parent isKindOfClass:[UIView class]]) {
+        // adjust frame
+        [JailsViewAdjuster adjustFrameInParent:parent view:view conf:conf];
+        
+        // adjust color
+        [JailsViewAdjuster adjustBackgroundInParent:parent view:view conf:conf];
+        
+        // adjust selector
+        [JailsViewAdjuster adjustSelectorInParent:parent view:view conf:conf];
+        
+        // adjust webViewControl
+        [JailsViewAdjuster adjustWebInParent:parent view:view conf:conf];
+        
+        // adjust text
+        [JailsViewAdjuster adjustTextInParent:parent view:view conf:conf];
+        
+        // adjust visivility
+        [JailsViewAdjuster adjustHiddenInParent:parent view:view conf:conf];
+        
+        
+        [view setNeedsDisplay];
+        
+        NSArray *createSubviews = nil;
+        if ((createSubviews = conf[@"createSubviews"])) {
+            for (NSDictionary *subviewConf in createSubviews) {
+                UIView *newView = [JailsViewAdjuster createViewInParent:parent conf:subviewConf];
+                if ([newView isMemberOfClass:[UIWebView class]]) {
+                    UIWebView *web = (UIWebView*)newView;
+                    web.scrollView.bounces = NO;
+                }
+                [view addSubview:newView];
             }
-            [view addSubview:newView];
         }
     }
 }
 
-+ (UIView*)createViewInController:(UIViewController*)viewController conf:(NSDictionary*)conf {
+
+
++ (UIView*)createViewInParent:(id)parent conf:(NSDictionary*)conf {
     UIView *newView = [(UIView*)[NSClassFromString(conf[@"class"]) alloc] initWithFrame:CGRectZero];
-    [JailsViewAdjuster updateViewController:viewController view:newView conf:conf];
+    [JailsViewAdjuster updateView:newView parent:parent conf:conf];
     return newView;
 }
 
 
-+ (void)adjustFrameInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustFrameInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     NSArray *frameObj = conf[@"frame"];
     if (!frameObj) {
         return;
@@ -70,7 +74,7 @@
 }
 
 // adjust color
-+ (void)adjustBackgroundInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustBackgroundInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     NSArray *rgba = conf[@"backgroundColor"];
 
     if (!rgba || rgba.count != 4) {
@@ -130,7 +134,7 @@
 }
 
 // adjust selector
-+ (void)adjustSelectorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustSelectorInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     NSString *selectorString = conf[@"action"];
     if (!selectorString) {
         return;
@@ -179,7 +183,7 @@
 }
 
 // adjust text
-+ (void)adjustTextInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustTextInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     NSString *text = conf[@"text"];
     if (!text) {
         return;
@@ -199,73 +203,19 @@
 }
 
 // adjust visivility
-+ (void)adjustHiddenInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustHiddenInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     if (![[conf allKeys] containsObject:@"hidden"]) {
         return;
     }
     
     view.hidden = [conf[@"hidden"] boolValue];
 }
-//+ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
-//    NSString *imageString = conf[@"image"];
-//
-//    if (imageString && [view isKindOfClass:[UIButton class]]) {
-//        UIButton *button = (UIButton*)view;
-//        [self adjustImageInViewController:viewController button:button conf:imageString];
-//    }
-//}
-//
-//+ (void)adjustImageInViewController:(UIViewController*)viewController button:(UIButton*)button conf:(NSString*)imageString {
-//
-//    NSRange match = [imageString rangeOfString:URL_PATTERN
-//                                       options:NSRegularExpressionSearch];
-//    
-//    if (match.location != NSNotFound) {
-//        // get image from external
-//        NSURL *imageURL = [NSURL URLWithString:imageString];
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//            
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                [button addSubview:loading];
-//                [loading startAnimating];
-//                loading.center = CGPointMake(button.bounds.size.width * 0.5,
-//                                             button.bounds.size.height * 0.5);
-//            });
-//            
-//            NSData *data = [JailsHttpUtils syncDownloadFromURL:imageURL cache:YES validation:^BOOL(NSData *data) {
-//                return [UIImage imageWithData:data] ? YES : NO;
-//            }];
-//            
-//            if (data) {
-//                UIImage *loadedImage = [[UIImage alloc] initWithData:data];
-//                if (loadedImage) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        [button setBackgroundImage:loadedImage forState:UIControlStateNormal];
-//                    });
-//                }
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [loading stopAnimating];
-//                [loading removeFromSuperview];
-//            });
-//        });
-//        
-//    } else {
-//        UIImage *image = [UIImage imageNamed:imageString];
-//        if (image) {
-//            [button setBackgroundImage:image forState:UIControlStateNormal];
-//        }
-//    }
-//}
 
-
-+ (void)adjustWebInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
++ (void)adjustWebInParent:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf {
     if ([view isKindOfClass:[UIWebView class]]) {
         UIWebView *web = (UIWebView*)view;
         JailsWebViewAdapter *adapter = [[JailsWebViewAdapter alloc] init];
-        [viewController._aspect_webAdapterList addObject:adapter];
+        [viewController._jails_webAdapterList addObject:adapter];
         
         if (web.delegate) {
             adapter.originalDelegate = web.delegate;
@@ -275,7 +225,7 @@
     }
 }
 
-+ (CGRect)newFrameInViewController:(UIViewController*)viewController baseFrame:(CGRect)baseFrame conf:(NSArray*)frameObj {
++ (CGRect)newFrameInViewController:(id)viewController baseFrame:(CGRect)baseFrame conf:(NSArray*)frameObj {
     if (frameObj && frameObj.count == 4) {
 
         for (int i = 0; i < 4; i++) {
@@ -345,27 +295,6 @@
     }
 }
 
-//+ (CGFloat)newValueInViewController:(UIViewController*)viewController base:(CGFloat)baseValue conf:(NSString*)confValue {
-//    
-//    CGFloat result = 0.0;
-//    CGFloat adjustValue = 0.0;
-//    NSString *operator = nil;
-//    NSRange operatorRange = [confValue rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]];
-//    if (operatorRange.location != NSNotFound) {
-//        operator = [confValue substringWithRange:operatorRange];
-//        adjustValue = [[confValue substringFromIndex:operatorRange.location] floatValue];
-//        result = baseValue;
-//    } else {
-//        adjustValue = [confValue floatValue];
-//    }
-//    
-//    if (0 < operatorRange.location) {
-//        NSString *propertyName = [confValue substringToIndex:operatorRange.location];
-//    }
-//    
-//    return result + adjustValue;
-//}
-
 // hundle URL
 +(NSURL*)urlFromString:(NSString*)urlString {
     NSRange match = [urlString rangeOfString:URL_PATTERN
@@ -389,17 +318,5 @@
 	//NSLog(@"HEX to RGB >> r:%f g:%f b:%f a:%f\n",r,g,b,a);
 	return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
-
-
-
-//+(void)hundleURL:(NSURL*)url {
-//    UIApplication *app = [UIApplication sharedApplication];
-//    if ([app canOpenURL:url]) {
-//        [app openURL:url];
-//    }
-//}
-
-
-
 
 @end

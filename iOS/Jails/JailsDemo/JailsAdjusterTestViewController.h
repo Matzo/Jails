@@ -3,12 +3,12 @@
 //  Jails
 //
 //  Created by Matsuo Keisuke on 2013/04/20.
-//  Copyright (c) 2013年 Matzo. All rights reserved.
+//  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface JailsAdjusterTestViewController : UIViewController<UIWebViewDelegate>
+@interface JailsAdjusterTestViewController : UIViewController<UIWebViewDelegate, UITableViewDataSource>
 @property BOOL buttonSelectorChanged;
 @property BOOL buttonCreated;
 
@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) IBOutlet UIButton *button;
 @property (strong, nonatomic) IBOutlet UIWebView *web;
+@property (strong, nonatomic) IBOutlet UITableView *table;
+@property (strong, nonatomic) NSArray *cellDataList;
 - (IBAction)buttonClicked:(id)sender;
 - (IBAction)adjustedButtonClicked:(id)sender;
 - (IBAction)createdButtonClicked:(id)sender;

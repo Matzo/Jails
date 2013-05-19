@@ -8,11 +8,13 @@
 
 #import "JailsViewAdjusterTest.h"
 #import "JailsViewAdjuster.h"
-#import "NSObject+Swizzle.h"
+#import "NSObject+JailsAspect.h"
 
 #import "ViewController.h"
 #import "JailsWebViewAdapter.h"
 #import <CoreImage/CoreImage.h>
+
+#import "JailsAdjusterTestCell.h"
 
 @implementation JailsViewAdjusterTest
 
@@ -36,7 +38,7 @@
 }
 
 - (void)testAdjustFrame {
-    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
      @"frame":@[@"10",@"20",@"+10",@"+20"],
      }];
     
@@ -46,7 +48,7 @@
     STAssertEquals(result, expected, @"adjust frame");
     
     
-    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
      @"frame":@[@"-10",@"-20",@"-10",@"-20"],
      }];
     expected = CGRectMake(0.0, 0.0, 100.0, 40.0);
@@ -56,7 +58,7 @@
 }
 
 - (void)testAdjustFrameRelative {
-    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
      @"frame":@[@"label+10",@"label+11",@"label+12",@"label+13"],
      }];
     
@@ -65,7 +67,7 @@
     STAssertEquals(result, expected, @"adjust frame relative");
 }
 - (void)testAdjustFrameRelative2 {
-    [JailsViewAdjuster adjustFrameInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustFrameInParent:self.testVC view:self.testVC.testView conf:@{
      @"frame":@[@"label-10",@"label-11",@"label-12",@"label-13"],
      }];
     
@@ -76,7 +78,7 @@
 }
 
 - (void)testAdjustBackgroundColor {
-    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
      @"backgroundColor":@[@255.0,@0.0,@0.0,@1.0],
      }];
 
@@ -88,7 +90,7 @@
     STAssertEqualObjects(result, expected, @"adjust background color");
 }
 - (void)testAdjustBackgroundHexColor {
-    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
      @"background":@"#FF0010"
      }];
     
@@ -101,7 +103,7 @@
 }
 
 - (void)testAdjustBackgroundImagePatternColor {
-    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.testView conf:@{
      @"background":@"button1"
      }];
     
@@ -113,7 +115,7 @@
 
 
 - (void)testAdjustBackgroundImagePatternColorURL {
-    [JailsViewAdjuster adjustBackgroundInViewController:self.testVC view:self.testVC.label conf:@{
+    [JailsViewAdjuster adjustBackgroundInParent:self.testVC view:self.testVC.label conf:@{
      @"background":@"https://raw.github.com/Matzo/Jails/develop/iOS/Jails/JailsDemo/button1.png"
      }];
     
@@ -129,7 +131,7 @@
 
 
 - (void)testAdjustSelector {
-    [JailsViewAdjuster adjustSelectorInViewController:self.testVC view:self.testVC.button conf:@{
+    [JailsViewAdjuster adjustSelectorInParent:self.testVC view:self.testVC.button conf:@{
      @"action":@"adjustedButtonClicked:",
      }];
     
@@ -151,20 +153,20 @@
 
 
 - (void)testAdjustText {
-    [JailsViewAdjuster adjustTextInViewController:self.testVC view:self.testVC.label conf:@{
+    [JailsViewAdjuster adjustTextInParent:self.testVC view:self.testVC.label conf:@{
      @"text":@"foo!",
      }];
     STAssertEqualObjects(self.testVC.label.text, @"foo!", @"label is chanded");
     
     
-    [JailsViewAdjuster adjustTextInViewController:self.testVC view:self.testVC.button conf:@{
+    [JailsViewAdjuster adjustTextInParent:self.testVC view:self.testVC.button conf:@{
      @"text":@"bar!",
      }];
     STAssertEqualObjects([self.testVC.button titleForState:UIControlStateNormal], @"bar!", @"button title was chanded");
     
 }
 - (void)testAdjustHidden {
-    [JailsViewAdjuster adjustHiddenInViewController:self.testVC view:self.testVC.testView conf:@{
+    [JailsViewAdjuster adjustHiddenInParent:self.testVC view:self.testVC.testView conf:@{
      @"hidden":@YES,
      }];
     
@@ -175,7 +177,7 @@
 
 - (void)testCreateNewView {
 
-    UIView *created = (UIView*)[JailsViewAdjuster createViewInController:self.testVC conf:@{
+    UIView *created = (UIView*)[JailsViewAdjuster createViewInParent:self.testVC conf:@{
                                 @"frame":@[@"100", @"100", @"40", @"40"],
                                 @"class":@"UIView",
                                 @"backgroundColor":@[@200.0,@201.0,@202.0,@1.0],
@@ -192,7 +194,7 @@
 
 - (void)testCreateNewLabel {
     
-    UILabel *created = (UILabel*)[JailsViewAdjuster createViewInController:self.testVC conf:@{
+    UILabel *created = (UILabel*)[JailsViewAdjuster createViewInParent:self.testVC conf:@{
                                 @"frame":@[@"110", @"110", @"50", @"50"],
                                 @"text":@"aaaaawaaaa",
                                 @"class":@"UILabel",
@@ -206,7 +208,7 @@
 
 - (void)testCreateNewWeb {
     
-    UIWebView *created = (UIWebView*)[JailsViewAdjuster createViewInController:self.testVC conf:@{
+    UIWebView *created = (UIWebView*)[JailsViewAdjuster createViewInParent:self.testVC conf:@{
                                   @"frame":@[@"120", @"120", @"60", @"60"],
                                   @"text":@"aaaaawaaaa",
                                   @"class":@"UIWebView",
@@ -224,7 +226,7 @@
 
 - (void)testCreateNewButton {
     
-    UIButton *created = (UIButton*)[JailsViewAdjuster createViewInController:self.testVC conf:@{
+    UIButton *created = (UIButton*)[JailsViewAdjuster createViewInParent:self.testVC conf:@{
                                     @"frame":@[@"200", @"200", @"80", @"40"],
                                     @"class":@"UIButton",
                                     @"text":@"new button",
@@ -238,6 +240,38 @@
     STAssertTrue([created isMemberOfClass:[UIButton class]], @"created class is UIButton");
     STAssertTrue(self.testVC.buttonCreated, @"button was created");
 
+
+}
+
+
+- (void)testAdjustFrameInView {
+    static NSString *cellIdentifier = @"testAdjustFrameInView";
+    JailsAdjusterTestCell *cell = [[JailsAdjusterTestCell alloc] initWithStyle:UITableViewCellStyleValue2
+                                                               reuseIdentifier:cellIdentifier];
+    cell.frame = CGRectMake(0.0, 0.0, 320.0, 44.0);
+    [self.testVC.view addSubview:cell];
+//    [cell layoutSubviews];
+    
+    UILabel *titleLabel = cell.textLabel;
+    UILabel *subtitleLabel = cell.detailTextLabel;
+    
+    [JailsViewAdjuster adjustFrameInParent:cell view:titleLabel conf:@{
+     @"frame":@[@"10",@"20",@"100",@"20"]
+     }];
+    
+    
+    CGRect expected = CGRectMake(10.0, 20.0, 100.0, 20.0);
+    CGRect result = titleLabel.frame;
+    STAssertEquals(result, expected, @"adjust frame");
+    
+    
+    [JailsViewAdjuster adjustFrameInParent:cell view:subtitleLabel conf:@{
+     @"frame":@[@"textLabel+10",@"textLabel+10",@"textLabel+10",@"textLabel+10"],
+     }];
+
+    expected = CGRectMake(120.0, 50.0, 110.0, 30.0);
+    result = subtitleLabel.frame;
+    STAssertEquals(result, expected, @"adjust frame");
 
 }
 

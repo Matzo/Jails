@@ -10,30 +10,17 @@
 
 @interface JailsViewAdjuster : NSObject
 
-+ (void)updateViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (UIView*)createViewInController:(UIViewController*)viewController conf:(NSDictionary*)conf;
++ (void)updateView:(UIView*)view parent:(id)parent conf:(NSDictionary*)conf;
++ (UIView*)createViewInParent:(id)parent conf:(NSDictionary*)conf;
 
-
-//+ (void)updateView:(UIView*)view conf:(NSDictionary*)conf;
-
-+ (void)adjustFrameInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustBackgroundInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustBackgroundColorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustSelectorInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustTextInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustHiddenInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustImageInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
-+ (void)adjustWebInViewController:(UIViewController*)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustFrameInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustBackgroundInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustSelectorInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustTextInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustHiddenInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
++ (void)adjustWebInParent:(id)viewController view:(UIView*)view conf:(NSDictionary*)conf;
 
 +(NSURL*)urlFromString:(NSString*)urlString;
 +(UIColor*)colorFromHex:(NSString *)hex alpha:(CGFloat)a;
-
-//+ (void)adjustFrameTo:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustBackgroundColorTo:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustSelectorTo:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustTextTo:(UIView*)view conf:(NSDictionary*)conf;
-//+ (void)adjustHiddenTo:(UIView*)view conf:(NSDictionary*)conf;
-
-
 
 @end

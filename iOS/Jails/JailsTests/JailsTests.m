@@ -35,7 +35,6 @@
     UIViewController *viewController = [[UIViewController alloc] init];
     NSString *result = [Jails branchNameOfViewController:viewController];
     
-    NSLog(@"Jails conf:%@", [Jails sharedInstance].conf);
     STAssertEqualObjects(result, @"b", @"branch name is 100% b");
 }
 
