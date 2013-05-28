@@ -52,5 +52,5 @@ Android
 Tools
 ----
 - jails.json editor  
-http://matzo.github.io/jpon_demo/#jails.json
+http://matzo.github.io/jpon_demo/#jails-0_2.json
 
