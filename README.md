@@ -49,6 +49,49 @@ Android
           :
     }
 
+
+Jails.json
+----
+    {"ClassNameOfViewController": [
+      { "ratio": 0 },   // A: 0%
+      { "ratio": 100,   // B: 100%
+        "branchName": "b",
+        "properties": [{
+          "name": "scrollView",
+          "frame": ["+0", "+44", "+0", "-44"]
+        },
+        {
+          "name": "view",
+          "createSubviews": [{
+            "class": "UIButton",
+            "background": "http://button/image.png",
+            "frame": ["0", "0", "320", "44"],
+            "action": "http://open/this/url/"
+          }]
+        }]
+      }
+    ]}
+
+
+| Key | required | Description |
+|:-----------|:---:|:-----------|
+| ClassNameOfViewController | o | This class name can be changed. You can specified subclasses of UIViewController or UIView. |
+| ratio      | o | Percentage for A/B test. |
+| branchName | - | You can use this name as parameter for your analytics tools. |
+| properties | - | You can change each properties with specified name. |
+
+
+| Key for properties or createSubviews | required | Description |
+|:-----------|:---:|:-----------|
+| name       | o | variable name as a property |
+| background | - | If you specified as URL of image, draw as pattern tile. Or, draw color if you specified HEX color code. |
+| frame      | - | UIView's frame for iOS. You can specify relatively position. |
+| text       | - | For UILabel: changing labes's text. For UIButton: change buttons title. For UIWebView: change html contents. |
+| action     | - | For UIWebView: you can specify URL for HTML contetnts. For UIButton: you can specify URL for to call openURL:, or selector for addTarget:action:forControlEvents: |
+| hidden     | - | Change visibility of UI perts. |
+| createSubview | - | You can use this param for original properties. So you cannot build tree hierarchy. |
+
+
 Tools
 ----
 - jails.json editor  
