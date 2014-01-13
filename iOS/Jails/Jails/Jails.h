@@ -25,6 +25,8 @@
 +(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval;
 +(void)stopRepeatLoading;
 
++(void)breakWithConfData:(NSDictionary*)config;
+
 +(void)branch:(id)parent;
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController;
 

@@ -53,6 +53,7 @@
 		F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
 		F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353B01721133C0093CA5F /* CoreGraphics.framework */; };
 		F79DF69C173BF1C80025CFE5 /* Jails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BE796FD1720F62400613242 /* Jails.h */; };
+		F7BEA3C118842E93000D22C7 /* JailsTests.json in Resources */ = {isa = PBXBuildFile; fileRef = F7BEA3BF18842999000D22C7 /* JailsTests.json */; };
 		F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
 		F7CCC3AE1737B268008F4009 /* JailsWebViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */; };
 		F7DA1B0017486B4A00413274 /* jails-0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFF17486B4A00413274 /* jails-0_2.json */; };
@@ -148,6 +149,7 @@
 		F709FBFB17450F9B00379229 /* JailsHttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsHttpUtils.h; sourceTree = "<group>"; };
 		F709FBFC17450F9B00379229 /* JailsHttpUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsHttpUtils.m; sourceTree = "<group>"; };
 		F7760C3B172D5E2F007D645A /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
+		F7BEA3BF18842999000D22C7 /* JailsTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JailsTests.json; sourceTree = "<group>"; };
 		F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsWebViewAdapter.h; sourceTree = "<group>"; };
 		F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsWebViewAdapter.m; sourceTree = "<group>"; };
 		F7DA1AFB1748420400413274 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				F7DA1AFB1748420400413274 /* test.json */,
+				F7BEA3BF18842999000D22C7 /* JailsTests.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				1B4353B71721133C0093CA5F /* InfoPlist.strings in Resources */,
 				1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */,
 				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
+				F7BEA3C118842E93000D22C7 /* JailsTests.json in Resources */,
 				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
 				F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */,
 				F7760C3C172D5E2F007D645A /* button1.png in Resources */,

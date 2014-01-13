@@ -87,6 +87,12 @@
     }
 }
 
++(void)breakWithConfData:(NSDictionary*)config {
+    Jails *jails = [Jails sharedInstance];
+    jails.conf = config;
+    [jails injectAspect];
+}
+
 -(void)observeNotification {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self];
