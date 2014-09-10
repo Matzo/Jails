@@ -150,7 +150,10 @@
         if (url) {
             NSString *key = [button description];
             jails.linkDic[key] = url;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
             selector = NSSelectorFromString(@"_jails_openLink:");
+#pragma clang diagnostic pop
         } else {
             selector = NSSelectorFromString(selectorString);
         }
