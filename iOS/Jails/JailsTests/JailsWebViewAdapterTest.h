@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "JailsWebViewAdapter.h"
 
-@interface JailsWebViewAdapterTest : SenTestCase
+@interface JailsWebViewAdapterTest : XCTestCase
 @property (nonatomic, strong) JailsWebViewAdapter *adapter;
 @property (assign) BOOL delegateAction1Called;
 @property (assign) BOOL delegateAction2Called;

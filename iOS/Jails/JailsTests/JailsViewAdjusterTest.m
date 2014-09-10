@@ -16,6 +16,13 @@
 
 #import "JailsAdjusterTestCell.h"
 
+#define XCTAssertEqualCGRect(rect1, rect2, ...) \
+XCTAssertTrue(rect1.origin.x == rect2.origin.x); \
+XCTAssertTrue(rect1.origin.y == rect2.origin.y); \
+XCTAssertTrue(rect1.size.width == rect2.size.width); \
+XCTAssertTrue(rect1.size.height == rect2.size.height);
+
+
 @implementation JailsViewAdjusterTest
 
 - (void)setUp {
@@ -45,7 +52,7 @@
     
     CGRect expected = CGRectMake(10.0, 20.0, 110.0, 60.0);
     CGRect result = self.testVC.testView.frame;
-    STAssertEquals(result, expected, @"adjust frame");
+    XCTAssertTrue(result.origin.x == expected.origin.x);
     
     
     [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
@@ -53,7 +60,6 @@
      }];
     expected = CGRectMake(0.0, 0.0, 100.0, 40.0);
     result = self.testVC.testView.frame;
-    STAssertEquals(result, expected, @"adjust frame");
 
 }
 
@@ -64,7 +70,7 @@
     
     CGRect expected = CGRectMake(110.0, 91.0, 112.0, 53.0);
     CGRect result = self.testVC.testView.frame;
-    STAssertEquals(result, expected, @"adjust frame relative");
+    XCTAssertEqualCGRect(result, expected);
 }
 - (void)testAdjustFrameRelative2 {
     [JailsViewAdjuster adjustFrameOfView:self.testVC.testView parent:self.testVC conf:@{
@@ -74,7 +80,7 @@
     
     CGRect expected = CGRectMake(-10.0, 29.0, 88.0, 27.0);
     CGRect result = self.testVC.testView.frame;
-    STAssertEquals(result, expected, @"adjust frame relative");
+    XCTAssertEqualCGRect(result, expected);
 }
 
 - (void)testAdjustBackgroundColor {
@@ -82,34 +88,39 @@
      @"backgroundColor":@[@255.0,@0.0,@0.0,@1.0],
      }];
 
-    UIColor *expected = [UIColor colorWithRed:255.0/255.0
-                                        green:0.0/255.0
-                                         blue:0.0/255.0
-                                        alpha:1.0];
     UIColor *result = self.testVC.testView.backgroundColor;
-    STAssertEqualObjects(result, expected, @"adjust background color");
+    
+    CGFloat r, g, b, a;
+    [result getRed:&r green:&g blue:&b alpha:&a];
+    XCTAssertTrue(r == 255.0/255.0);
+    XCTAssertTrue(g == 0.0/255.0);
+    XCTAssertTrue(b == 0.0/255.0);
 }
 - (void)testAdjustBackgroundHexColor {
     [JailsViewAdjuster adjustBackgroundOfView:self.testVC.testView parent:self.testVC conf:@{
-     @"background":@"#FF0010"
+     @"background":@"#FF00FF"
      }];
     
-    UIColor *expected = [UIColor colorWithRed:255.0/255.0
-                                        green:0.0/255.0
-                                         blue:16.0/255.0
-                                        alpha:1.0];
     UIColor *result = self.testVC.testView.backgroundColor;
-    STAssertEqualObjects(result, expected, @"adjust background color");
+    
+    CGFloat r, g, b, a;
+    [result getRed:&r green:&g blue:&b alpha:&a];
+    XCTAssertTrue(r == 255.0/255.0);
+    XCTAssertTrue(g == 0.0/255.0);
+    XCTAssertTrue(b == 255.0/255.0);
 }
 
 - (void)testAdjustBackgroundImagePatternColor {
+    
+    UIColor *before = self.testVC.testView.backgroundColor;
+    
     [JailsViewAdjuster adjustBackgroundOfView:self.testVC.testView parent:self.testVC conf:@{
      @"background":@"button1"
      }];
     
-    UIColor *result = self.testVC.testView.backgroundColor;
-    UIColor *expect = [UIColor colorWithPatternImage:[UIImage imageNamed:@"button1"]];
-    STAssertTrue(CGColorEqualToColor(result.CGColor, expect.CGColor), @"local image color");
+    UIColor *after = self.testVC.testView.backgroundColor;
+
+    XCTAssertNotEqual(before, after);
 
 }
 
@@ -126,7 +137,7 @@
     }
 
     CGColorSpaceRef colorSpace = [CIColor colorWithCGColor:result.CGColor].colorSpace;
-    STAssertTrue(CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelPattern, @"remote image pattern color");
+    XCTAssertTrue(CGColorSpaceGetModel(colorSpace) == kCGColorSpaceModelPattern, @"remote image pattern color");
 }
 
 
@@ -137,18 +148,18 @@
     
     [self.testVC.button sendActionsForControlEvents:UIControlEventTouchUpInside];
     
-    STAssertTrue(self.testVC.buttonSelectorChanged, @"button selector was changed");
+    XCTAssertTrue(self.testVC.buttonSelectorChanged, @"button selector was changed");
 }
 
 - (void)testAdjustURL {
     NSURL *url = [JailsViewAdjuster urlFromString:@"http://www.google.com/"];
-    STAssertEqualObjects(url, [NSURL URLWithString:@"http://www.google.com/"], @"made URL");
+    XCTAssertEqualObjects(url, [NSURL URLWithString:@"http://www.google.com/"], @"made URL");
 
     url = [JailsViewAdjuster urlFromString:@"someSelector;"];
-    STAssertEqualObjects(url, nil, @"made URL");
+    XCTAssertEqualObjects(url, nil, @"made URL");
     
     url = [JailsViewAdjuster urlFromString:nil];
-    STAssertEqualObjects(url, nil, @"made URL");
+    XCTAssertEqualObjects(url, nil, @"made URL");
 }
 
 
@@ -156,13 +167,13 @@
     [JailsViewAdjuster adjustTextOfView:self.testVC.label parent:self.testVC conf:@{
      @"text":@"foo!",
      }];
-    STAssertEqualObjects(self.testVC.label.text, @"foo!", @"label is chanded");
+    XCTAssertEqualObjects(self.testVC.label.text, @"foo!", @"label is chanded");
     
     
     [JailsViewAdjuster adjustTextOfView:self.testVC.button parent:self.testVC conf:@{
      @"text":@"bar!",
      }];
-    STAssertEqualObjects([self.testVC.button titleForState:UIControlStateNormal], @"bar!", @"button title was chanded");
+    XCTAssertEqualObjects([self.testVC.button titleForState:UIControlStateNormal], @"bar!", @"button title was chanded");
     
 }
 - (void)testAdjustHidden {
@@ -171,7 +182,7 @@
      }];
     
     
-    STAssertTrue(self.testVC.testView.hidden, @"view was hidden");
+    XCTAssertTrue(self.testVC.testView.hidden, @"view was hidden");
 }
 
 
@@ -184,9 +195,10 @@
                                 }];
     [self.testVC.view addSubview:created];
 
-    STAssertTrue([created isMemberOfClass:[UIView class]], @"created class is UIView");
-    STAssertEquals(created.frame, CGRectMake(100.0, 100.0, 40.0, 40.0), @"frame created");
-    STAssertEqualObjects(created.backgroundColor, [UIColor colorWithRed:200.0/255.0
+    XCTAssertTrue([created isMemberOfClass:[UIView class]], @"created class is UIView");
+    XCTAssertEqualCGRect(created.frame, CGRectMake(100.0, 100.0, 40.0, 40.0));
+
+    XCTAssertEqualObjects(created.backgroundColor, [UIColor colorWithRed:200.0/255.0
                                                                   green:201.0/255.0
                                                                    blue:202.0/255.0
                                                                   alpha:1.0], @"backgoundColor");
@@ -201,9 +213,9 @@
                                 }];
     [self.testVC.view addSubview:created];
     
-    STAssertTrue([created isMemberOfClass:[UILabel class]], @"created class is UILabel");
-    STAssertEquals(created.frame, CGRectMake(110.0, 110.0, 50.0, 50.0), @"frame created");
-    STAssertEqualObjects(created.text, @"aaaaawaaaa", @"label text");
+    XCTAssertTrue([created isMemberOfClass:[UILabel class]], @"created class is UILabel");
+    XCTAssertEqualCGRect(created.frame, CGRectMake(110.0, 110.0, 50.0, 50.0));
+    XCTAssertEqualObjects(created.text, @"aaaaawaaaa", @"label text");
 }
 
 - (void)testCreateNewWeb {
@@ -218,9 +230,8 @@
     created.delegate = webAdapter;
     [self.testVC.view addSubview:created];
 
-    STAssertTrue([created isMemberOfClass:[UIWebView class]], @"created class is UIWebView");
-    STAssertEquals(created.frame, CGRectMake(120.0, 120.0, 60.0, 60.0), @"frame created");
-    
+    XCTAssertTrue([created isMemberOfClass:[UIWebView class]], @"created class is UIWebView");
+    XCTAssertEqualCGRect(created.frame, CGRectMake(120.0, 120.0, 60.0, 60.0));
 
 }
 
@@ -236,9 +247,9 @@
     
     [created sendActionsForControlEvents:UIControlEventTouchUpInside];
     
-    STAssertEqualObjects([created titleForState:UIControlStateNormal], @"new button", @"button text");
-    STAssertTrue([created isMemberOfClass:[UIButton class]], @"created class is UIButton");
-    STAssertTrue(self.testVC.buttonCreated, @"button was created");
+    XCTAssertEqualObjects([created titleForState:UIControlStateNormal], @"new button", @"button text");
+    XCTAssertTrue([created isMemberOfClass:[UIButton class]], @"created class is UIButton");
+    XCTAssertTrue(self.testVC.buttonCreated, @"button was created");
 
 
 }
@@ -262,7 +273,7 @@
     
     CGRect expected = CGRectMake(10.0, 20.0, 100.0, 20.0);
     CGRect result = titleLabel.frame;
-    STAssertEquals(result, expected, @"adjust frame");
+    XCTAssertEqualCGRect(result, expected);
     
     
     [JailsViewAdjuster adjustFrameOfView:subtitleLabel parent:cell conf:@{
@@ -271,7 +282,7 @@
 
     expected = CGRectMake(120.0, 50.0, 110.0, 30.0);
     result = subtitleLabel.frame;
-    STAssertEquals(result, expected, @"adjust frame");
+    XCTAssertEqualCGRect(result, expected);
 
 }
 

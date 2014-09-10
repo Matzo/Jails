@@ -32,7 +32,6 @@
 		1BC06EE8173D365E00DF959A /* JailsWebViewAdapterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC06EE7173D365E00DF959A /* JailsWebViewAdapterTest.m */; };
 		1BE796F91720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
 		1BE797001720F62400613242 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
-		1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE797071720F62400613242 /* SenTestingKit.framework */; };
 		1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
 		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
 		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
@@ -139,8 +138,7 @@
 		1BE796FC1720F62400613242 /* Jails-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jails-Prefix.pch"; sourceTree = "<group>"; };
 		1BE796FD1720F62400613242 /* Jails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Jails.h; sourceTree = "<group>"; };
 		1BE796FF1720F62400613242 /* Jails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jails.m; sourceTree = "<group>"; };
-		1BE797061720F62400613242 /* JailsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JailsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BE797071720F62400613242 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1BE797061720F62400613242 /* JailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE797111720F62400613242 /* JailsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JailsTests-Info.plist"; sourceTree = "<group>"; };
 		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			files = (
 				F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */,
 				F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */,
-				1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */,
 				1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */,
 				1BE7970E1720F62400613242 /* libJails.a in Frameworks */,
 				F709FBF31744F5B900379229 /* CoreFoundation.framework in Frameworks */,
@@ -265,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE796F51720F62400613242 /* libJails.a */,
-				1BE797061720F62400613242 /* JailsTests.octest */,
+				1BE797061720F62400613242 /* JailsTests.xctest */,
 				1B4353AD1721133C0093CA5F /* JailsDemo.app */,
 			);
 			name = Products;
@@ -278,7 +275,6 @@
 				1B4353CE1721141A0093CA5F /* CoreFoundation.framework */,
 				1B4353CC172114130093CA5F /* UIKit.framework */,
 				1BE796F81720F62400613242 /* Foundation.framework */,
-				1BE797071720F62400613242 /* SenTestingKit.framework */,
 				1B4353B01721133C0093CA5F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -403,8 +399,8 @@
 			);
 			name = JailsTests;
 			productName = JailsTests;
-			productReference = 1BE797061720F62400613242 /* JailsTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 1BE797061720F62400613242 /* JailsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -733,13 +729,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -750,13 +746,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

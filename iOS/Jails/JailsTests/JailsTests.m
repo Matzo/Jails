@@ -48,7 +48,7 @@
     UIViewController *viewController = [[UIViewController alloc] init];
     NSString *result = [Jails branchNameOfViewController:viewController];
     
-    STAssertEqualObjects(result, @"b", @"branch name is 100% b");
+    XCTAssertEqualObjects(result, @"b", @"branch name is 100% b");
 }
 
 - (void)testBreakWithConfValue {
@@ -64,10 +64,10 @@
     [viewController view];
     CGRect result = viewController.testView.frame;
     
-    STAssertEquals(result.origin.x, 20.0f, @"x position");
-    STAssertEquals(result.origin.y, 15.0f, @"y position");
-    STAssertEquals(result.size.width, 45.0f, @"width");
-    STAssertEquals(result.size.height, 44.0f, @"heidht");
+    XCTAssertEqual(result.origin.x, (CGFloat)20.0f, @"x position");
+    XCTAssertEqual(result.origin.y, (CGFloat)15.0f, @"y position");
+    XCTAssertEqual(result.size.width, (CGFloat)45.0f, @"width");
+    XCTAssertEqual(result.size.height, (CGFloat)44.0f, @"heidht");
 }
 
 - (void)testBreakWithConfValueUpdated {
@@ -86,10 +86,10 @@
     
     result = viewController.testView.frame;
     
-    STAssertEquals(result.origin.x, 20.0f, @"x position");
-    STAssertEquals(result.origin.y, 15.0f, @"y position");
-    STAssertEquals(result.size.width, 45.0f, @"width");
-    STAssertEquals(result.size.height, 44.0f, @"heidht");
+    XCTAssertEqual(result.origin.x, (CGFloat)20.0f, @"x position");
+    XCTAssertEqual(result.origin.y, (CGFloat)15.0f, @"y position");
+    XCTAssertEqual(result.size.width, (CGFloat)45.0f, @"width");
+    XCTAssertEqual(result.size.height, (CGFloat)44.0f, @"heidht");
 
     confData[@"JailsTestsViewController"][0][@"properties"][0][@"frame"][0] = @"+15.0";
     confData[@"JailsTestsViewController"][0][@"properties"][0][@"frame"][1] = @"+10.0";
@@ -102,10 +102,10 @@
     [Jails breakWithConfData:confData];
     result = viewController.testView.frame;
     
-    STAssertEquals(result.origin.x, 25.0f, @"x position");
-    STAssertEquals(result.origin.y, 20.0f, @"y position");
-    STAssertEquals(result.size.width, 40.0f, @"width");
-    STAssertEquals(result.size.height, 60.0f, @"heidht");
+    XCTAssertEqual(result.origin.x, (CGFloat)25.0f, @"x position");
+    XCTAssertEqual(result.origin.y, (CGFloat)20.0f, @"y position");
+    XCTAssertEqual(result.size.width, (CGFloat)40.0f, @"width");
+    XCTAssertEqual(result.size.height, (CGFloat)60.0f, @"heidht");
 }
 
 
