@@ -22,7 +22,7 @@
             SEL selector = [self selectorFromURL:url params:&params];
             
             if ([self.delegate respondsToSelector:selector]) {
-                int countOfArguments = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count] - 1;
+                NSUInteger countOfArguments = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count] - 1;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 switch (countOfArguments) {

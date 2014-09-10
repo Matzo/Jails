@@ -48,7 +48,7 @@
     UIViewController *viewController = [[UIViewController alloc] init];
     NSString *result = [Jails branchNameOfViewController:viewController];
     
-    XCTAssertEqualObjects(result, @"b", @"branch name is 100% b");
+    XCTAssertEqualObjects(result, @"b", @"branch name is 100 percent b");
 }
 
 - (void)testBreakWithConfValue {

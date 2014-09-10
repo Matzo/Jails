@@ -17,7 +17,7 @@
     if (self) {
         
         NSUserDefaults *userDefoults = [NSUserDefaults standardUserDefaults];
-        int seed = 0;
+        NSInteger seed = 0;
         if ([[[userDefoults dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
             seed = [userDefoults integerForKey:kNSUserDefaultsJailsSeedKey];
         } else {
@@ -152,13 +152,13 @@
         Class class = NSClassFromString(className);
         if ([class isSubclassOfClass:[UIViewController class]]) {
             [class _jails_swizzleMethod:@selector(viewDidLoad)
-                             withMethod:@selector(_jails_viewDidLoad)];
+                             withMethod:NSSelectorFromString(@"_jails_viewDidLoad")];
             
 //            [class _jails_swizzleMethod:@selector(viewDidLayoutSubviews)
 //                             withMethod:@selector(_aspect_viewDidLayoutSubviews)];
         } else if ([class isSubclassOfClass:[UIView class]]) {
             [class _jails_swizzleMethod:@selector(layoutSubviews)
-                             withMethod:@selector(_jails_layoutSubviews)];
+                             withMethod:NSSelectorFromString(@"_jails_layoutSubviews")];
         }
         
         [self.aspectedClassSet addObject:className];

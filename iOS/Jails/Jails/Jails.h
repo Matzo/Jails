@@ -11,7 +11,7 @@
 #define kNSUserDefaultsJailsSeedKey @"kNSUserDefaultsJailsSeedKey"
 
 @interface Jails : NSObject
-@property (nonatomic, assign) int branchSeed;
+@property (nonatomic, assign) NSInteger branchSeed;
 @property (strong) NSURL *jsonURL;
 @property (strong) NSTimer *repeatTimer;
 @property (strong) NSDictionary *conf;
