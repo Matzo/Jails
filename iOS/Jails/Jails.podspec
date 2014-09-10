@@ -10,10 +10,10 @@ Pod::Spec.new do |s|
                    This library is recommended small AB testing.
                    DESC
   s.homepage     = "https://github.com/Matzo/Jails"
-  s.license      = "MIT"
+  s.license      = { :type => "MIT", :file => "LICENSE.txt" }
   s.author       = { "Matzo" => "ksk.matsuo@gmail.com" }
   s.platform     = :ios, "5.0"
-  s.source       = { :git => "https://github.com/Matzo/Jails.git", :branch => "develop", :tag => s.version}
+  s.source       = { :git => "https://github.com/Matzo/Jails.git", :tag => s.version}
   s.source_files  = "iOS/Jails/Jails/*.{h,m}"
   s.requires_arc = true
 end
