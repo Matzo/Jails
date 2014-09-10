@@ -16,15 +16,18 @@
 @property (strong) NSTimer *repeatTimer;
 @property (strong) NSDictionary *conf;
 @property (strong) NSMutableSet *aspectedClassSet;
+@property (strong) NSMutableDictionary *webAdapterListDic;
 @property NSTimeInterval interval;
 @property (strong) NSMutableDictionary *linkDic;
 
-+(id)sharedInstance;
++(Jails*)sharedInstance;
 +(void)breakWithConfURL:(NSURL*)url;
 +(void)breakWithConfURL:(NSURL*)url loadingInterval:(NSTimeInterval)interval;
 +(void)stopRepeatLoading;
 
-+(void)branchViewController:(UIViewController*)viewController;
++(void)breakWithConfData:(NSDictionary*)config;
+
++(void)branch:(id)parent;
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController;
 
 

@@ -1,9 +1,9 @@
-#import "NSObject+Swizzle.h"
+#import "NSObject+JailsAspect.h"
 #import <objc/runtime.h>
 
-@implementation NSObject(Swizzle)
+@implementation NSObject(JailsAspect)
 
-+ (void)swizzleMethod:(SEL)orig_sel withMethod:(SEL)alt_sel
++ (void)_jails_swizzleMethod:(SEL)orig_sel withMethod:(SEL)alt_sel
 {
   Method orig_method = class_getInstanceMethod(self, orig_sel);
   Method alt_method = class_getInstanceMethod(self, alt_sel);

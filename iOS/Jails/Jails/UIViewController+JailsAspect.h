@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (JailsAspect)
-- (void)_aspect_viewDidLoad;
-- (void)_aspect_viewWillLayoutSubviews;
-- (void)_aspect_viewDidLayoutSubviews;
+@property (readonly) NSMutableArray *_jails_webAdapterList;
+- (void)_jails_viewDidLoad;
+- (void)_jails_dealloc;
 @end

@@ -21,7 +21,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [Jails breakWithConfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"json"]]];
+    [Jails breakWithConfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"jails-0_2" ofType:@"json"]]
+            loadingInterval:5];
     
     UIViewController *viewController;
     // Override point for customization after application launch.

@@ -10,22 +10,21 @@
 #import "Jails.h"
 
 @implementation UIViewController (JailsAspect)
-- (void)_aspect_viewDidLoad {
-    [self _aspect_viewDidLoad];
+@dynamic _jails_webAdapterList;
+- (void)_jails_viewDidLoad {
+    [self _jails_viewDidLoad];
     
     @try {
-        [Jails branchViewController:self];
+        [Jails branch:self];
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
     }
 }
-- (void)_aspect_viewWillLayoutSubviews {
-    [self _aspect_viewWillLayoutSubviews];
+- (void)_jails_dealloc {
+    [self _jails_dealloc];
 }
-- (void)_aspect_viewDidLayoutSubviews {
-    [self _aspect_viewDidLayoutSubviews];
-}
+
 
 - (void)_jails_openLink:(id)sender {
     
@@ -37,6 +36,17 @@
     if ([app canOpenURL:url]) {
         [app openURL:url];
     }
+}
+- (NSMutableArray*)_jails_webAdapterList {
+    Jails *jails = [Jails sharedInstance];
+    NSMutableArray *adapterList = [jails.webAdapterListDic objectForKey:[self description]];
+    
+    if (!adapterList) {
+        adapterList = [NSMutableArray array];
+        [jails.webAdapterListDic setObject:adapterList forKey:[self description]];
+    }
+    
+    return adapterList;
 }
 
 @end

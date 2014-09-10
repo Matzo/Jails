@@ -7,7 +7,7 @@
 //
 
 #import "Jails.h"
-#import "NSObject+Swizzle.h"
+#import "NSObject+JailsAspect.h"
 #import "JailsViewAdjuster.h"
 
 @implementation Jails
@@ -16,24 +16,25 @@
     self = [super init];
     if (self) {
         
-        NSUserDefaults *userDefoulds = [NSUserDefaults standardUserDefaults];
+        NSUserDefaults *userDefoults = [NSUserDefaults standardUserDefaults];
         int seed = 0;
-        if ([[[userDefoulds dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
-            seed = [userDefoulds integerForKey:kNSUserDefaultsJailsSeedKey];
+        if ([[[userDefoults dictionaryRepresentation] allKeys] containsObject:kNSUserDefaultsJailsSeedKey]) {
+            seed = [userDefoults integerForKey:kNSUserDefaultsJailsSeedKey];
         } else {
             srand((unsigned) time(NULL));
             seed = rand() % 100;
-            [userDefoulds setInteger:seed forKey:kNSUserDefaultsJailsSeedKey];
+            [userDefoults setInteger:seed forKey:kNSUserDefaultsJailsSeedKey];
         }
         
         self.branchSeed = seed;
         self.aspectedClassSet = [NSMutableSet set];
+        self.webAdapterListDic = [NSMutableDictionary dictionary];
         self.linkDic = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
-+(id)sharedInstance {
++(Jails*)sharedInstance {
     static Jails* instance = nil;
     if (instance == nil) {
         instance = [[Jails alloc] init];
@@ -65,9 +66,7 @@
     
     
     // always load JSON even if it is cached
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [jails loadJSON];
-    });
+    [jails loadJSON];
     
     // set reload events
     [jails observeNotification];
@@ -78,7 +77,7 @@
     jails.interval = interval;
     [Jails breakWithConfURL:url];
     
-    if (0 < interval) {
+    if (0 < interval && !jails.repeatTimer) {
         jails.repeatTimer = [NSTimer timerWithTimeInterval:interval
                                                     target:jails
                                                   selector:@selector(loadJSON)
@@ -88,6 +87,12 @@
     }
 }
 
++(void)breakWithConfData:(NSDictionary*)config {
+    Jails *jails = [Jails sharedInstance];
+    jails.conf = config;
+    [jails injectAspect];
+}
+
 -(void)observeNotification {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self];
@@ -95,33 +100,35 @@
 }
 
 -(void)loadJSON {
-    NSData *data = nil;
-    NSError *error = nil;
-
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.jsonURL
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:5.0];
-    NSURLResponse *res = nil;
-    data = [NSURLConnection sendSynchronousRequest:req
-                                 returningResponse:&res
-                                             error:&error];
-    if (error) {
-        NSLog(@"get config error:%@", error);
-        return;
-    }
-    
-    if (data) {
-        self.conf = [NSJSONSerialization JSONObjectWithData:data
-                                                    options:NSJSONReadingMutableContainers
-                                                      error:&error];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *data = nil;
+        NSError *error = nil;
+        
+        NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.jsonURL
+                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                              timeoutInterval:5.0];
+        NSURLResponse *res = nil;
+        data = [NSURLConnection sendSynchronousRequest:req
+                                     returningResponse:&res
+                                                 error:&error];
         if (error) {
-            NSLog(@"parse config error:%@", error);
+            NSLog(@"get config error:%@", error);
             return;
-        } else {
-            [self saveCache:data];
-            [self injectAspect];
         }
-    }
+        
+        if (data) {
+            self.conf = [NSJSONSerialization JSONObjectWithData:data
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&error];
+            if (error) {
+                NSLog(@"parse config error:%@", error);
+                return;
+            } else {
+                [self saveCache:data];
+                [self injectAspect];
+            }
+        }
+    });
 }
 
 -(void)saveCache:(NSData*)data {
@@ -142,15 +149,17 @@
         if ([self.aspectedClassSet containsObject:className]) {
             continue;
         }
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewDidLoad)
-                                         withMethod:@selector(_aspect_viewDidLoad)];
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewWillLayoutSubviews)
-                                         withMethod:@selector(_aspect_viewWillLayoutSubviews)];
-        
-        [NSClassFromString(className) swizzleMethod:@selector(viewDidLayoutSubviews)
-                                         withMethod:@selector(_aspect_viewDidLayoutSubviews)];
+        Class class = NSClassFromString(className);
+        if ([class isSubclassOfClass:[UIViewController class]]) {
+            [class _jails_swizzleMethod:@selector(viewDidLoad)
+                             withMethod:@selector(_jails_viewDidLoad)];
+            
+//            [class _jails_swizzleMethod:@selector(viewDidLayoutSubviews)
+//                             withMethod:@selector(_aspect_viewDidLayoutSubviews)];
+        } else if ([class isSubclassOfClass:[UIView class]]) {
+            [class _jails_swizzleMethod:@selector(layoutSubviews)
+                             withMethod:@selector(_jails_layoutSubviews)];
+        }
         
         [self.aspectedClassSet addObject:className];
     }
@@ -159,21 +168,20 @@
 
 
 #pragma mark - Execute AB
-+(void)branchViewController:(UIViewController*)viewController {
++(void)branch:(id)parent {
     Jails *jails = [Jails sharedInstance];
-    NSDictionary *conf = [jails getConfigWithViewController:viewController];
+    NSDictionary *conf = [jails getConfigWithClass:[parent class]];
     if (conf) {
-        
-//        viewController.view.translatesAutoresizingMaskIntoConstraints = NO;
         
         for (NSDictionary *property in conf[@"properties"]) {
             SEL propName = NSSelectorFromString(property[@"name"]);
-            if ([viewController respondsToSelector:propName]) {
+            if ([parent respondsToSelector:propName]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                UIView *view = [viewController performSelector:propName];
+                UIView *childView = [parent performSelector:propName];
 #pragma clang diagnostic pop
-                [JailsViewAdjuster updateViewController:viewController view:view conf:property];
+                
+                [JailsViewAdjuster updateView:childView parent:parent conf:property];
             }
         }
     }
@@ -181,9 +189,9 @@
 
 +(NSString*)branchNameOfViewController:(UIViewController*)viewController {
     Jails *jails = [Jails sharedInstance];
-    NSDictionary *conf = [jails getConfigWithViewController:viewController];
+    NSDictionary *conf = [jails getConfigWithClass:[viewController class]];
     if (conf) {
-        return conf[@"name"];
+        return conf[@"branchName"];
     } else {
         return nil;
     }
@@ -192,34 +200,32 @@
 +(void)stopRepeatLoading {
     Jails *jails = [Jails sharedInstance];
     [jails.repeatTimer invalidate];
+    jails.repeatTimer = nil;
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:jails];
 }
 
 #pragma mark - Private Methods
-- (NSDictionary*)getConfigWithViewController:(UIViewController*)viewController {
-    NSString *className = NSStringFromClass([viewController class]);
-    NSDictionary *conf = nil;
-    if (self.conf && (conf = self.conf[className])) {
-        NSArray *abList = conf[@"ratio"];
+- (NSDictionary*)getConfigWithClass:(Class)class {
+    NSString *className = NSStringFromClass([class class]);
+    NSArray *abList = nil;
+    if (self.conf && (abList = self.conf[className])) {
         int range = 0;
         int target = 0;
         for (int i = 0; i < abList.count; i++) {
-            NSNumber *percent = abList[i];
+            NSNumber *percent = abList[i][@"ratio"];
             range += [percent intValue];
             if (self.branchSeed < range) {
                 target = i;
                 break;
             }
         }
-        return conf[@"branches"][target];
+        return abList[target];
     } else {
         return nil;
     }
 }
-
-
 
 @end
 

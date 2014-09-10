@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B40917F17211F210008C4C2 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* test.json */; };
-		1B40918017211F2F0008C4C2 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B40917E17211F210008C4C2 /* test.json */; };
 		1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
 		1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
 		1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B40918217212E320008C4C2 /* JailsViewAdjuster.m */; };
@@ -23,30 +21,52 @@
 		1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C41721133D0093CA5F /* ViewController_iPad.xib */; };
 		1B4353CD172114130093CA5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
 		1B4353CF1721141A0093CA5F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
-		1B4353D2172116200093CA5F /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
-		1B4353D3172118050093CA5F /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
+		1B4353D2172116200093CA5F /* NSObject+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+JailsAspect.m */; };
+		1B4353D3172118050093CA5F /* NSObject+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+JailsAspect.m */; };
 		1B4353D61721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
 		1B4353D71721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
 		1B4353D817211A0F0093CA5F /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
 		1B4353D917211A4F0093CA5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
+		1BC06EE4173D29E000DF959A /* JailsWebViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */; };
+		1BC06EE5173D29E500DF959A /* JailsWebViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */; };
+		1BC06EE8173D365E00DF959A /* JailsWebViewAdapterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC06EE7173D365E00DF959A /* JailsWebViewAdapterTest.m */; };
 		1BE796F91720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
-		1BE796FE1720F62400613242 /* Jails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BE796FD1720F62400613242 /* Jails.h */; };
 		1BE797001720F62400613242 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
-		1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE797071720F62400613242 /* SenTestingKit.framework */; };
 		1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F81720F62400613242 /* Foundation.framework */; };
 		1BE7970E1720F62400613242 /* libJails.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE796F51720F62400613242 /* libJails.a */; };
 		1BE797141720F62400613242 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BE797121720F62400613242 /* InfoPlist.strings */; };
 		1BE797171720F62400613242 /* JailsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE797161720F62400613242 /* JailsTests.m */; };
+		F709FBF31744F5B900379229 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
+		F709FBF41744F5BA00379229 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CE1721141A0093CA5F /* CoreFoundation.framework */; };
+		F709FBFA1744FD6D00379229 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F709FBF81744FD6600379229 /* CoreImage.framework */; };
+		F709FBFD17450F9B00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
+		F709FBFE17450FAA00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
+		F709FBFF17450FAB00379229 /* JailsHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F709FBFC17450F9B00379229 /* JailsHttpUtils.m */; };
 		F7760C3C172D5E2F007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
 		F7760C3D172D6567007D645A /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = F7760C3B172D5E2F007D645A /* button1.png */; };
 		F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */; };
-		F77C74A41722666300350CD1 /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+Swizzle.m */; };
+		F77C74A41722666300350CD1 /* NSObject+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4353D1172116200093CA5F /* NSObject+JailsAspect.m */; };
 		F77C74A51722666600350CD1 /* Jails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE796FF1720F62400613242 /* Jails.m */; };
 		F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C11721133D0093CA5F /* ViewController_iPhone.xib */; };
 		F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4353C41721133D0093CA5F /* ViewController_iPad.xib */; };
 		F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353CC172114130093CA5F /* UIKit.framework */; };
 		F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B4353B01721133C0093CA5F /* CoreGraphics.framework */; };
+		F79DF69C173BF1C80025CFE5 /* Jails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BE796FD1720F62400613242 /* Jails.h */; };
+		F7BEA3C118842E93000D22C7 /* JailsTests.json in Resources */ = {isa = PBXBuildFile; fileRef = F7BEA3BF18842999000D22C7 /* JailsTests.json */; };
 		F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */; };
+		F7CCC3AE1737B268008F4009 /* JailsWebViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */; };
+		F7DA1B0017486B4A00413274 /* jails-0_2.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFF17486B4A00413274 /* jails-0_2.json */; };
+		F7DA1B021748729400413274 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1AFB1748420400413274 /* test.json */; };
+		F7DA1B061748739700413274 /* jails-0_1.json in Resources */ = {isa = PBXBuildFile; fileRef = F7DA1B051748739700413274 /* jails-0_1.json */; };
+		F7DFE10A1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1091748B43B00D55B60 /* UIView+JailsAspect.m */; };
+		F7DFE10B1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1091748B43B00D55B60 /* UIView+JailsAspect.m */; };
+		F7DFE10C1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1091748B43B00D55B60 /* UIView+JailsAspect.m */; };
+		F7DFE10F1748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE10E1748BA4900D55B60 /* JailsAdjusterTestCell.m */; };
+		F7DFE1101748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE10E1748BA4900D55B60 /* JailsAdjusterTestCell.m */; };
+		F7DFE1111748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE10E1748BA4900D55B60 /* JailsAdjusterTestCell.m */; };
+		F7DFE1141748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1131748BAC300D55B60 /* JailsAdjusterTestCellData.m */; };
+		F7DFE1151748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1131748BAC300D55B60 /* JailsAdjusterTestCellData.m */; };
+		F7DFE1161748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DFE1131748BAC300D55B60 /* JailsAdjusterTestCellData.m */; };
 		F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */; };
 		F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F1582B172274AD00997085 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
@@ -66,7 +86,7 @@
 			remoteGlobalIDString = 1BE796F41720F62400613242;
 			remoteInfo = Jails;
 		};
-		F77C74A1172265A600350CD1 /* PBXContainerItemProxy */ = {
+		F7DA1B031748737A00413274 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BE796ED1720F62400613242 /* Project object */;
 			proxyType = 1;
@@ -82,14 +102,13 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				1BE796FE1720F62400613242 /* Jails.h in CopyFiles */,
+				F79DF69C173BF1C80025CFE5 /* Jails.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B40917E17211F210008C4C2 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		1B40918117212E320008C4C2 /* JailsViewAdjuster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjuster.h; sourceTree = "<group>"; };
 		1B40918217212E320008C4C2 /* JailsViewAdjuster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsViewAdjuster.m; sourceTree = "<group>"; };
 		1B409186172133760008C4C2 /* JailsViewAdjusterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsViewAdjusterTest.h; sourceTree = "<group>"; };
@@ -108,22 +127,38 @@
 		1B4353C51721133D0093CA5F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		1B4353CC172114130093CA5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1B4353CE1721141A0093CA5F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		1B4353D0172116200093CA5F /* NSObject+Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzle.h"; sourceTree = "<group>"; };
-		1B4353D1172116200093CA5F /* NSObject+Swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzle.m"; sourceTree = "<group>"; };
+		1B4353D0172116200093CA5F /* NSObject+JailsAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JailsAspect.h"; sourceTree = "<group>"; };
+		1B4353D1172116200093CA5F /* NSObject+JailsAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JailsAspect.m"; sourceTree = "<group>"; };
 		1B4353D41721197B0093CA5F /* UIViewController+JailsAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JailsAspect.h"; sourceTree = "<group>"; };
 		1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JailsAspect.m"; sourceTree = "<group>"; };
+		1BC06EE6173D365E00DF959A /* JailsWebViewAdapterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsWebViewAdapterTest.h; sourceTree = "<group>"; };
+		1BC06EE7173D365E00DF959A /* JailsWebViewAdapterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsWebViewAdapterTest.m; sourceTree = "<group>"; };
 		1BE796F51720F62400613242 /* libJails.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJails.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE796F81720F62400613242 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1BE796FC1720F62400613242 /* Jails-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jails-Prefix.pch"; sourceTree = "<group>"; };
 		1BE796FD1720F62400613242 /* Jails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Jails.h; sourceTree = "<group>"; };
 		1BE796FF1720F62400613242 /* Jails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jails.m; sourceTree = "<group>"; };
-		1BE797061720F62400613242 /* JailsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JailsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BE797071720F62400613242 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1BE797061720F62400613242 /* JailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE797111720F62400613242 /* JailsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JailsTests-Info.plist"; sourceTree = "<group>"; };
 		1BE797131720F62400613242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1BE797151720F62400613242 /* JailsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JailsTests.h; sourceTree = "<group>"; };
 		1BE797161720F62400613242 /* JailsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JailsTests.m; sourceTree = "<group>"; };
+		F709FBF81744FD6600379229 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		F709FBFB17450F9B00379229 /* JailsHttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsHttpUtils.h; sourceTree = "<group>"; };
+		F709FBFC17450F9B00379229 /* JailsHttpUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsHttpUtils.m; sourceTree = "<group>"; };
 		F7760C3B172D5E2F007D645A /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
+		F7BEA3BF18842999000D22C7 /* JailsTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = JailsTests.json; sourceTree = "<group>"; };
+		F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsWebViewAdapter.h; sourceTree = "<group>"; };
+		F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsWebViewAdapter.m; sourceTree = "<group>"; };
+		F7DA1AFB1748420400413274 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		F7DA1AFF17486B4A00413274 /* jails-0_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_2.json"; sourceTree = "<group>"; };
+		F7DA1B051748739700413274 /* jails-0_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jails-0_1.json"; sourceTree = "<group>"; };
+		F7DFE1081748B43B00D55B60 /* UIView+JailsAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JailsAspect.h"; sourceTree = "<group>"; };
+		F7DFE1091748B43B00D55B60 /* UIView+JailsAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JailsAspect.m"; sourceTree = "<group>"; };
+		F7DFE10D1748BA4900D55B60 /* JailsAdjusterTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JailsAdjusterTestCell.h; path = JailsDemo/JailsAdjusterTestCell.h; sourceTree = SOURCE_ROOT; };
+		F7DFE10E1748BA4900D55B60 /* JailsAdjusterTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JailsAdjusterTestCell.m; path = JailsDemo/JailsAdjusterTestCell.m; sourceTree = SOURCE_ROOT; };
+		F7DFE1121748BAC300D55B60 /* JailsAdjusterTestCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsAdjusterTestCellData.h; sourceTree = "<group>"; };
+		F7DFE1131748BAC300D55B60 /* JailsAdjusterTestCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsAdjusterTestCellData.m; sourceTree = "<group>"; };
 		F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JailsAdjusterTestViewController.h; sourceTree = "<group>"; };
 		F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JailsAdjusterTestViewController.m; sourceTree = "<group>"; };
 		F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailsAdjusterTestViewController.xib; sourceTree = "<group>"; };
@@ -138,6 +173,7 @@
 				1B4353AF1721133C0093CA5F /* Foundation.framework in Frameworks */,
 				1B4353B11721133C0093CA5F /* CoreGraphics.framework in Frameworks */,
 				1B4353D917211A4F0093CA5F /* UIKit.framework in Frameworks */,
+				F709FBF41744F5BA00379229 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,9 +193,10 @@
 			files = (
 				F77C74AA172266A100350CD1 /* CoreGraphics.framework in Frameworks */,
 				F77C74A91722669100350CD1 /* UIKit.framework in Frameworks */,
-				1BE797081720F62400613242 /* SenTestingKit.framework in Frameworks */,
 				1BE7970B1720F62400613242 /* Foundation.framework in Frameworks */,
 				1BE7970E1720F62400613242 /* libJails.a in Frameworks */,
+				F709FBF31744F5B900379229 /* CoreFoundation.framework in Frameworks */,
+				F709FBFA1744FD6D00379229 /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +206,8 @@
 		1B40917D17211F210008C4C2 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
-				1B40917E17211F210008C4C2 /* test.json */,
+				F7DA1AFB1748420400413274 /* test.json */,
+				F7BEA3BF18842999000D22C7 /* JailsTests.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -177,6 +215,7 @@
 		1B4353B21721133C0093CA5F /* JailsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F7DA1AFE17486B4A00413274 /* TestData */,
 				F7760C3B172D5E2F007D645A /* button1.png */,
 				1B4353BB1721133C0093CA5F /* AppDelegate.h */,
 				1B4353BC1721133C0093CA5F /* AppDelegate.m */,
@@ -187,6 +226,10 @@
 				F7F1582017226A5700997085 /* JailsAdjusterTestViewController.h */,
 				F7F1582117226A5700997085 /* JailsAdjusterTestViewController.m */,
 				F7F1582217226A5700997085 /* JailsAdjusterTestViewController.xib */,
+				F7DFE10D1748BA4900D55B60 /* JailsAdjusterTestCell.h */,
+				F7DFE10E1748BA4900D55B60 /* JailsAdjusterTestCell.m */,
+				F7DFE1121748BAC300D55B60 /* JailsAdjusterTestCellData.h */,
+				F7DFE1131748BAC300D55B60 /* JailsAdjusterTestCellData.m */,
 				1B4353B31721133C0093CA5F /* Supporting Files */,
 			);
 			path = JailsDemo;
@@ -219,7 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE796F51720F62400613242 /* libJails.a */,
-				1BE797061720F62400613242 /* JailsTests.octest */,
+				1BE797061720F62400613242 /* JailsTests.xctest */,
 				1B4353AD1721133C0093CA5F /* JailsDemo.app */,
 			);
 			name = Products;
@@ -228,10 +271,10 @@
 		1BE796F71720F62400613242 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F709FBF81744FD6600379229 /* CoreImage.framework */,
 				1B4353CE1721141A0093CA5F /* CoreFoundation.framework */,
 				1B4353CC172114130093CA5F /* UIKit.framework */,
 				1BE796F81720F62400613242 /* Foundation.framework */,
-				1BE797071720F62400613242 /* SenTestingKit.framework */,
 				1B4353B01721133C0093CA5F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -242,12 +285,18 @@
 			children = (
 				1BE796FD1720F62400613242 /* Jails.h */,
 				1BE796FF1720F62400613242 /* Jails.m */,
-				1B4353D0172116200093CA5F /* NSObject+Swizzle.h */,
-				1B4353D1172116200093CA5F /* NSObject+Swizzle.m */,
+				1B4353D0172116200093CA5F /* NSObject+JailsAspect.h */,
+				1B4353D1172116200093CA5F /* NSObject+JailsAspect.m */,
 				1B4353D41721197B0093CA5F /* UIViewController+JailsAspect.h */,
 				1B4353D51721197B0093CA5F /* UIViewController+JailsAspect.m */,
+				F7DFE1081748B43B00D55B60 /* UIView+JailsAspect.h */,
+				F7DFE1091748B43B00D55B60 /* UIView+JailsAspect.m */,
 				1B40918117212E320008C4C2 /* JailsViewAdjuster.h */,
 				1B40918217212E320008C4C2 /* JailsViewAdjuster.m */,
+				F7CCC3AC1737B268008F4009 /* JailsWebViewAdapter.h */,
+				F7CCC3AD1737B268008F4009 /* JailsWebViewAdapter.m */,
+				F709FBFB17450F9B00379229 /* JailsHttpUtils.h */,
+				F709FBFC17450F9B00379229 /* JailsHttpUtils.m */,
 				1BE796FB1720F62400613242 /* Supporting Files */,
 			);
 			path = Jails;
@@ -265,11 +314,13 @@
 			isa = PBXGroup;
 			children = (
 				1B40917D17211F210008C4C2 /* TestData */,
+				1BE797101720F62400613242 /* Supporting Files */,
 				1BE797151720F62400613242 /* JailsTests.h */,
 				1BE797161720F62400613242 /* JailsTests.m */,
-				1BE797101720F62400613242 /* Supporting Files */,
 				1B409186172133760008C4C2 /* JailsViewAdjusterTest.h */,
 				1B409187172133760008C4C2 /* JailsViewAdjusterTest.m */,
+				1BC06EE6173D365E00DF959A /* JailsWebViewAdapterTest.h */,
+				1BC06EE7173D365E00DF959A /* JailsWebViewAdapterTest.m */,
 			);
 			path = JailsTests;
 			sourceTree = "<group>";
@@ -281,6 +332,15 @@
 				1BE797121720F62400613242 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7DA1AFE17486B4A00413274 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				F7DA1AFF17486B4A00413274 /* jails-0_2.json */,
+				F7DA1B051748739700413274 /* jails-0_1.json */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +371,7 @@
 				1BE796F11720F62400613242 /* Sources */,
 				1BE796F21720F62400613242 /* Frameworks */,
 				1BE796F31720F62400613242 /* CopyFiles */,
+				F79DF69D173BF2BB0025CFE5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -333,13 +394,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				F77C74A2172265A600350CD1 /* PBXTargetDependency */,
+				F7DA1B041748737A00413274 /* PBXTargetDependency */,
 				1BE7970D1720F62400613242 /* PBXTargetDependency */,
 			);
 			name = JailsTests;
 			productName = JailsTests;
-			productReference = 1BE797061720F62400613242 /* JailsTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 1BE797061720F62400613242 /* JailsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -377,10 +438,13 @@
 				1B4353B71721133C0093CA5F /* InfoPlist.strings in Resources */,
 				1B4353C31721133D0093CA5F /* ViewController_iPhone.xib in Resources */,
 				1B4353C61721133D0093CA5F /* ViewController_iPad.xib in Resources */,
-				1B40918017211F2F0008C4C2 /* test.json in Resources */,
+				F7BEA3C118842E93000D22C7 /* JailsTests.json in Resources */,
 				F7F1582C172274AD00997085 /* Default-568h@2x.png in Resources */,
 				F7BFD63517243F4E00636BB0 /* JailsAdjusterTestViewController.xib in Resources */,
 				F7760C3C172D5E2F007D645A /* button1.png in Resources */,
+				F7DA1B0017486B4A00413274 /* jails-0_2.json in Resources */,
+				F7DA1B021748729400413274 /* test.json in Resources */,
+				F7DA1B061748739700413274 /* jails-0_1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE797141720F62400613242 /* InfoPlist.strings in Resources */,
-				1B40917F17211F210008C4C2 /* test.json in Resources */,
 				F77C74A71722667500350CD1 /* ViewController_iPhone.xib in Resources */,
 				F77C74A81722667700350CD1 /* ViewController_iPad.xib in Resources */,
 				F7760C3D172D6567007D645A /* button1.png in Resources */,
@@ -412,6 +475,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		F79DF69D173BF2BB0025CFE5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "JAILS_NAME=\"libJails.a\"\nIOS_LIB_PATH=\"${BUILT_PRODUCTS_DIR}/../${CONFIGURATION}-iphoneos\"\nSIMULATOR_LIB_PATH=\"${BUILT_PRODUCTS_DIR}/../${CONFIGURATION}-iphonesimulator\"\nJAILS_LIB_OUTPUT_PATH=\"${BUILT_PRODUCTS_DIR}/../${CONFIGURATION}-universal\"\n\nmkdir -p \"${JAILS_LIB_OUTPUT_PATH}\"\ncp \"${BUILT_PRODUCTS_DIR}/include/${PRODUCT_NAME}/Jails.h\" \"${JAILS_LIB_OUTPUT_PATH}\"\n\nif [ -e \"${IOS_LIB_PATH}/${JAILS_NAME}\" -a -e \"${SIMULATOR_LIB_PATH}/${JAILS_NAME}\" ]; then\n  lipo ${IOS_LIB_PATH}/${JAILS_NAME} ${SIMULATOR_LIB_PATH}/${JAILS_NAME} -create -output ${JAILS_LIB_OUTPUT_PATH}/${JAILS_NAME}\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -422,11 +498,16 @@
 				1B4353B91721133C0093CA5F /* main.m in Sources */,
 				1B4353BD1721133C0093CA5F /* AppDelegate.m in Sources */,
 				1B4353C01721133D0093CA5F /* ViewController.m in Sources */,
-				1B4353D3172118050093CA5F /* NSObject+Swizzle.m in Sources */,
+				1B4353D3172118050093CA5F /* NSObject+JailsAspect.m in Sources */,
 				1B4353D71721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
 				1B4353D817211A0F0093CA5F /* Jails.m in Sources */,
 				1B40918517212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
 				F7F1582317226A5700997085 /* JailsAdjusterTestViewController.m in Sources */,
+				1BC06EE4173D29E000DF959A /* JailsWebViewAdapter.m in Sources */,
+				F709FBFE17450FAA00379229 /* JailsHttpUtils.m in Sources */,
+				F7DFE10C1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */,
+				F7DFE1111748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */,
+				F7DFE1161748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,9 +516,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE797001720F62400613242 /* Jails.m in Sources */,
-				1B4353D2172116200093CA5F /* NSObject+Swizzle.m in Sources */,
+				1B4353D2172116200093CA5F /* NSObject+JailsAspect.m in Sources */,
 				1B4353D61721197B0093CA5F /* UIViewController+JailsAspect.m in Sources */,
 				1B40918317212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
+				F7CCC3AE1737B268008F4009 /* JailsWebViewAdapter.m in Sources */,
+				F709FBFD17450F9B00379229 /* JailsHttpUtils.m in Sources */,
+				F7DFE10A1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */,
+				F7DFE10F1748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */,
+				F7DFE1141748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,8 +535,14 @@
 				1B40918417212E320008C4C2 /* JailsViewAdjuster.m in Sources */,
 				1B409188172133760008C4C2 /* JailsViewAdjusterTest.m in Sources */,
 				F77C74A31722665F00350CD1 /* UIViewController+JailsAspect.m in Sources */,
-				F77C74A41722666300350CD1 /* NSObject+Swizzle.m in Sources */,
+				F77C74A41722666300350CD1 /* NSObject+JailsAspect.m in Sources */,
 				F77C74A51722666600350CD1 /* Jails.m in Sources */,
+				1BC06EE5173D29E500DF959A /* JailsWebViewAdapter.m in Sources */,
+				1BC06EE8173D365E00DF959A /* JailsWebViewAdapterTest.m in Sources */,
+				F709FBFF17450FAB00379229 /* JailsHttpUtils.m in Sources */,
+				F7DFE10B1748B43B00D55B60 /* UIView+JailsAspect.m in Sources */,
+				F7DFE1101748BA4900D55B60 /* JailsAdjusterTestCell.m in Sources */,
+				F7DFE1151748BAC300D55B60 /* JailsAdjusterTestCellData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,10 +559,10 @@
 			target = 1BE796F41720F62400613242 /* Jails */;
 			targetProxy = 1BE7970C1720F62400613242 /* PBXContainerItemProxy */;
 		};
-		F77C74A2172265A600350CD1 /* PBXTargetDependency */ = {
+		F7DA1B041748737A00413274 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B4353AC1721133C0093CA5F /* JailsDemo */;
-			targetProxy = F77C74A1172265A600350CD1 /* PBXContainerItemProxy */;
+			targetProxy = F7DA1B031748737A00413274 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -601,12 +693,17 @@
 		1BE7971B1720F62400613242 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DSTROOT = /tmp/Jails.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -616,9 +713,12 @@
 				DSTROOT = /tmp/Jails.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYMROOT = build;
 			};
 			name = Release;
 		};
@@ -629,13 +729,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -646,13 +746,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jails/Jails-Prefix.pch";
 				INFOPLIST_FILE = "JailsTests/JailsTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

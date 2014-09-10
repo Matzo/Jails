@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "JailsAdjusterTestViewController.h"
 
-@interface JailsViewAdjusterTest : SenTestCase<UIWebViewDelegate>
+@interface JailsViewAdjusterTest : XCTestCase
+@property (assign) BOOL isFinished;
 @property (strong, nonatomic) JailsAdjusterTestViewController *testVC;
 @end
 

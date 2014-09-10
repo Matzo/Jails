@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Matzo. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
+#import "Jails.h"
+#import "JailsAdjusterTestViewController.h"
 
-@interface JailsTests : SenTestCase
-
+@interface JailsTests : XCTestCase
+//@property (strong) JailsAdjusterTestViewController *viewController;
 @end
