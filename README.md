@@ -9,7 +9,12 @@ iOS
 - iOS 5.0 and later
 
 ### Install
+#### Using CocoaPods
+Add below to your Podsfile.
 
+    pod "Jails"
+
+#### Manual installation
 1. Open project on Xcode.
 2. Select scheme `Jails > iOS Device` then `Project > Build`.
 3. Select scheme `Jails > iPhone 5.0 Simulator` then `Project > Build`.
