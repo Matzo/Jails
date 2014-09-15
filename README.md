@@ -1,7 +1,7 @@
 Jails
 =====
 
-AB testing framework for native apps of iOS and Android.
+AB testing framework for native apps of iOS.
 
 iOS
 ----
@@ -32,7 +32,7 @@ Add below to your Podsfile.
           :
     }
     
-
+<!-- 
 Android
 ----
 ### Require
@@ -53,7 +53,7 @@ Android
         Jails.breakWithConfURL("http://your.domain.com/path/to/conf/jails.json");
           :
     }
-
+-->
 
 Jails.json
 ----
